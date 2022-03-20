@@ -27,7 +27,7 @@ We can create, read, update and delete a form and a job vacancy post
 Employees can save a job post with short memo for later read and can edit the memo also they can delete
 the saved post if it is no longer relevant.
 
-       *Group Memeber*                     *Id*                        *Section*
+        ## Group Memeber                     Id                        Section
       
 	BEREKET TILAHUN                 UGR/9703/12                       2
 	DURESSA JEMAL                   UGR/3937/12                       2
