@@ -5,7 +5,7 @@
 
   1. having to apply for jobs  in person (solves the problem of remoteness of applicants )
   2. companies do not get the employee with the specifications they require easly
-  3. creaing a medium platform in which companies and employees can interact directly 
+  3. creating a medium platform in which companies and employees can interact directly 
 
 
 ## Authentication
@@ -25,4 +25,4 @@ We can create, read, update and delete a form and a job vacancy post
 
 ## *Business feature 2*
 Employee can save a job post with short memo for later read and can edit the memo also they can delete
-the saved post if it is irrelevant.
+the saved post if it is no longer relevant.
