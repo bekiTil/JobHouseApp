@@ -24,5 +24,5 @@ Display a form after filled by the employee, companies can post a job vacancy
 We can create, read, update and delete a form and a job vacancy post
 
 ## *Business feature 2*
-Employee can save a job post with short memo for later read and can edit the memo also they can delete
+Employees can save a job post with short memo for later read and can edit the memo also they can delete
 the saved post if it is no longer relevant.
