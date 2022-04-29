@@ -1,13 +1,13 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 const User = require("../models/User");
 
 const signupValidation = require("./validation/signupValidation");
 const loginValidation = require("./validation/loginValidation");
 
-// "/signup" : POST
 router.post("/signup", async (req, res) => {
-  // Signup-Validation: Validate the user data before saving it
   const { error } = signupValidation(req.body);
 
   if (error) {
@@ -16,7 +16,6 @@ router.post("/signup", async (req, res) => {
 
   ({ username, email, password, name, role } = req.body);
 
-  // Check: whether either the email or username already exists in the db
   const emailExist = await User.findOne({ email: email });
   const usernameExist = await User.findOne({ username: username });
 
@@ -26,7 +25,7 @@ router.post("/signup", async (req, res) => {
     return res.status(400).send("Username already exists!");
   }
 
-  // Encryption: Hash the password
+  // Hash the password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -44,7 +43,6 @@ router.post("/signup", async (req, res) => {
     res.status(400).send("Something went wrong!");
   }
 });
-
 
 router.post("/login", async (req, res) => {
   const { error } = loginValidation(req.body);
@@ -67,7 +65,15 @@ router.post("/login", async (req, res) => {
     return res.status(400).send("Password is incorrect!");
   }
 
-  return res.send("Logged in!");
+  // Create a token
+  const token = jwt.sign(
+    { username: user.username, role: user.role },
+    process.env.TOKEN_SECRET
+  );
+
+  return res.header("token", token).json({
+    token: token,
+  });
 });
 
 module.exports = router;

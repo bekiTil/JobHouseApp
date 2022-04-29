@@ -19,5 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Route Middleware
 app.use("", authRoute);
+app.use("/post", postRoute);
 
 app.listen(3000, () => console.log("Server started listening!!"));
