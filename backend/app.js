@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Route Middleware
 app.use("", authRoute);
+app.use("/images", express.static("images"));
 app.use("/post", postRoute);
 
 app.listen(3000, () => console.log("Server started listening!!"));
