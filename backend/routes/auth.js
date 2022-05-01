@@ -1,78 +1,33 @@
-const router = require("express").Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const express = require("express")
+const Joi = require('joi');
+const mongoose = require("mongoose");
+const {User} = require("../models/User")
+const _ = require('lodash');
+const bcrypt = require("bcrypt");
 
-const signupValidation = require("./validation/signupValidation");
-const loginValidation = require("./validation/loginValidation");
+const router = express.Router();
 
+router.post("/", async(req, res) => {
+    
+    const{ error } = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-router.post("/signup", async (req, res) => {
-  const { error } = signupValidation(req.body);
+    let user = await User.findOne({email: req.body.email});
+    if (!user) return res.status(400).send('Invalid email or password.');
 
-  if (error) {
-    return res.status(400).send(error.details[0].message);
-  }
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+    if (!validPass) return res.status(400).send('Invalid email or password.');
 
-  ({ username, email, password, name, role } = req.body);
-
-  const emailExist = await User.findOne({ email: email });
-  const usernameExist = await User.findOne({ username: username });
-
-  if (emailExist) {
-    return res.status(400).send("Email already exists!");
-  } else if (usernameExist) {
-    return res.status(400).send("Username already exists!");
-  }
-
-  // Hash the password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-  const user = new User({
-    username: username,
-    email: email,
-    password: hashedPassword,
-    name: name,
-    role: role,
-  });
-
-  try {
-    res.send(await user.save());
-  } catch (err) {
-    res.status(400).send("Something went wrong!");
-  }
+    const token = user.generateAuthToken();
+    res.send(token)
 });
 
-router.post("/login", async (req, res) => {
-  const { error } = loginValidation(req.body);
-
-  if (error) {
-    return res.status(400).send(error.details[0].message);
-  }
-
-  ({ username, password } = req.body);
-
-  const user = await User.findOne({ username: username });
-
-  if (!user) {
-    return res.status(400).send("Username doesn't match!");
-  }
-
-  const validPass = await bcrypt.compare(password, user.password); // boolean
-
-  if (!validPass) {
-    return res.status(400).send("Password is incorrect!");
-  }
-
-  // Create a token
-  const token = jwt.sign(
-    { _id: user._id, role: user.role },
-    process.env.TOKEN_SECRET
-  );
-
-  return res.header("token", token).json({
-    token: token,
-  });
-});
+function validate(req){
+    const schema = Joi.object({
+        email: Joi.string().min(10).max(255).required().email(),
+        password: Joi.string().min(5).max(255).required()
+    });
+    return schema.validate(req);
+}
 
 module.exports = router;
