@@ -1,6 +1,5 @@
 const { expressjwt: njwt } = require("express-jwt");
 
-
 // this function authorize based on role
 authorize=(roles)=>
     [ 

@@ -1,13 +1,9 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const authorize =require("./auth/authorize");
-const Role =require("./auth/Role");
-
-const User = require("../models/User");
-
-const signupValidation = require("./validation/signupValidation");
-const loginValidation = require("./validation/loginValidation");
+const authorize =require("../middleware/authorize");
+const Role =require("../models/Role");
+const {User, signupValidation, loginValidation} = require("../models/User");
 
 
 //signup route 

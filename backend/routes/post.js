@@ -1,7 +1,5 @@
 const router = require("express").Router();
-
-const verifyToken = require("./validation/verifyToken");
-
+const verifyToken = require("../middleware/verifyToken");
 router.post("", verifyToken, (req, res) => {
   res.send("posted successfully!");
 });
