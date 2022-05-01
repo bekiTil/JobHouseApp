@@ -1,5 +1,6 @@
-const jwt = require("jsonwebtoken");
+var jwt = require("jsonwebtoken");
 
+// Middleware function to check for token
 module.exports = (req, res, next) => {
   const token = req.header("token");
 

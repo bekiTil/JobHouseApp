@@ -1,16 +1,12 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const authorize =require("./auth/authorize");
-const Role =require("./auth/Role");
 
 const User = require("../models/User");
 
 const signupValidation = require("./validation/signupValidation");
 const loginValidation = require("./validation/loginValidation");
 
-
-//signup route 
 router.post("/signup", async (req, res) => {
   const { error } = signupValidation(req.body);
 
@@ -32,7 +28,6 @@ router.post("/signup", async (req, res) => {
   // Hash the password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-
   const user = new User({
     username: username,
     email: email,
@@ -48,18 +43,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-
-//sample authorization which u must be admin to access the route 
-// and it works
-router.get("/users",authorize(Role.Admin),(req,res)=>
-  User.find({})
-  .then(users=>res.send(users)).
-  catch(err=>res.status(400).
-  send("Something went wrong!"))
-)
-
-
-//login route 
 router.post("/login", async (req, res) => {
   const { error } = loginValidation(req.body);
 
@@ -83,8 +66,7 @@ router.post("/login", async (req, res) => {
 
   // Create a token
   const token = jwt.sign(
-    
-    { username: user.username, role: user.role },
+    { _id: user._id, role: user.role },
     process.env.TOKEN_SECRET
   );
 
