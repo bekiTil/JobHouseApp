@@ -24,6 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/users", users);
 app.use('/login', auth)
 app.use("/images", express.static("images"));
-app.use("/post", postRoute);
+app.use("/api/posts", postRoute);
 
 app.listen(3000, () => console.log("Server started listening!!"));

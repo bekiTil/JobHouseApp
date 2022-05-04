@@ -1,4 +1,3 @@
-const { expressjwt: njwt } = require("express-jwt");
 const verifyToken = require("../middleware/verifyToken")
 const jwt = require('jsonwebtoken');
 

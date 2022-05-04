@@ -5,6 +5,8 @@ const { Post, postValidation } = require("../models/Post");
 const verifyToken = require("../middleware/verifyToken");
 const isCompany = require("../middleware/isCompany");
 const upload = require("../middleware/image");
+const authorize = require("../middleware/authorize");
+const Role = require("../models/Role");
 
 router.post(
   "",
@@ -36,7 +38,12 @@ router.post(
     res.send(await post.save());
   }
 );
-
+router.get("/", authorize(Role.Admin), (req, res) => {
+  Post.find()
+  .then(posts=>res.send(posts)).
+  catch(err=>res.status(400).
+  send("Something went wrong!"))
+} );
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id });
