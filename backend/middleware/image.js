@@ -19,7 +19,7 @@ const upload = multer({
     fileSize: 1024 * 1024 * 50,
   },
   fileFilter: (req, file, cb) => {
-    cb(null, ["image/png", "imaeg/jpeg", "image/jpg"].includes(file.mimetype));
+    cb(null, ["image/png", "image/jpeg", "image/jpg"].includes(file.mimetype));
   },
 });
 

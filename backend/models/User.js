@@ -35,6 +35,9 @@ const userSchema = mongoose.Schema({
     },
     profile:{
       type: [Object]
+    },
+    image: {
+      type: String
     }
   });
 
