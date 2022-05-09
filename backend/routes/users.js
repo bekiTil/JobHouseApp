@@ -3,22 +3,11 @@ const mongoose = require("mongoose");
 const { User, validate } = require("../models/User");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 const authorize = require('../middleware/authorize')
 const Role = require('../models/Role')
 const verifyToken = require("../middleware/verifyToken")
 const upload = require("../middleware/image");
-=======
-const authorize = require("../middleware/authorize");
-const Role = require("../models/Role");
-const verifyToken = require("../middleware/verifyToken");
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
-=======
-const authorize = require("../middleware/authorize");
-const Role = require("../models/Role");
-const verifyToken = require("../middleware/verifyToken");
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
 
 const router = express.Router();
 
@@ -35,22 +24,11 @@ router.get("/:id", async (req, res) => {
   res.send(user);
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 router.post("/", upload.single("image"),async(req, res) => {
     
     const{ error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-=======
-router.post("/", async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
-=======
-router.post("/", async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
 
   ({ username, email, password, fullNname, role } = req.body);
 
@@ -63,8 +41,7 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Username already exists!");
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     let user = User(_.pick(req.body, ['username','fullName', 'email', 'password', 'profile', 'role']));
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
@@ -81,73 +58,14 @@ router.post("/", async (req, res) => {
       }
 });
 
-router.put("/:id", verifyToken, upload.single("image"), async(req, res) => {
-    
-  const{ error } = validate(req.body);
-=======
-  let user = User(
-    _.pick(req.body, [
-      "username",
-      "fullName",
-      "email",
-      "password",
-      "profile",
-      "role",
-    ])
-  );
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-  await user.save();
-
-  const token = user.generateAuthToken();
-  try {
-    res
-      .header("x-auth-token", token)
-      .send(_.pick(user, ["_id", "name", "email"]));
-  } catch (err) {
-    res.status(400).send("Something went wrong!");
-  }
-});
-
 router.put("/:id", verifyToken, async (req, res) => {
   const { error } = validate(req.body);
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
-=======
-  let user = User(
-    _.pick(req.body, [
-      "username",
-      "fullName",
-      "email",
-      "password",
-      "profile",
-      "role",
-    ])
-  );
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-  await user.save();
-
-  const token = user.generateAuthToken();
-  try {
-    res
-      .header("x-auth-token", token)
-      .send(_.pick(user, ["_id", "name", "email"]));
-  } catch (err) {
-    res.status(400).send("Something went wrong!");
-  }
-});
-
-router.put("/:id", verifyToken, async (req, res) => {
-  const { error } = validate(req.body);
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
   if (error) return res.status(400).send(error.details[0].message);
 
   ({ username, email, password, fullNname, role } = req.body);
 
   let user = await User.findOne({ _id: req.params.id });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   user.username = req.body.username
   user.email = req.body.email
   user.fullName = req.body.fullName
@@ -156,16 +74,7 @@ router.put("/:id", verifyToken, async (req, res) => {
   if (req.file) {
     user.image = req.file.path;
   }
-=======
-=======
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
-  user.username = req.body.username;
-  user.email = req.body.email;
-  user.fullName = req.body.fullName;
-  user.role = req.body.role;
-  user.profile = req.body.profile;
 
->>>>>>> e3595cafaeb0388840798c9ef9e7677cc06688a2
   await user.save();
 
   try {
