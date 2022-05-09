@@ -3,7 +3,7 @@ const Joi = require("@hapi/joi");
 
 const postSchema = mongoose.Schema({
   poster_id: {
-    type: String,
+    type: mongoose.ObjectId,
     required: true,
   },
   description: {
@@ -32,7 +32,7 @@ const postSchema = mongoose.Schema({
 });
 
 const schema = Joi.object({
-  poster_id: Joi.string().required(),
+  poster_id: Joi.string().hex().length(24).required(),
   description: Joi.string().min(5).max(200).required(),
   category: Joi.string().required(),
   number: Joi.number().min(1).required(),

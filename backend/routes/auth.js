@@ -28,7 +28,6 @@ router.post("/signup", async (req, res) => {
   // Hash the password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-
   const user = new User({
     username: username,
     email: email,
@@ -67,7 +66,7 @@ router.post("/login", async (req, res) => {
 
   // Create a token
   const token = jwt.sign(
-    { username: user.username, role: user.role },
+    { _id: user._id, role: user.role },
     process.env.TOKEN_SECRET
   );
 

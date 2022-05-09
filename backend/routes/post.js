@@ -1,81 +1,104 @@
-/**
- * TODO: 1: add token authorization
- * TODO: 2: add poster_id to each post from token
- */
-
 const router = require("express").Router();
+const User = require("../models/User");
 const { Post, postValidation } = require("../models/Post");
+
+const verifyToken = require("../middleware/verifyToken");
+const isCompany = require("../middleware/isCompany");
 const upload = require("../middleware/image");
 
-/**
- *
- * Handles creation and update of a post. If postId === null: it
- * creates the post else it updates a post with id === postId
- *
- * @param {*} req
- * @param {*} res
- * @param {*} postId
- */
-async function postHandler(req, res, postId) {
-  const { error } = postValidation(req.body);
+router.post(
+  "",
+  verifyToken,
+  isCompany,
+  upload.single("image"),
+  async (req, res) => {
+    req.body.poster_id = req.user._id;
 
-  if (error) {
-    return res.status(400).send(error.details[0].message);
-  }
+    const { error } = postValidation(req.body);
 
-  let post;
-  ({ description, category, number, poster_id } = req.body);
-
-  if (postId) {
-    try {
-      post = await Post.findOne({ _id: req.params.postId });
-    } catch (error) {
-      return res.status(401).send("Post doesn't exist!");
+    if (error) {
+      return res.status(400).send(error.details[0].message);
     }
-  } else {
-    post = new Post({poster_id: 1});
+
+    ({ poster_id, description, category, number, poster_id } = req.body);
+
+    const post = new Post({
+      poster_id: poster_id,
+      description: description,
+      category: category,
+      number: number,
+    });
+
+    if (req.file) {
+      post.image = req.file.path;
+    }
+
+    res.send(await post.save());
   }
+);
 
-  post.description = description;
-  post.category = category;
-  post.number = number;
-
-  if (req.file) {
-    post.image = req.file.path;
-  }
-
-  res.send(await post.save());
-}
-
-router.post("", upload.single("postImage"), async (req, res) => {
-  await postHandler(req, res, null);
-});
-
-router.get("/:postId", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findOne({ _id: req.params.postId });
+    const post = await Post.findOne({ _id: req.params.id });
     if (post) return res.send(post);
   } catch (error) {
     return res.status(400).send("Post doesn't exist!");
   }
 });
 
-router.get("user/:username", (req, res) => {
-  res.send("fetched from username");
+router.get("/user/:username", async (req, res) => {
+  const user = await User.findOne({ username: req.params.username });
 
-  // TODO: fetch all the posts
+  if (!user) {
+    return req.status(401).send("User doesn't exist!");
+  }
+
+  res.send(await Post.find({ poster_id: user._id }));
 });
 
-router.get("/delete/:postId", async (req, res) => {
+router.get("/delete/:id", verifyToken, isCompany, async (req, res) => {
+  let post;
   try {
-    res.send(await Post.deleteOne({ _id: req.params.postId }));
+    post = await Post.findOne({ _id: req.params.id });
+
+    if (req.user._id != post.poster_id) {
+      throw Error("Not the owner");
+    }
+
+    res.send(await post.delete());
   } catch (error) {
-    res.status(401).send("Something went wrong!");
+    res.status(401).send("Post is not found!");
   }
 });
 
-router.post("/edit/:postId", upload.single("postImage"), async (req, res) => {
-  await postHandler(req, res, req.params.postId);
-});
+router.post(
+  "/edit/:id",
+  verifyToken,
+  isCompany,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      ({ description, category, number } = req.body);
+
+      const post = await Post.findOne({ _id: req.params.id });
+
+      if (post.poster_id != req.user._id) {
+        throw Error("Not the owner!");
+      }
+
+      post.description = description;
+      post.category = category;
+      post.number = number;
+
+      if (req.file) {
+        post.image = req.file.path;
+      }
+
+      res.send(await post.save());
+    } catch (error) {
+      res.status(401).send("Post doesn't exist!");
+    }
+  }
+);
 
 module.exports = router;
