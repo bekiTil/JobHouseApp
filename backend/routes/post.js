@@ -36,7 +36,6 @@ router.post(
     res.send(await post.save());
   }
 );
-
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id });
