@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/authentication_page.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
-import 'package:frontend/screens/auth/signup_page.dart';
 
 void main() {
   runApp(const MyApp());

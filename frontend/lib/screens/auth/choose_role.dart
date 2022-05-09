@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/company_registration.dart';
 import 'package:frontend/screens/auth/employee_registration.dart';
-import 'package:frontend/screens/auth/signup_page.dart';
 
 class ChooseRole extends StatefulWidget {
   ChooseRole({Key? key}) : super(key: key);
