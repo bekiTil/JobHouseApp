@@ -5,10 +5,11 @@ import '../../../Models/user.dart';
 abstract class AuthEvent {}
 
 class LoggedIn extends AuthEvent {
-  final User? user;
+  final String? role;
+  final String? id;
   final String? token;
 
-  LoggedIn({this.user, this.token});
+  LoggedIn({this.role, this.id, this.token});
 }
 
 class LoggedOut extends AuthEvent {}
