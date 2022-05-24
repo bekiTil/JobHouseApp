@@ -10,15 +10,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository = UserRepository();
   final AuthBloc authBloc;
   LoginBloc(this.authBloc) : super(LoginInitial()) {
-    on<LoginPressed>((event, emit) {
+    on<LoginPressed>((event, emit) async {
       emit(LoginInitial());
       try {
-        final response = userRepository.Login(
+        final response = await userRepository.Login(
             username: event.username,
             password: event.password) as Map<String, dynamic>;
+        print(response["user"]["role"]);
         authBloc.add(LoggedIn(
             role: response["user"]["role"],
-            id: response["user"]["role"],
+            id: response["user"]["_id"],
             token: response["token"]));
         emit(LoginSuccessfull());
       } catch (e) {

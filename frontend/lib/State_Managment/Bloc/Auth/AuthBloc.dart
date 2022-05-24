@@ -9,7 +9,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoggedIn>(
       (event, emit) async {
         emit(AuthLoading());
+        print(event.role);
+        print(event.id);
+        print(event.token);
         await storage.saveIdAndToken(event.role!, event.id!, event.token!);
+        emit(Authenticated());
       },
     );
     on<LoggedOut>(

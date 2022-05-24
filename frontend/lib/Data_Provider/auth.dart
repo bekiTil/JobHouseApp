@@ -11,12 +11,6 @@ class AuthProvider {
     try {
       final dio = Dio();
       const url = "http://localhost:3000/api/users";
-      final map = Map<String, dynamic>();
-      map["username"] = user.username;
-      map["email"] = user.email;
-      map["password"] = user.password;
-      map["role"] = user.role;
-      map["fullName"] = user.name;
 
       FormData formData = FormData.fromMap({
         "username": user.username,
@@ -26,9 +20,8 @@ class AuthProvider {
         "fullName": user.name,
       });
 
-      final response =
-          await dio.post(url, data: formData) as Map<String, dynamic>;
-      user.id = response["id"];
+      final response = await dio.post(url, data: formData);
+      user.id = response.data["id"];
     } catch (e) {
       throw e;
     }
@@ -40,7 +33,9 @@ class AuthProvider {
       const url = "http://localhost:3000/login";
       final response = await dio
           .post(url, data: {"username": username, "password": password});
+      print(response);
       if (response.statusCode == 201) {
+        print(response.data["user"]["username"]);
         return {"token": response.data["token"], "user": response.data["user"]};
       }
     } catch (e) {

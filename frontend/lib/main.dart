@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/Repository/secureStorage.dart';
 import 'package:frontend/Repository/user_repository.dart';
+import 'package:frontend/State_Managment/Bloc/Auth/AuthBloc.dart';
+import 'package:frontend/State_Managment/Bloc/Login/LoginBloc.dart';
 import 'package:frontend/State_Managment/Bloc/SignUp/SignUpBloc.dart';
 import 'package:frontend/screens/auth/authentication_page.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
@@ -19,13 +22,23 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final UserRepository userRepository = UserRepository();
+  final storage = StorageService();
   final router = AllRoutes().router;
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
         create: (context) => UserRepository(),
         child: MultiBlocProvider(
-          providers: [BlocProvider(create: (context) => SignUpBloc())],
+          providers: [
+            BlocProvider(
+              create: ((context) => AuthBloc(storage)),
+            ),
+            BlocProvider(
+              create: ((context) =>
+                  LoginBloc(BlocProvider.of<AuthBloc>(context))),
+            ),
+            BlocProvider(create: (context) => SignUpBloc())
+          ],
           child: MaterialApp.router(
               routeInformationParser: router.routeInformationParser,
               routerDelegate: router.routerDelegate),

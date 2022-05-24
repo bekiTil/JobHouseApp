@@ -4,6 +4,7 @@ class StorageService {
   final _secureStorage = const FlutterSecureStorage();
 
   Future<void> saveIdAndToken(String role, String id, String token) async {
+    print(id);
     await _secureStorage.write(key: "role", value: role);
     await _secureStorage.write(key: "id", value: id);
     await _secureStorage.write(key: "token", value: token);

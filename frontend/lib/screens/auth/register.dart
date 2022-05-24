@@ -42,9 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return BlocConsumer<SignUpBloc, SignUpState>(
         bloc: _signUpBloc,
-        listener: (context, state) {
-          print(1);
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
               body: Form(
