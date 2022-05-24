@@ -30,7 +30,7 @@ router.post("/", upload.single("image"),async(req, res) => {
     const{ error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-  ({ username, email, password, fullNname, role } = req.body);
+  ({ username, email, password, fullName, role } = req.body);
 
   const emailExist = await User.findOne({ email: email });
   const usernameExist = await User.findOne({ username: username });
@@ -62,7 +62,7 @@ router.put("/:id", verifyToken, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  ({ username, email, password, fullNname, role } = req.body);
+  ({ username, email, password, fullName, role } = req.body);
 
   let user = await User.findOne({ _id: req.params.id });
 

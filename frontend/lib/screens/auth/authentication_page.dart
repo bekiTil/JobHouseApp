@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -138,13 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 16,
                               ),
                             ),
-                            onTap: () => {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (constex) => ChooseRole()),
-                                  ),
-                                }),
+                            onTap: () => {context.go('/signup')}),
                       ),
                     ),
                   ],

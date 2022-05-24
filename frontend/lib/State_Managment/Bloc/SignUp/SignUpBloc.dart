@@ -1,3 +1,5 @@
+import 'package:frontend/Repository/user_repository.dart';
+
 import 'SignUpState.dart';
 import 'SignUpEvent.dart';
 
@@ -6,36 +8,21 @@ import 'package:bloc/bloc.dart';
 import '../../../Data_Provider/auth.dart';
 
 class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
-  final AuthProvider authProvider;
-  SignUpBloc({required this.authProvider}) : super(SignUpState());
-
-  @override
-  Stream<SignUpState> mapEventToState(SignupEvent event) async* {
-    if (event is UsernameChanged) {
-      yield state.copyWith(username: event.username);
-    } else if (event is EmailChanged) {
-      yield state.copyWith(email: event.email);
-    } else if (event is PasswordChanged) {
-      yield state.copyWith(password: event.password);
-    } else if (event is RoleChanged) {
-      yield state.copyWith(role: event.role);
-    } else if (event is NameChanged) {
-      yield state.copyWith(name: event.name);
-    } else if (event is NewSignUp) {
-      yield state.copyWith(
-          username: "", email: "", password: "", role: "", name: "");
-    } else if (event is SignUpSubmitted) {
+  final UserRepository userRepository = UserRepository();
+  SignUpBloc() : super(SignUpInitial()) {
+    on<SignUpSubmitted>((event, emit) async {
+      emit(SignUpLoading());
       User user = User(
-          username: state.username,
-          email: state.email,
-          password: state.password,
-          role: state.role,
-          name: state.name);
+          username: event.username,
+          email: event.email,
+          password: event.password,
+          role: event.role,
+          name: event.name);
       try {
-        authProvider.signup(user);
+        await userRepository.SignUp(user: user);
       } catch (e) {
         throw (e);
       }
-    }
+    });
   }
 }

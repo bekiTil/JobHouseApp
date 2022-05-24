@@ -1,30 +1,21 @@
 abstract class SignupEvent {}
 
-class UsernameChanged extends SignupEvent {
-  final String? username;
-  UsernameChanged({required this.username});
-}
+class SignUpSubmitted extends SignupEvent {
+  final String username;
+  final String password;
+  final String email;
+  final String role;
+  final String name;
 
-class EmailChanged extends SignupEvent {
-  final String? email;
-  EmailChanged({required this.email});
+  SignUpSubmitted({
+    required this.username,
+    required this.password,
+    required this.email,
+    required this.role,
+    required this.name,
+  });
 }
-
-class PasswordChanged extends SignupEvent {
-  final String? password;
-  PasswordChanged({required this.password});
-}
-
-class RoleChanged extends SignupEvent {
-  final String? role;
-  RoleChanged({required this.role});
-}
-
-class NameChanged extends SignupEvent {
-  final String? name;
-  NameChanged({required this.name});
-}
-
-class SignUpSubmitted extends SignupEvent {}
 
 class NewSignUp extends SignupEvent {}
+
+

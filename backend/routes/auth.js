@@ -12,19 +12,21 @@ router.post("/", async(req, res) => {
     const{ error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let user = await User.findOne({email: req.body.email});
-    if (!user) return res.status(400).send('Invalid email or password.');
+    let user = await User.findOne({username: req.body.username});
+    if (!user) return res.status(400).send('Invalid username or password.');
 
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).send('Invalid email or password.');
+    if (!validPass) return res.status(400).send('Invalid username or password.');
 
     const token = user.generateAuthToken();
-    res.send(token)
+    res.status(201).json({
+        status:201
+        ,"user":user, "token":token});
 });
 
 function validate(req){
     const schema = Joi.object({
-        email: Joi.string().min(10).max(255).required().email(),
+        username: Joi.string().min(3).max(255).required(),
         password: Joi.string().min(5).max(255).required()
     });
     return schema.validate(req);
