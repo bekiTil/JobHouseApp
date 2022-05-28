@@ -58,7 +58,7 @@ router.get("/user/:username", async (req, res) => {
 });
 
 // Delete a post by its id
-router.delete("/delete/:id", authorize(Role.Company), async (req, res) => {
+router.delete("/:id", authorize(Role.Company), async (req, res) => {
   let post;
   try {
     post = await Post.findOne({ _id: req.params.id });

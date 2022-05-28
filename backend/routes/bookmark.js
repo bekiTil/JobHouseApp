@@ -4,14 +4,12 @@ const User = require("../models/User");
 const { Post } = require("../models/Post");
 const { Bookmark, bookmarkValidation } = require("../models/Bookmark");
 
-const verifyToken = require("../middleware/verifyToken");
-const isEmployee = require("../middleware/isEmployee");
+const authorize = require("../middleware/authorize");
+const Role = require("../models/Role");
 
-/**
- * Create bookmark
- */
-router.post("", verifyToken, isEmployee, async (req, res) => {
-  req.body.user_id = req.user._id;
+// Create bookmark
+router.post("", authorize(Role.Employee), async (req, res) => {
+  req.body.user_id = req.auth._id;
 
   const { error } = bookmarkValidation(req.body);
 
@@ -43,25 +41,40 @@ router.post("", verifyToken, isEmployee, async (req, res) => {
   res.send(await bookmark.save());
 });
 
-/**
- * Get all the saved bookmarks of the user who made this get request
- */
-router.get("", verifyToken, isEmployee, async (req, res) => {
+// Get all the saved bookmarks of the user who made this get request
+router.get("", authorize(Role.Employee), async (req, res) => {
   return res.send(
-    await Bookmark.find({ user_id: req.user._id }).sort({
+    await Bookmark.find({ user_id: req.auth._id }).sort({
       createdAt: -1,
     })
   );
 });
 
-/**
- * Deletes a bookmark with _id = id
- */
-router.get("/delete/:id", verifyToken, isEmployee, async (req, res) => {
+// Edit memo of a bookmark
+router.put("/:id", authorize(Role.Employee), async (req, res) => {
+  try {
+    ({ memo } = req.body);
+
+    const bookmark = await Bookmark.findOne({ _id: req.params.id });
+
+    if (bookmark.user_id != req.auth._id) {
+      throw Error("Not the owner!");
+    }
+
+    bookmark.memo = memo;
+
+    res.send(await bookmark.save());
+  } catch (error) {
+    res.status(401).send("Bookmark doesn't exist!");
+  }
+});
+
+// Deletes a bookmark
+router.delete("/:id", authorize(Role.Employee), async (req, res) => {
   try {
     const bookmark = await Bookmark.findOne({ _id: req.params.id });
 
-    if (req.user._id != bookmark.user_id) {
+    if (req.auth._id != bookmark.user_id) {
       throw Error("Not the owner");
     }
 

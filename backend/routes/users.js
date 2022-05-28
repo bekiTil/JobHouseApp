@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 
 const authorize = require("../middleware/authorize");
 const Role = require("../models/Role");
-const verifyToken = require("../middleware/verifyToken");
 const upload = require("../middleware/image");
 
 const router = express.Router();
@@ -24,7 +23,7 @@ router.get("/:id", async (req, res) => {
   res.send(user);
 });
 
-// Sign-up for new user 
+// Sign-up for new user
 router.post("/", upload.single("image"), async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -34,9 +33,11 @@ router.post("/", upload.single("image"), async (req, res) => {
   const emailExist = await User.findOne({ email: email });
   const usernameExist = await User.findOne({ username: username });
 
-  if (emailExist) { // email already exists
+  if (emailExist) {
+    // email already exists
     return res.status(400).send("Email already exists!");
-  } else if (usernameExist) { // username already registered
+  } else if (usernameExist) {
+    // username already registered
     return res.status(400).send("Username already exists!");
   }
 
