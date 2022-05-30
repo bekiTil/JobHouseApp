@@ -12,7 +12,7 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
   SignUpBloc() : super(SignUpInitial()) {
     on<SignUpSubmitted>((event, emit) async {
       emit(SignUpLoading());
-      User user = User(
+     final User user = User(
           username: event.username,
           email: event.email,
           password: event.password,

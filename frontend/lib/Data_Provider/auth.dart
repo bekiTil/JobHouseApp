@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:convert' as convert;
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
@@ -9,19 +11,20 @@ class AuthProvider {
 
   Future<void> signup(User user) async {
     try {
-      final dio = Dio();
-      const url = "http://localhost:3000/api/users";
+      var url = Uri.parse('http://localhost:3000/api/users');
 
-      FormData formData = FormData.fromMap({
+      final response = await http.post(url, body: {
         "username": user.username,
         "email": user.email,
         "password": user.password,
         "role": user.role,
         "fullName": user.name,
       });
+      print(response.body);
+      var responded = convert.jsonDecode(response.body);
+      print(user);
 
-      final response = await dio.post(url, data: formData);
-      user.id = response.data["id"];
+      user.id = responded["_id"];
     } catch (e) {
       throw e;
     }
@@ -29,14 +32,15 @@ class AuthProvider {
 
   Future<dynamic> login(String username, String password) async {
     try {
-      final dio = Dio();
-      const url = "http://localhost:3000/login";
-      final response = await dio
-          .post(url, data: {"username": username, "password": password});
-      print(response);
+      var url = Uri.parse("http://localhost:3000/login");
+      final response = await http
+          .post(url, body: {"username": username, "password": password});
+
       if (response.statusCode == 201) {
-        print(response.data["user"]["username"]);
-        return {"token": response.data["token"], "user": response.data["user"]};
+        var responded =
+            convert.jsonDecode(response.body) as Map<String, dynamic>;
+        print(responded["user"]["username"]);
+        return {"token": responded["token"], "user": responded["user"]};
       }
     } catch (e) {
       return null;

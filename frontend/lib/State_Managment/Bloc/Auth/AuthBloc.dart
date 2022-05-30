@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (event, emit) async {
         emit(AuthLoading());
         await storage.deleteAll();
+        emit(AuthLogout());
       },
     );
   }
