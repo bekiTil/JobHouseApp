@@ -1,18 +1,17 @@
 const router = require("express").Router();
-const User = require("../models/User");
+const { User } = require("../models/User");
 const { Post, postValidation } = require("../models/Post");
 
-const verifyToken = require("../middleware/verifyToken");
-const isCompany = require("../middleware/isCompany");
 const upload = require("../middleware/image");
+const authorize = require("../middleware/authorize");
+const Role = require("../models/Role");
 
 router.post(
   "",
-  verifyToken,
-  isCompany,
+  authorize(Role.Company),
   upload.single("image"),
   async (req, res) => {
-    req.body.poster_id = req.user._id;
+    req.body.poster_id = req.auth._id;
 
     const { error } = postValidation(req.body);
 
@@ -20,7 +19,7 @@ router.post(
       return res.status(400).send(error.details[0].message);
     }
 
-    ({ poster_id, description, category, number, poster_id } = req.body);
+    ({ poster_id, description, category, number } = req.body);
 
     const post = new Post({
       poster_id: poster_id,
@@ -36,6 +35,8 @@ router.post(
     res.send(await post.save());
   }
 );
+
+// Get post information by its post id
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id });
@@ -45,6 +46,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Get all posts from a given user
 router.get("/user/:username", async (req, res) => {
   const user = await User.findOne({ username: req.params.username });
 
@@ -55,12 +57,13 @@ router.get("/user/:username", async (req, res) => {
   res.send(await Post.find({ poster_id: user._id }));
 });
 
-router.get("/delete/:id", verifyToken, isCompany, async (req, res) => {
+// Delete a post by its id
+router.delete("/:id", authorize(Role.Company), async (req, res) => {
   let post;
   try {
     post = await Post.findOne({ _id: req.params.id });
 
-    if (req.user._id != post.poster_id) {
+    if (req.auth._id != post.poster_id) {
       throw Error("Not the owner");
     }
 
@@ -70,10 +73,10 @@ router.get("/delete/:id", verifyToken, isCompany, async (req, res) => {
   }
 });
 
-router.post(
-  "/edit/:id",
-  verifyToken,
-  isCompany,
+// Edit post
+router.put(
+  "/:id",
+  authorize(Role.Company),
   upload.single("image"),
   async (req, res) => {
     try {
@@ -81,7 +84,7 @@ router.post(
 
       const post = await Post.findOne({ _id: req.params.id });
 
-      if (post.poster_id != req.user._id) {
+      if (post.poster_id != req.auth._id) {
         throw Error("Not the owner!");
       }
 
