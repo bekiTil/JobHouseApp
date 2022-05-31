@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (snapshot.data == "employee") {
                     return New();
                   } else {
-                    return News();
+                    return New();
                   }
                 } else {
                   return BlocConsumer<LoginBloc, LoginState>(
@@ -100,10 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           TextFormField(
                                             controller: usernameController,
-                                            validator: ValidationBuilder()
-                                                .minLength(5)
-                                                .maxLength(20)
-                                                .build(),
                                             decoration: const InputDecoration(
                                               icon: Icon(Icons.person),
                                               hintText: 'Your username',
@@ -115,10 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           TextFormField(
                                             controller: passwordController,
-                                            validator: ValidationBuilder()
-                                                .minLength(8)
-                                                .maxLength(20)
-                                                .build(),
                                             decoration: const InputDecoration(
                                               icon: Icon(Icons.password),
                                               hintText:

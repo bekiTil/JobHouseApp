@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../Models/roles.dart';
-import 'package:form_validator/form_validator.dart';
 
 class PostBody extends StatefulWidget {
   const PostBody({Key? key}) : super(key: key);
@@ -11,9 +10,9 @@ class PostBody extends StatefulWidget {
 
 class _PostBodyState extends State<PostBody> {
   final _formKeyBasic = GlobalKey<FormState>();
-  final _categories = ['lsdjkf', ' ldsfj', ' ksjd'];
+  final List<String> _categories = ['lsdjkf', ' ldsfj', ' ksjd'];
 
-
+  late String categorySelected;
   String selectedRole = Roles.Company;
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController categoryController = TextEditingController();
@@ -21,34 +20,28 @@ class _PostBodyState extends State<PostBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: _formKeyBasic,
-        child: Column(
-          children: [
-            DropdownButton<string>(
-              items: _categories.map().toList(),
-              // controller: categoryController,
-              // validator: ValidationBuilder().minLength(5).maxLength(35).build(),
-              // decoration: const InputDecoration(labelText: 'Category'),
-            ),
-            TextFormField(
-              controller: numberController,
-              validator: ValidationBuilder().minLength(5).maxLength(35).build(),
-              decoration: const InputDecoration(labelText: 'Number of spaces available'),
-            ),
-            TextFormField(
-              controller: descriptionController,
-              validator: ValidationBuilder().minLength(5).maxLength(35).build(),
-              decoration: const InputDecoration(labelText: 'description'),
-            ),
-            TextFormField(
-              controller: categoryController,
-              validator: ValidationBuilder().minLength(5).maxLength(35).build(),
-              decoration: const InputDecoration(labelText: 'Category'),
-            ),
-          ],
-        ),
+    return Form(
+      key: _formKeyBasic,
+      child: Column(
+        children: [
+          const Text("POST", style: TextStyle(fontSize: 18.0)),
+          const SizedBox(
+            height: 20.0,
+          ),
+          TextFormField(
+            controller: numberController,
+            decoration:
+                const InputDecoration(labelText: 'Number of spaces available'),
+          ),
+          TextFormField(
+            controller: descriptionController,
+            decoration: const InputDecoration(labelText: 'description'),
+          ),
+          TextFormField(
+            controller: categoryController,
+            decoration: const InputDecoration(labelText: 'Category'),
+          ),
+        ],
       ),
     );
   }
