@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../Models/roles.dart';
+import '../../../models/roles.dart';
 
 class PostBody extends StatefulWidget {
   const PostBody({Key? key}) : super(key: key);
