@@ -36,6 +36,13 @@ router.post(
   }
 );
 
+// Get all posts
+router.get("", async (req, res) => {
+  Post.find({})
+    .then((posts) => res.send(users))
+    .catch((error) => res.status(400).send("An Error occured"));
+});
+
 // Get post information by its post id
 router.get("/:id", async (req, res) => {
   try {

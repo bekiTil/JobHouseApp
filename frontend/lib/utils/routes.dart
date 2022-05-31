@@ -1,9 +1,9 @@
 import 'dart:js';
-import 'package:frontend/Repository/secureStorage.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthBloc.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthEvent.dart';
-import 'package:frontend/State_Managment/Bloc/Login/LoginBloc.dart';
-import 'package:frontend/State_Managment/Bloc/SignUp/SignUpBloc.dart';
+import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/blocs/auth/AuthBloc.dart';
+import 'package:frontend/blocs/auth/AuthEvent.dart';
+import 'package:frontend/blocs/login/LoginBloc.dart';
+import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/screens/Company/home.dart';
 import 'package:frontend/screens/Employee/home.dart';
 import 'package:frontend/screens/auth/register.dart';

@@ -6,7 +6,7 @@ import "package:flutter/material.dart";
 
 @immutable
 class User extends Equatable {
-  late final String? id;
+  late String? id;
   final String? username;
   final String? email;
   final String? password;

@@ -12,6 +12,7 @@ class StorageService {
 
   Future<bool> hasToken() async {
     var value = await _secureStorage.read(key: "token");
+    print(value);
     return value != null;
   }
 

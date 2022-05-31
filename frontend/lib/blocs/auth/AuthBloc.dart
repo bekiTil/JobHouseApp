@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/Repository/secureStorage.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthEvent.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthState.dart';
+import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/blocs/auth/AuthEvent.dart';
+import 'package:frontend/blocs/auth/AuthState.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final StorageService storage;
@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (event, emit) async {
         emit(AuthLoading());
         await storage.deleteAll();
+        emit(AuthLogout());
       },
     );
   }
