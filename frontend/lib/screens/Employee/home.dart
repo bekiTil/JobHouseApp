@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthEvent.dart';
-import '../../State_Managment/Bloc/Auth/AuthBloc.dart';
-import '../../State_Managment/Bloc/Auth/AuthState.dart';
+import 'package:frontend/blocs/auth/AuthEvent.dart';
+import 'package:frontend/blocs/auth/AuthBloc.dart';
+import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:go_router/go_router.dart';
 
 class New extends StatelessWidget {
@@ -20,7 +20,7 @@ class New extends StatelessWidget {
         builder: (context, state) {
           return Container(
               child: ElevatedButton(
-            child: Text('logout'),
+            child: const Text('logout'),
             onPressed: () {
               BlocProvider.of<AuthBloc>(context).add(LoggedOut());
             },

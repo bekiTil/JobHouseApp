@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/State_Managment/Bloc/SignUp/SignUpBloc.dart';
-import 'package:frontend/State_Managment/Bloc/SignUp/SignUpEvent.dart';
-import 'package:frontend/State_Managment/Bloc/SignUp/SignUpState.dart';
-import '../../Models/roles.dart';
+import 'package:frontend/blocs/signup/SignUpBloc.dart';
+import 'package:frontend/blocs/signup/SignUpEvent.dart';
+import 'package:frontend/blocs/signup/SignUpState.dart';
+import 'package:frontend/models/roles.dart';
+import 'package:go_router/go_router.dart';
 import 'package:form_validator/form_validator.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -38,6 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
           email: emailController.text,
           role: selectedRole,
           name: nameController.text));
+          context.go("/");
     }
 
     return BlocConsumer<SignUpBloc, SignUpState>(

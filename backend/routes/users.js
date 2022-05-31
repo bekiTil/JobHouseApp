@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const authorize = require("../middleware/authorize");
 const Role = require("../models/Role");
 const upload = require("../middleware/image");
+const verifyToken = require("../middleware/verifyToken");
 
 const router = express.Router();
 

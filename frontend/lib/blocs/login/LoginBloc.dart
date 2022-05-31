@@ -1,10 +1,10 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/Repository/user_repository.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthBloc.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthEvent.dart';
-import 'package:frontend/State_Managment/Bloc/Login/LoginEvent.dart';
-import 'package:frontend/State_Managment/Bloc/Login/LoginState.dart';
 import 'package:http/http.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/repository/repository.dart';
+import 'package:frontend/blocs/auth/AuthBloc.dart';
+import 'package:frontend/blocs/auth/AuthEvent.dart';
+import 'package:frontend/blocs/login/LoginEvent.dart';
+import 'package:frontend/blocs/login/LoginState.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository = UserRepository();

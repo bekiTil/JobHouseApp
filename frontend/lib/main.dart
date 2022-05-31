@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/Repository/secureStorage.dart';
-import 'package:frontend/Repository/user_repository.dart';
-import 'package:frontend/State_Managment/Bloc/Auth/AuthBloc.dart';
-import 'package:frontend/State_Managment/Bloc/Login/LoginBloc.dart';
-import 'package:frontend/State_Managment/Bloc/SignUp/SignUpBloc.dart';
+import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/repository/user_repository.dart';
+import 'package:frontend/blocs/auth/AuthBloc.dart';
+import 'package:frontend/blocs/login/LoginBloc.dart';
+import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/screens/auth/authentication_page.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/utils/routes.dart';

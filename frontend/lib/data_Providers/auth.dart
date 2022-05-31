@@ -4,7 +4,7 @@ import 'dart:convert' as convert;
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import '../Models/user.dart';
+import '../models/user.dart';
 
 class AuthProvider {
   AuthProvider();

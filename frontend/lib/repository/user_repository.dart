@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import '../Data_Provider/auth.dart';
-import '../Models/user.dart';
+import '../data_Providers/auth.dart';
+import '../models/user.dart';
 
 class UserRepository {
   final AuthProvider authProvider = new AuthProvider();
