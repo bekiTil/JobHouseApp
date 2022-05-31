@@ -5,7 +5,6 @@ import 'package:frontend/blocs/signup/SignUpEvent.dart';
 import 'package:frontend/blocs/signup/SignUpState.dart';
 import 'package:frontend/models/roles.dart';
 import 'package:go_router/go_router.dart';
-import 'package:form_validator/form_validator.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -39,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
           email: emailController.text,
           role: selectedRole,
           name: nameController.text));
-          context.go("/");
+      context.go("/");
     }
 
     return BlocConsumer<SignUpBloc, SignUpState>(
@@ -52,36 +51,19 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Column(children: [
                     TextFormField(
                       controller: usernameController,
-                      validator: ValidationBuilder()
-                          .minLength(5)
-                          .maxLength(20)
-                          .build(),
                       decoration: InputDecoration(labelText: 'Username'),
                     ),
                     TextFormField(
                       controller: emailController,
-                      validator: ValidationBuilder()
-                          .email()
-                          .minLength(5)
-                          .maxLength(35)
-                          .build(),
                       decoration: InputDecoration(labelText: 'Email'),
                     ),
                     TextFormField(
                       controller: passwordController,
-                      validator: ValidationBuilder()
-                          .minLength(8)
-                          .maxLength(20)
-                          .build(),
                       decoration: InputDecoration(labelText: 'Password'),
                       obscureText: true,
                     ),
                     TextFormField(
                       controller: nameController,
-                      validator: ValidationBuilder()
-                          .minLength(5)
-                          .maxLength(35)
-                          .build(),
                       decoration: InputDecoration(labelText: 'Name'),
                     ),
                     Row(children: [

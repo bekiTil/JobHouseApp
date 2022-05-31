@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import '../data_Providers/auth.dart';
 import '../models/user.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_validator/form_validator.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
@@ -52,10 +51,10 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (role == "Employee") {
-        context.go("/homeEmployee");
-      } else {
-        context.go("/homeEmployee");
-      }
+          context.go("/homeEmployee");
+        } else {
+          context.go("/homeEmployee");
+        }
       },
       builder: (context, state) {
         return FutureBuilder<String?>(
@@ -68,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (snapshot.data == "employee") {
                     return New();
                   } else {
-                    return News();
+                    return New();
                   }
                 } else {
                   return BlocConsumer<LoginBloc, LoginState>(
@@ -101,10 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           TextFormField(
                                             controller: usernameController,
-                                            validator: ValidationBuilder()
-                                                .minLength(5)
-                                                .maxLength(20)
-                                                .build(),
                                             decoration: const InputDecoration(
                                               icon: Icon(Icons.person),
                                               hintText: 'Your username',
@@ -116,10 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           TextFormField(
                                             controller: passwordController,
-                                            validator: ValidationBuilder()
-                                                .minLength(8)
-                                                .maxLength(20)
-                                                .build(),
                                             decoration: const InputDecoration(
                                               icon: Icon(Icons.password),
                                               hintText:

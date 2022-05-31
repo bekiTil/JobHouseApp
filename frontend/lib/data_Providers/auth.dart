@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:convert' as convert;
 
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
