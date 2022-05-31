@@ -31,6 +31,7 @@ class PostDataProvider {
 
     throw Exception("An Error happened while creating post");
   }
+  
 
   Future<Post> fetchById(int id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
