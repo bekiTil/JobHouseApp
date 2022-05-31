@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_validator/form_validator.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
@@ -52,10 +51,10 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (role == "Employee") {
-        context.go("/homeEmployee");
-      } else {
-        context.go("/homeEmployee");
-      }
+          context.go("/homeEmployee");
+        } else {
+          context.go("/homeEmployee");
+        }
       },
       builder: (context, state) {
         return FutureBuilder<String?>(
