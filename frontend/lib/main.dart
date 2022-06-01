@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/blocs.dart';
+import 'package:frontend/blocs/company/EditCompany/editcompany_bloc.dart';
+import 'package:frontend/blocs/employee/editEmployee/editEmployee_bloc.dart';
+import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/repository/user_repository.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
@@ -38,8 +42,19 @@ class _MyAppState extends State<MyApp> {
               create: ((context) =>
                   LoginBloc(BlocProvider.of<AuthBloc>(context))),
             ),
-            BlocProvider(create: (context) => SignUpBloc()),
-            BlocProvider(create: (context) => PostBloc())
+            BlocProvider(
+              create: (context) => SignUpBloc(),
+            ),
+            BlocProvider(
+              create: ((context) => CompanyBloc()),
+            ),
+            BlocProvider(create: ((context) => EditCompanyBloc())),
+            BlocProvider(
+              create: ((context) => EmployeeBloc()),
+            ),
+            BlocProvider(
+              create: ((context) => EditEmployeeBloc()),
+            )
           ],
           child: MaterialApp.router(
               routeInformationParser: router.routeInformationParser,

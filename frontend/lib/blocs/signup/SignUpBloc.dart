@@ -17,11 +17,12 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
           email: event.email,
           password: event.password,
           role: event.role,
-          name: event.name);
+          fullName: event.name);
       try {
-        await userRepository.SignUp(user: user);
-      } catch (e) {
-        throw (e);
+        final response = await userRepository.SignUp(user: user);
+        emit(SignUpSuccess());
+      } catch ( e) {
+        emit(SignUpFailure(e.toString()));
       }
     });
   }

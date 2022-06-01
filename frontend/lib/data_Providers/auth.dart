@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:convert' as convert;
 
+import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
 class AuthProvider {
   AuthProvider();
 
-  Future<void> signup(User user) async {
-    try {
+  Future signup(User user) async {
       var url = Uri.parse('http://localhost:3000/api/users');
 
       final response = await http.post(url, body: {
@@ -17,23 +17,26 @@ class AuthProvider {
         "email": user.email,
         "password": user.password,
         "role": user.role,
-        "fullName": user.name,
+        "fullName": user.fullName,
       });
       print(response.body);
-      var responded = convert.jsonDecode(response.body);
-      print(user);
+      if (response.statusCode == 200) {
+        var responded = convert.jsonDecode(response.body);
+        print(user);
 
-      user.id = responded["_id"];
-    } catch (e) {
-      throw e;
+        user.id = responded["_id"];
+        return user;
+      }else{
+      throw AuthException(response.body);
+
+      }
+    
     }
-  }
 
   Future<dynamic> login(String username, String password) async {
-    try {
+      Map data = {"username": username, 'password': password};
       var url = Uri.parse("http://localhost:3000/login");
-      final response = await http
-          .post(url, body: {"username": username, "password": password});
+      final response = await http.post(url, body: data);
 
       if (response.statusCode == 201) {
         var responded =
@@ -41,8 +44,8 @@ class AuthProvider {
         print(responded["user"]["username"]);
         return {"token": responded["token"], "user": responded["user"]};
       }
-    } catch (e) {
-      return null;
-    }
-  }
+      else{
+        throw AuthException("username and password doesn't match");
+      }
+    } 
 }

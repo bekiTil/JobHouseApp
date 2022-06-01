@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/auth/company_registration.dart';
-import 'package:frontend/screens/auth/employee_registration.dart';
+import 'package:go_router/go_router.dart';
 
 class ChooseRole extends StatefulWidget {
   ChooseRole({Key? key}) : super(key: key);
@@ -51,12 +50,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                             ),
                           )),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EmployeeRegistration(),
-                          ),
-                        );
+                        context.go("/employeeRegistration");
                       },
                     ),
                     const Text("OR"),
@@ -76,12 +70,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CompanyRegistration(),
-                          ),
-                        );
+                        context.go('/companyRegistration');
                       },
                     )
                   ],
