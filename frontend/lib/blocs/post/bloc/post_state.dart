@@ -1,12 +1,30 @@
 part of 'post_bloc.dart';
 
 @immutable
-abstract class PostState {}
+abstract class PostState {
+  final Post post;
 
-class PostInitial extends PostState {}
+  PostState(this.post);
+  
+}
 
-class PostCreating extends PostState {}
+class PostInitial extends PostState {
+  PostInitial(Post post) :super(post);
+}
 
-class PostUpdating extends PostState {}
+class PostCreating extends PostState {
+  PostCreating(Post post) : super(post);
+}
 
-class PostFailed extends PostState {}
+class PostCreated extends PostState {
+  PostCreated(Post post) : super(post);
+}
+
+class PostCreationFailed extends PostState {
+  final String exception;
+
+  PostCreationFailed(this.exception, Post post) : super(post);
+
+  
+}
+
