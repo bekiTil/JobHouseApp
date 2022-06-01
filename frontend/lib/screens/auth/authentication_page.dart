@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_validator/form_validator.dart';
 import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/models/models.dart';

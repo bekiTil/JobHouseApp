@@ -13,6 +13,7 @@ import 'package:frontend/screens/Employee/home.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/screens/auth/company_registration.dart';
 import 'package:frontend/screens/auth/employee_registration.dart';
+import '../screens/Company/home.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,10 @@ class AllRoutes {
               ),
             )
           ]),
+        GoRoute(
+          path: "/post",
+          builder: (BuildContext context, GoRouterState state) => const Post(),
+        ),
     
     
   ],
@@ -109,5 +114,5 @@ class AllRoutes {
         ),
       ),
     ),
-     refreshListenable: GoRouterRefreshStream(signup.stream));
+    refreshListenable: GoRouterRefreshStream(signup.stream));
 }
