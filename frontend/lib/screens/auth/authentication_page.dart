@@ -46,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
       if (state is Authenticated) {
         if (state.role == Roles.Company) {
-          BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited(state.id));
           context.go("/companyHome");
         } else if (state.role == Roles.Employee) {
           BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited(state.id));

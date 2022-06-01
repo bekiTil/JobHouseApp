@@ -7,7 +7,11 @@ class PostRepository {
   PostRepository(this.postDataProvider);
 
   Future<Post> create(Post post) async {
-    return postDataProvider.create(post);
+    try{
+      return postDataProvider.create(post);
+    }catch(e){
+      rethrow;
+    }
   }
 
   Future<Post> update(int id, Post post) async {

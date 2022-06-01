@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 import '../models/post.dart';
 
@@ -6,7 +7,7 @@ class PostDataProvider {
   static const String _baseUrl = "http://10.0.2.2:3000/api/posts";
   static const String _token = "TODO:";
 
-  String jsonify(Post post) {
+String jsonify(Post post) {
     return jsonEncode({
       "description": post.description,
       "number": post.number,
@@ -14,6 +15,7 @@ class PostDataProvider {
       "image": post.image,
     });
   }
+  
 
   Future<Post> create(Post post) async {
     final http.Response response = await http.post(
@@ -29,9 +31,9 @@ class PostDataProvider {
       return Post.fromJson(jsonDecode(response.body));
     }
 
-    throw Exception("An Error happened while creating post");
+    throw AuthException("An Error happened while creating post");
   }
-  
+
 
   Future<Post> fetchById(int id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
