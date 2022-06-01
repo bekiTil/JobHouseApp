@@ -10,7 +10,6 @@ import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/login/LoginBloc.dart';
 import 'package:frontend/blocs/login/LoginEvent.dart';
 import 'package:frontend/blocs/login/LoginState.dart';
-import 'package:frontend/screens/Company/post.dart';
 import 'package:frontend/screens/Employee/home.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
 

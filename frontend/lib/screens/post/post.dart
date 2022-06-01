@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './post/components/postBody.dart';
+import 'components/postBody.dart';
 
 class Post extends StatefulWidget {
   const Post({Key? key}) : super(key: key);

@@ -1,20 +1,16 @@
 import 'dart:js';
-import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
-import 'package:frontend/blocs/auth/AuthEvent.dart';
-import 'package:frontend/blocs/login/LoginBloc.dart';
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/screens/Company/companyHome.dart';
 import 'package:frontend/screens/Company/edit_company_profile.dart';
-import 'package:frontend/screens/Company/post.dart';
+import 'package:frontend/screens/post/post.dart';
 import 'package:frontend/screens/Employee/edit_employee_profile.dart';
 import 'package:frontend/screens/Employee/employeeHome.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/screens/auth/company_registration.dart';
 import 'package:frontend/screens/auth/employee_registration.dart';
-import '../screens/Company/home.dart';
-
+import '../screens/post/post.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/authentication_page.dart';
@@ -78,7 +74,12 @@ class AllRoutes {
                   key: state.pageKey,
                   child: const EditCompanyProfile(),
                 ),
-              )
+              ),
+              GoRoute(
+                path: "post",
+                builder: (BuildContext context, GoRouterState state) =>
+                    const Post(),
+              ),
             ]),
         GoRoute(
             name: 'employeeHome',
