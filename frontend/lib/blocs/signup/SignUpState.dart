@@ -12,4 +12,9 @@ class SignUpLoading extends SignUpState {}
 
 class SignUpSuccess extends SignUpState {}
 
-class SignUpFailure extends SignUpState {}
+class SignUpFailure extends SignUpState {
+  final String exception;
+
+  const SignUpFailure(this.exception);
+  
+}

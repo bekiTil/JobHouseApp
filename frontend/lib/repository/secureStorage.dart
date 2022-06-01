@@ -19,12 +19,15 @@ class StorageService {
   Future<void> deleteAll() async {
     return await _secureStorage.deleteAll();
   }
+  Future<String?> getId() async {
+    return await _secureStorage.read(key: "id");
+  }
 
   Future<String?> getRole() async {
-    return _secureStorage.read(key: "role");
+    return await _secureStorage.read(key: "role");
   }
 
   Future<String?> getToken() async {
-    return _secureStorage.read(key: "token");
+    return await _secureStorage.read(key: "token");
   }
 }

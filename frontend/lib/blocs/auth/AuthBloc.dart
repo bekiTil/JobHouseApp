@@ -13,12 +13,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         print(event.id);
         print(event.token);
         await storage.saveIdAndToken(event.role!, event.id!, event.token!);
-        emit(Authenticated());
+        emit(Authenticated(event.role!, event.id!));
       },
     );
     on<LoggedOut>(
       (event, emit) async {
-        emit(AuthLoading());
+        emit(AuthLoggingOut());
         await storage.deleteAll();
         emit(AuthLogout());
       },
