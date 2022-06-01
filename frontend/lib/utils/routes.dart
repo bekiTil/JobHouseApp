@@ -7,7 +7,7 @@ import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/screens/Company/home.dart';
 import 'package:frontend/screens/Employee/home.dart';
 import 'package:frontend/screens/auth/register.dart';
-import '../screens/Company/home.dart';
+import '../screens/Company/post.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';

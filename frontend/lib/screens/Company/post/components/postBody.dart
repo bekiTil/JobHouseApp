@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/roles.dart';
+import '../../../../models/roles.dart';
 
 class PostBody extends StatefulWidget {
   const PostBody({Key? key}) : super(key: key);
@@ -28,19 +28,26 @@ class _PostBodyState extends State<PostBody> {
           const SizedBox(
             height: 20.0,
           ),
-          TextFormField(
-            controller: numberController,
-            decoration:
-                const InputDecoration(labelText: 'Number of spaces available'),
+          DropdownButton<String>(
+            items: <String>['A', 'B', 'C', 'D'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (_) {},
           ),
           TextFormField(
             controller: descriptionController,
-            decoration: const InputDecoration(labelText: 'description'),
+            decoration:
+                const InputDecoration(labelText: 'Number of available places'),
           ),
           TextFormField(
             controller: categoryController,
-            decoration: const InputDecoration(labelText: 'Category'),
+            decoration: const InputDecoration(labelText: 'description'),
           ),
+          ElevatedButton(
+              onPressed: () => {setState(() {})}, child: const Text("Post")),
         ],
       ),
     );

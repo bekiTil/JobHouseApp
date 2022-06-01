@@ -6,8 +6,7 @@ part 'post_state.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
   PostBloc() : super(PostInitial()) {
-    on<PostEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    // on<EditPost>((event, emit) => ,)
+    // on<DeletePost>()
   }
 }
