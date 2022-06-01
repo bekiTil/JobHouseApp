@@ -71,17 +71,10 @@ router.post("/", upload.single("image"), async (req, res) => {
 
 // Edit user profile
 router.put("/:id", verifyToken, async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
   ({ username, email, password, fullName, role } = req.body);
 
   let user = await User.findOne({ _id: req.params.id });
 
-  user.username = req.body.username;
-  user.email = req.body.email;
-  user.fullName = req.body.fullName;
-  user.role = req.body.role;
   user.profile = req.body.profile;
 
   if (req.file) {

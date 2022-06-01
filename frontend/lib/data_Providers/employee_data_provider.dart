@@ -60,7 +60,7 @@ class EmployeeDataProvider {
     final response =
         await http.put(Uri.parse("http://localhost:3000/api/users/$id"),
             headers: {
-              "x-auth-token": token.toString(),
+              "x-auth-token": token,
               "Accept": "application/json",
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": "*",
