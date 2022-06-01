@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import '../../../../models/roles.dart';
 
 class PostBody extends StatefulWidget {
@@ -9,45 +11,137 @@ class PostBody extends StatefulWidget {
 }
 
 class _PostBodyState extends State<PostBody> {
-  final _formKeyBasic = GlobalKey<FormState>();
-  final List<String> _categories = ['lsdjkf', ' ldsfj', ' ksjd'];
+  final _formKey = GlobalKey<FormState>();
+  final List<String> _categories = [
+    'TECH',
+    'BUSINESS',
+    ' ART',
+    'CONSTRUCTION',
+    'EDUCATION'
+  ];
 
-  late String categorySelected;
+  String? categorySelected;
   String selectedRole = Roles.Company;
-  final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController categoryController = TextEditingController();
-  final TextEditingController numberController = TextEditingController();
+  final TextEditingController
+
+      /// A controller for the description text field.
+      _descriptionController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKeyBasic,
+      key: _formKey,
       child: Column(
         children: [
-          const Text("POST", style: TextStyle(fontSize: 18.0)),
+          const Text(
+            "POST",
+            style: TextStyle(
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 40.0,
+          ),
+          DropdownButton<String>(
+            value: categorySelected,
+            isExpanded: true,
+            hint: const Text('Choose Job Category'),
+            items: _categories.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                categorySelected = value!;
+              });
+            },
+          ),
           const SizedBox(
             height: 20.0,
           ),
-          DropdownButton<String>(
-            items: <String>['A', 'B', 'C', 'D'].map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (_) {},
-          ),
           TextFormField(
-            controller: descriptionController,
+            controller: _numberController,
             decoration:
                 const InputDecoration(labelText: 'Number of available places'),
+            validator: (String? value) {
+              return double.tryParse(value!) == null
+                  ? 'Please only numbers'
+                  : null;
+            },
+          ),
+          const SizedBox(
+            height: 20.0,
           ),
           TextFormField(
-            controller: categoryController,
+            controller: _descriptionController,
             decoration: const InputDecoration(labelText: 'description'),
+            validator: (String? value) {
+              return value!.isEmpty
+                  ? 'Please enter small job description'
+                  : null;
+            },
           ),
-          ElevatedButton(
-              onPressed: () => {setState(() {})}, child: const Text("Post")),
+          const SizedBox(
+            height: 20,
+          ),
+          BlocBuilder<PostBloc, PostState>(
+            builder: (context, state) {
+              return state is PostCreationFailed
+                  ? Column(
+                    children: [
+                      Text(
+                          state.exception,
+                          style: const TextStyle(color: Colors.red),
+                          ),
+                      const SizedBox(height: 20,)
+                    ],
+                  )
+                    
+                  : const Text('');
+            },
+          ),
+          
+          BlocBuilder<PostBloc, PostState>(
+            builder: (context, state) {
+              return state is PostCreating
+                  ? const CircularProgressIndicator()
+                  : ElevatedButton(
+                      style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(16),
+                      ),
+                      child: Container(
+                        width: 200,
+                        padding: const EdgeInsets.all(15.0),
+                        child: const Center(
+                          child: Text(
+                            "Post",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          BlocProvider.of<PostBloc>(context).add(
+                            PostCreate(
+                              _descriptionController.text,
+                              int.parse(_numberController.text),
+                              categorySelected!,
+                            ),
+                          );
+                        }
+                      },
+                    );
+            },
+          )
         ],
       ),
     );

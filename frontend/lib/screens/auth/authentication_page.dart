@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/models/models.dart';
-import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/login/LoginBloc.dart';
 import 'package:frontend/blocs/login/LoginEvent.dart';
 import 'package:frontend/blocs/login/LoginState.dart';
-import 'package:frontend/screens/Employee/home.dart';
-import 'package:frontend/screens/auth/choose_role.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:bloc/bloc.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);

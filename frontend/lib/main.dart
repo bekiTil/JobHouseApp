@@ -54,7 +54,8 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: ((context) => EditEmployeeBloc()),
-            )
+            ),
+            BlocProvider(create: ((context) => PostBloc()))
           ],
           child: MaterialApp.router(
               routeInformationParser: router.routeInformationParser,
