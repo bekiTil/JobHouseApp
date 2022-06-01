@@ -70,6 +70,12 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              context.go('/companyHome/post');
+            },
+            child: const Icon(Icons.add),
+          ),
         );
       },
     );
