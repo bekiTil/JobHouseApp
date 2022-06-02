@@ -16,7 +16,7 @@ class SimpleBlocObserver extends BlocObserver {
   
  
   @override
-  void onChange(Blocbase bloc, Change change) {
+  void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
     print('onChnage $change');
   }
