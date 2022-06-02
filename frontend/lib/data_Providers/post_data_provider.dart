@@ -86,9 +86,12 @@ class PostDataProvider {
   }
 
   Future<void> delete(String id) async {
-    final response = await http.delete(Uri.parse("$_baseUrl/$id"));
+    StorageService storage = StorageService();
+    final String? token = await storage.getToken();
+    final response = await http
+        .delete(Uri.parse("$_baseUrl/$id"), headers: {"x-auth-token": token!});
     if (response.statusCode != 204) {
-      throw Exception("Failed to delete the post");
+      throw AuthException(response.body);
     }
   }
 }
