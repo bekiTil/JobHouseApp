@@ -6,7 +6,7 @@ class PostRepository {
 
   PostRepository(this.postDataProvider);
 
-  Future<Post> create(Post post) async {
+  Future<Post> create(Map post) async {
     try {
       return postDataProvider.create(post);
     } catch (e) {
@@ -14,7 +14,7 @@ class PostRepository {
     }
   }
 
-  Future<Post> update(int id, Post post) async {
+  Future<Post> update(String id, Post post) async {
     return postDataProvider.update(id, post);
   }
 
@@ -30,7 +30,7 @@ class PostRepository {
     }
   }
 
-  Future<Post> fetchById(int id) async {
+  Future<Post> fetchById(String id) async {
     try {
       return await postDataProvider.fetchById(id);
     } catch (e) {
@@ -38,7 +38,7 @@ class PostRepository {
     }
   }
 
-  Future<void> delete(int id) async {
+  Future<void> delete(String id) async {
     postDataProvider.delete(id);
   }
 }

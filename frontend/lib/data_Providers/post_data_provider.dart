@@ -16,7 +16,7 @@ class PostDataProvider {
     });
   }
 
-  Future<Post> create(Post post) async {
+  Future<Post> create(Map post) async {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
     final http.Response response = await http.post(
@@ -25,7 +25,7 @@ class PostDataProvider {
         "Content-Type": "application/json",
         "x-auth-token": token!,
       },
-      body: jsonify(post),
+      body: json.encode(post),
     );
 
     if (response.statusCode == 200) {
@@ -35,7 +35,7 @@ class PostDataProvider {
     throw AuthException(response.body);
   }
 
-  Future<Post> fetchById(int id) async {
+  Future<Post> fetchById(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/$id"));
 
     if (response.statusCode == 200) {
@@ -68,7 +68,7 @@ class PostDataProvider {
     }
   }
 
-  Future<Post> update(int id, Post post) async {
+  Future<Post> update(String id, Post post) async {
     final response = await http.put(
       Uri.parse("$_baseUrl/$id"),
       headers: <String, String>{
@@ -85,7 +85,7 @@ class PostDataProvider {
     }
   }
 
-  Future<void> delete(int id) async {
+  Future<void> delete(String id) async {
     final response = await http.delete(Uri.parse("$_baseUrl/$id"));
     if (response.statusCode != 204) {
       throw Exception("Failed to delete the post");

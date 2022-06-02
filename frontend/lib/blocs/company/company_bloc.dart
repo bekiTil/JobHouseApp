@@ -12,7 +12,6 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
   CompanyBloc() : super(CompanyInitial()) {
     on<CompanyHomeVisited>((event, emit) async {
       emit(CompanyHomeLoading());
-
       try {
         CompanyRepository companyRepository = CompanyRepository();
         Company user = await companyRepository.fetchSingle();

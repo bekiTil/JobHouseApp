@@ -11,4 +11,10 @@ class PostCreate extends PostEvent {
   PostCreate(this.description, this.number, this.category);
 }
 
-class DeletePost extends PostEvent {}
+class DeletePost extends PostEvent {
+  final String id;
+
+  DeletePost(this.id);
+}
+
+class EditPost extends PostEvent {}

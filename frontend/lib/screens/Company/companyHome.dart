@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
+import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:frontend/screens/Company/drawer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -83,10 +84,13 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ),
                                           TextButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              BlocProvider.of<PostBloc>(context)
+                                                  .add(DeletePost(
+                                                      state.posts[index].id));
+                                            },
                                             child: const Icon(
                                               Icons.delete,
-                                              semanticLabel: 'Edit',
                                               color: Colors.red,
                                             ),
                                           ),
