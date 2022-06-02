@@ -63,18 +63,19 @@ await db.execute('''
 
 
   //creating new Employee Profile
-  createEmployeeProfile(EmployeeProfile employeeProfile) async {
-    final db= await database;
-    final response= await db!.insert(empProfile,employeeProfile.toJson());
-    return response;
-  }
+//   createEmployeeProfile(EmployeeProfile employeeProfile) async {
+//     final db= await database;
+//     final response= await db!.insert(empProfile,employeeProfile.toJson());
+//     return response;
+//   }
   
-  //creating new Company Profile
-  createCompanyProfile(CompanyProfile companyProfile) async {
-    final db= await database;
-    final response= await db!.insert(comProfile,companyProfile.toJson());
-    return response;
-  }
+//   //creating new Company Profile
+//   createCompanyProfile(CompanyProfile companyProfile) async {
+//     final db= await database;
+    
+//     final response= await db!.insert(comProfile,companyProfile.toJson());
+//     return response;
+//   }
 
   deleteAll() async {
     final db = await database;
