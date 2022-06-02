@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:frontend/data_Providers/company_data_provider.dart';
 import 'package:frontend/models/Company.dart';
+import 'package:frontend/repository/company_repository.dart';
 import 'package:frontend/repository/repository.dart';
 import 'package:meta/meta.dart';
 
@@ -13,12 +14,9 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
       emit(const CompanyHomeLoading());
 
       try {
-        StorageService storage = StorageService();
-        String? id = await storage.getId();
-        Company user = await CompanyDataProvider.fetchSingle(id!);
-        print('asd');
-        await Future.delayed(const Duration(seconds: 2));
-        
+        CompanyRepository companyRepository = CompanyRepository();
+        Company user = await companyRepository.fetchSingle();
+
         emit(CompanyHomeLoaded(
             username: user.username,
             email: user.email,
