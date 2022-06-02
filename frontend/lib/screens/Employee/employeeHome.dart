@@ -3,6 +3,7 @@ import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
+import 'package:frontend/screens/Employee/drawer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
@@ -29,6 +30,7 @@ class _HomePageState extends State<EmployeeHomePage> {
       },
       builder: (context, state) {
         return Scaffold(
+          drawer: DrawerCustom(),
           appBar: AppBar(title: Text(state.fullName)),
           body: Center(
             child: state is EmployeeHomeLoading

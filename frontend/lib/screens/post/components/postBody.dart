@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../models/roles.dart';
@@ -95,6 +96,7 @@ class _PostBodyState extends State<PostBody> {
           BlocConsumer<PostBloc, PostState>(
             listener: (context, state) {
               if (state is PostCreated){
+                BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
                 context.go('/companyHome');
               }
             },
