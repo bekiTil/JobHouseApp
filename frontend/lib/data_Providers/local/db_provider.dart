@@ -1,11 +1,8 @@
-import 'dart:io';
 import 'package:frontend/models/company_profile.dart';
 import 'package:frontend/models/employee_profile.dart';
 import 'package:frontend/models/user.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:frontend/models/Company.dart';
 
 class DBProvider {
   static  Database? _database;
@@ -81,9 +78,9 @@ await db.execute('''
 
   deleteAll() async {
     final db = await database;
-    final response1 = await db.rawDelete('DELETE FROM $empProfile');
+    final response1 = await db!.rawDelete('DELETE FROM $empProfile');
     final responsee2 = await db.rawDelete('DELETE FROM $comProfile');
-    return response;
+    return response1;
   }
   Future<Object> findEmployeeById(String id) async{
     final db =await database;
