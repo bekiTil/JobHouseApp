@@ -30,6 +30,14 @@ class PostRepository {
     }
   }
 
+  Future<Post> fetchById(int id) async {
+    try {
+      return await postDataProvider.fetchById(id);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> delete(int id) async {
     postDataProvider.delete(id);
   }

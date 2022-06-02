@@ -19,7 +19,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
-
   }
 
   @override
@@ -32,39 +31,43 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(title: Text(state.fullName)),
-          drawer: const  DrawerCustom(),
+          drawer: const DrawerCustom(),
           body: Center(
-            child: state is CompanyHomeLoading
-                ? const SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3,
-                      semanticsLabel: "Loading...",
-                    ),
-                  )
-                : state is CompanyHomeLoadingFailed
-                    ? const Center(
-                        child: Text('Err... Loading Failed'),
-                      )
-                    : ListView.builder(
-                      itemCount: state.posts.length,
-                      itemBuilder: (context, index) => GestureDetector(
-                        child: Container(
-                          decoration: BoxDecoration(border:Border.all(color: Colors.black, width: 5)),
-                        child: Column(
-                          children: [
-                            Text('Category: ${state.posts[index].category}'),
-                            Text('description: ${state.posts[index].description}'),
-                            Text('Number: ${state.posts[index].number}'),
-                          ],
-                        ),
-                        )
-                        
+              child: state is CompanyHomeLoading
+                  ? const SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 3,
+                        semanticsLabel: "Loading...",
                       ),
-
                     )
-          ),
+                  : state is CompanyHomeLoadingFailed
+                      ? const Center(
+                          child: Text('Err... Loading Failed'),
+                        )
+                      : ListView.builder(
+                          itemCount: state.posts.length,
+                          itemBuilder: (context, index) => GestureDetector(
+                              child: Container(
+                            margin: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
+                            child: Column(
+                              children: [
+                                Text(
+                                    'Category: ${state.posts[index].category}'),
+                                const SizedBox(height: 10),
+                                Text(
+                                    'description: ${state.posts[index].description}'),
+                                const SizedBox(height: 10),
+                                Text('Number: ${state.posts[index].number}'),
+                              ],
+                            ),
+                          )),
+                        )),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               context.go('/companyHome/post');
