@@ -47,8 +47,22 @@ class _HomePageState extends State<HomePage> {
                     ? const Center(
                         child: Text('Err... Loading Failed'),
                       )
-                    : ListView(
-                      
+                    : ListView.builder(
+                      itemCount: state.posts.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                        child: Container(
+                          decoration: BoxDecoration(border:Border.all(color: Colors.black, width: 5)),
+                        child: Column(
+                          children: [
+                            Text('Category: ${state.posts[index].category}'),
+                            Text('description: ${state.posts[index].description}'),
+                            Text('Number: ${state.posts[index].number}'),
+                          ],
+                        ),
+                        )
+                        
+                      ),
+
                     )
           ),
           floatingActionButton: FloatingActionButton(
