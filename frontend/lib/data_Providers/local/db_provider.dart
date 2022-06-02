@@ -40,36 +40,30 @@ CREATE TABLE $empProfile (
   password TEXT,
   role TEXT,
   fullName TEXT
+  fieldOfStudy TEXT,
+  educationLevel TEXT,
+  yearOfExperience INTEGER,
+  location TEXT,
+  bio TEXT
 )''');
 
 await db.execute('''
-  CREATE TABLE $empProfile (
-    id TEXT PRIMARY KEY,
-    fieldOfStudy TEXT,
-    educationLevel TEXT,
-    yearOfExperience INTEGER,
-    location TEXT,
-    bio TEXT
-  )
-''');
-await db.execute('''
   CREATE TABLE $comProfile (
-    location TEXT,
-    bio TEXT
+  id TEXT PRIMARY KEY,
+  username TEXT,
+  email TEXT,
+  password TEXT,
+  role TEXT,
+  fullName TEXT
+  location TEXT,
+  bio TEXT
   )
 ''');
       },
     );
   }
 
-  //creating new user
-  createUser(User user) async {
-    await deleteAll();
-    final db=await database;
-    final response=await db!.insert(userTable, user.toJson());
-    return response;
 
-  }
   //creating new Employee Profile
   createEmployeeProfile(EmployeeProfile employeeProfile) async {
     final db= await database;
@@ -86,16 +80,9 @@ await db.execute('''
 
   deleteAll() async {
     final db = await database;
-    final response = await db!.rawDelete('DELETE FROM $userTable');
     final response1 = await db.rawDelete('DELETE FROM $empProfile');
     final responsee2 = await db.rawDelete('DELETE FROM $comProfile');
     return response;
-  }
-  Future<Object> findUserById(String id) async{
-    final db =await database;
-    final userJson=await db!.query(userTable, where: 'id= $id');
-    return userJson.isNotEmpty ? User.fromJson(userJson.first) : Null; 
-  
   }
   Future<Object> findEmployeeById(String id) async{
     final db =await database;
