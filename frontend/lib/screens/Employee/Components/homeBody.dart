@@ -69,7 +69,7 @@ class _HomeBodyState extends State<HomeBody> {
                                               children: [
                                                 TextButton(
                                                   onPressed: () {
-                                                    context.go('/bookmarkList/addUpdateBookmark', extra: state.posts[index]);
+                                                    context.go('/bookmarkList/addBookmark', extra: state.posts[index]);
                                                   },
                                                   
                                                   child: const Icon(

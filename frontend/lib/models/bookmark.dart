@@ -22,7 +22,7 @@ class Bookmark extends Equatable {
   @override
   List<Object> get props => [id, user_id, post_id];
 
-  factory Bookmark.fromJoson(Map<String, dynamic> json) {
+  factory Bookmark.fromJson(Map<String, dynamic> json) {
     return Bookmark(
         id: json["_id"],
         user_id: json["user_id"],

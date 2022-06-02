@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/models.dart';
-class AddUpdateBookmark extends StatelessWidget {
+class AddBookmark extends StatelessWidget {
   final Post post;
-  const AddUpdateBookmark({Key? key, required this.post}) : super(key: key);
+  const AddBookmark({Key? key, required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
