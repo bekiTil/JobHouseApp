@@ -7,9 +7,9 @@ class PostRepository {
   PostRepository(this.postDataProvider);
 
   Future<Post> create(Post post) async {
-    try{
+    try {
       return postDataProvider.create(post);
-    }catch(e){
+    } catch (e) {
       rethrow;
     }
   }
@@ -20,6 +20,14 @@ class PostRepository {
 
   Future<List<Post>> fetchAll() async {
     return postDataProvider.fetchAll();
+  }
+
+  Future<List<Post>> fetchAllByUserID() async {
+    try {
+      return await postDataProvider.fetchAllByUserId();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> delete(int id) async {

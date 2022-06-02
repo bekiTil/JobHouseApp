@@ -56,14 +56,15 @@ router.get("/:id", async (req, res) => {
 });
 
 // Get all posts from a given user
-router.get("/user/:username", async (req, res) => {
-  const user = await User.findOne({ username: req.params.username });
-
+router.get("/user/:id", async (req, res) => {
+  const user = await User.findOne({ id: req.params.id });
+  
   if (!user) {
     return req.status(401).send("User doesn't exist!");
   }
-
-  res.send(await Post.find({ poster_id: user._id }));
+  const response = await Post.find({ poster_id: req.params.id });
+  console.log(req.params.id)
+  res.send(response);
 });
 
 // Delete a post by its id
