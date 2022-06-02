@@ -3,7 +3,9 @@ import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
-import 'package:frontend/screens/Employee/drawer.dart';
+import 'package:frontend/screens/Employee/Components/bottomNavigationBar.dart';
+import 'package:frontend/screens/Employee/Components/drawer.dart';
+import 'package:frontend/screens/Employee/Components/homeBody.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
@@ -33,45 +35,8 @@ class _HomePageState extends State<EmployeeHomePage> {
         return Scaffold(
           drawer: const DrawerCustom(),
           appBar: AppBar(title: Text(state.fullName)),
-          body: Center(
-            child: state is EmployeeHomeLoading
-                ? const SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3,
-                      semanticsLabel: "Loading...",
-                    ),
-                  )
-                : state is EmployeeHomeLoadingFailed
-                    ? const Center(
-                        child: Text('Err... Loading Failed'),
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(state.username),
-                          Text(state.email),
-                          Text(state.fullName),
-                          Text(state.location),
-                          Text(state.bio),
-                          BlocBuilder<AuthBloc, AuthState>(
-                            builder: ((context, state) {
-                              return state is AuthLoggingOut
-                                  ? const CircularProgressIndicator()
-                                  : ElevatedButton(
-                                      onPressed: () {
-                                        BlocProvider.of<AuthBloc>(context)
-                                            .add(LoggedOut());
-                                        context.go('/login');
-                                      },
-                                      child: const Text('Log out'),
-                                    );
-                            }),
-                          )
-                        ],
-                      ),
-          ),
+          body: const HomeBody(),
+          bottomNavigationBar: const BottomNavCustom(),
         );
       },
     );

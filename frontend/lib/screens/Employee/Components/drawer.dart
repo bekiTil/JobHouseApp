@@ -5,6 +5,7 @@ import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/blocs.dart';
 import 'package:go_router/go_router.dart';
+import '../../../blocs/employee/employee_bloc.dart';
 
 class DrawerCustom extends StatefulWidget {
   const DrawerCustom({Key? key}) : super(key: key);
@@ -30,16 +31,19 @@ class _DrawerCustomState extends State<DrawerCustom> {
           ),
           child: Text('Drawer Header'),
         ),
-        BlocBuilder<CompanyBloc, CompanyState>(
+        BlocBuilder<EmployeeBloc, EmployeeState>(
           builder: (context, state) {
-            return state is CompanyHomeLoading
+            return state is EmployeeHomeLoading
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       CircularProgressIndicator(),
                     ],
                   )
-                : Padding(
+                : state is EmployeeHomeLoadingFailed
+                    ? const Center(
+                        child: Text('Err... Loading Failed'),
+                      ): Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
