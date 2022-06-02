@@ -13,6 +13,12 @@ class SimpleBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
   }
 
+  
+  @override
+  void onClose(BlocBase bloc) {
+    super.onClose(bloc);
+    print('onClose -- ${bloc.runtimeType}');
+  }
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
