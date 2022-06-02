@@ -14,7 +14,11 @@ class BookmarkRepository {
   }
 
   Future<List<Bookmark>> getBookmarks() async {
+    try{
     return await dataRepository.getBookmarks();
+    }catch(e){
+      rethrow;
+    }
   }
 
   Future<Bookmark> updateBookmark(Bookmark bookmark) async {

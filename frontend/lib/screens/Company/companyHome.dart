@@ -3,10 +3,11 @@ import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
-import 'package:frontend/screens/Company/drawer.dart';
+import 'package:frontend/screens/Company/Components/drawer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
+import 'Components/bottomNavigationBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,28 +52,58 @@ class _HomePageState extends State<HomePage> {
                           itemCount: state.posts.length,
                           itemBuilder: (context, index) => GestureDetector(
                               onTap: () {},
-                              child: Card(
-                                child: Container(
-                                  margin: const EdgeInsets.all(20),
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.black, width: 1)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 20),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  shadowColor: Colors.blue,
+                                  elevation: 2,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                              'Category: ${state.posts[index].category}'),
-                                          const SizedBox(height: 10),
-                                          Text(
-                                              'description: ${state.posts[index].description}'),
-                                          const SizedBox(height: 10),
-                                          Text(
-                                              'Number: ${state.posts[index].number}'),
-                                        ],
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                'Category: ${state.posts[index].category}'),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                                'Number: ${state.posts[index].number}'),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                                'description: ${state.posts[index].description}'),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                children: [
+                                                  TextButton(
+                                                    onPressed: () {},
+                                                    child: const Icon(
+                                                      Icons.edit,
+                                                      color: Colors.blue,
+                                                    ),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {},
+                                                    child: const Icon(
+                                                      Icons.delete,
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                       Row(
                                         children: [
@@ -107,6 +138,7 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Icon(Icons.add),
           ),
+          bottomNavigationBar: const BottomNavCustom(),
         );
       },
     );

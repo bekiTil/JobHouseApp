@@ -4,8 +4,19 @@ import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:go_router/go_router.dart';
 
-class BookmarkList extends StatelessWidget {
+class BookmarkList extends StatefulWidget {
   const BookmarkList({Key? key}) : super(key: key);
+
+  @override
+  State<BookmarkList> createState() => _BookmarkListState();
+}
+
+class _BookmarkListState extends State<BookmarkList> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<BookmarkBloc>(context).add(const BookmarkLoad());
+  }
 
   @override
   Widget build(BuildContext context) {

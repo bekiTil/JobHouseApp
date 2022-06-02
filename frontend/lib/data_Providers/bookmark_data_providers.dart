@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bookmark.dart';
+import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 
 class BookmarkDataProvider {
@@ -26,7 +27,7 @@ class BookmarkDataProvider {
     if (response.statusCode == 200) {
       return Bookmark.fromJoson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to load bookmark');
+      throw AuthException('Failed to load bookmark');
     }
   }
 
@@ -38,6 +39,7 @@ class BookmarkDataProvider {
         "x-auth-token": _token,
       },
     );
+
 
     if (response.statusCode == 200) {
       final bookmarks = jsonDecode(response.body) as List;
