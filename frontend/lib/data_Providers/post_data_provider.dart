@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/post.dart';
 
 class PostDataProvider {
-  static const String _baseUrl = "http://10.0.2.2:3000/api/posts";
+  static const String _baseUrl = "http://localhost:3000/api/posts";
   static const String _token = "TODO:";
 
 String jsonify(Post post) {
@@ -12,17 +12,17 @@ String jsonify(Post post) {
       "description": post.description,
       "number": post.number,
       "category": post.category,
-      "image": post.image,
     });
   }
   
 
   Future<Post> create(Post post) async {
+    print('object');
     final http.Response response = await http.post(
       Uri.parse(_baseUrl),
       headers: <String, String>{
         "Content-Type": "application/json",
-        "x-auth-token": _token,
+        "x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjk2OGU0MmVhZGY4OWFjMjdiZDdiMTUiLCJyb2xlIjoiY29tcGFueSIsImlhdCI6MTY1NDEyNzMwOH0.pQu2n6_u58NAsrIGOtzQ_OE8jRzWKZK6oUFa4CMoNyU",
       },
       body: jsonify(post),
     );
@@ -31,7 +31,7 @@ String jsonify(Post post) {
       return Post.fromJson(jsonDecode(response.body));
     }
 
-    throw AuthException("An Error happened while creating post");
+    throw AuthException(response.body);
   }
 
 
