@@ -70,7 +70,7 @@ class BookmarkDataProvider {
     }
   }
 
-  Future<void> deleteBookmark(int id) async {
+  Future<void> deleteBookmark(String id) async {
     final response = await http.delete(
       Uri.parse('$_baseUrl/$id'),
       headers: <String, String>{

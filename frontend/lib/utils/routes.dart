@@ -4,6 +4,8 @@ import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/screens/Company/companyHome.dart';
 import 'package:frontend/screens/Company/edit_company_profile.dart';
+import 'package:frontend/screens/bookmark/bookmark_add_update.dart';
+import 'package:frontend/screens/bookmark/bookmark_list.dart';
 import 'package:frontend/screens/post/post.dart';
 import 'package:frontend/screens/Employee/edit_employee_profile.dart';
 import 'package:frontend/screens/Employee/employeeHome.dart';
@@ -97,6 +99,23 @@ class AllRoutes {
                   child: const EditEmployeeProfile(),
                 ),
               )
+            ]),
+
+        GoRoute(
+            name: 'bookmarkDashboard',
+            path: '/bookmarkList',
+            pageBuilder: (context, state) => MaterialPage(
+                  key: state.pageKey,
+                  child: const BookmarkList(),
+                ),
+            routes: [
+              GoRoute(
+                  name: 'addUpdateBookmark',
+                  path: 'addUpdateBookmark',
+                  pageBuilder: (context, state) => MaterialPage(
+                        key: state.pageKey,
+                        child: AddUpdateCourse(),
+                      ))
             ]),
       ],
       errorPageBuilder: (context, state) => MaterialPage(

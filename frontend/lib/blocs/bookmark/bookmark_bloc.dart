@@ -13,7 +13,7 @@ part 'bookmark_state.dart';
 class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   final BookmarkRepository bookmarkRepository;
 
-  BookmarkBloc({required this.bookmarkRepository}) : super(BookmarkInitial()) {
+  BookmarkBloc({required this.bookmarkRepository}) : super(BookmarkLoading()) {
     on<BookmarkLoad>((event, emit) async {
       emit(BookmarkLoading());
       try {
