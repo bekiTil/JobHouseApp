@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
-import 'package:frontend/screens/Company/drawer.dart';
+import 'package:frontend/screens/Company/Components/drawer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';

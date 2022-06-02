@@ -9,6 +9,7 @@ import 'package:frontend/screens/Employee/Components/homeBody.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
+import '../../screens/bookmark/bookmark_list.dart';
 
 class EmployeeHomePage extends StatefulWidget {
   const EmployeeHomePage({Key? key}) : super(key: key);
@@ -18,6 +19,11 @@ class EmployeeHomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<EmployeeHomePage> {
+  int _selectedindex = 0;
+  final List<Widget> screens =const  [
+    HomeBody(),
+    BookmarkList()
+  ];
   @override
   void initState() {
     super.initState();
@@ -35,8 +41,27 @@ class _HomePageState extends State<EmployeeHomePage> {
         return Scaffold(
           drawer: const DrawerCustom(),
           appBar: AppBar(title: Text(state.fullName)),
-          body: const HomeBody(),
-          bottomNavigationBar: const BottomNavCustom(),
+          body: screens[_selectedindex],
+          bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedindex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star_border),
+            label: 'Bookmarks',
+            
+          ),
+        
+        ],
+      onTap: (value){
+        setState(() {
+          _selectedindex = value;
+        });
+      },
+      ),
         );
       },
     );
