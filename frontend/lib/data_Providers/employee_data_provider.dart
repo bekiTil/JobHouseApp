@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:frontend/models/employee.dart';
+import 'package:frontend/models/Employee.dart';
 import 'package:frontend/models/employee_profile.dart';
 import 'package:frontend/repository/repository.dart';
 import 'package:frontend/utils/exception.dart';

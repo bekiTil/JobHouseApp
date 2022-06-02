@@ -1,5 +1,5 @@
 import 'package:frontend/data_Providers/employee_data_provider.dart';
-import 'package:frontend/models/employee.dart';
+import 'package:frontend/models/Employee.dart';
 
 class EmployeeRepository {
   final EmployeeDataProvider companyDataProvider = EmployeeDataProvider();

@@ -4,7 +4,7 @@ import 'package:frontend/data_Providers/data_providers.dart';
 import 'package:frontend/repository/employee_repository.dart';
 import 'package:frontend/repository/post_repository.dart';
 import 'package:meta/meta.dart';
-import 'package:frontend/models/employee.dart';
+import 'package:frontend/models/Employee.dart';
 
 import '../../models/post.dart';
 
