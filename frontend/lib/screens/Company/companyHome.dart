@@ -49,24 +49,53 @@ class _HomePageState extends State<HomePage> {
                       : ListView.builder(
                           itemCount: state.posts.length,
                           itemBuilder: (context, index) => GestureDetector(
-                              child: Container(
-                            margin: const EdgeInsets.all(20),
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.black, width: 1)),
-                            child: Column(
-                              children: [
-                                Text(
-                                    'Category: ${state.posts[index].category}'),
-                                const SizedBox(height: 10),
-                                Text(
-                                    'description: ${state.posts[index].description}'),
-                                const SizedBox(height: 10),
-                                Text('Number: ${state.posts[index].number}'),
-                              ],
-                            ),
-                          )),
+                              onTap: () {},
+                              child: Card(
+                                child: Container(
+                                  margin: const EdgeInsets.all(20),
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black, width: 1)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                              'Category: ${state.posts[index].category}'),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                              'description: ${state.posts[index].description}'),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                              'Number: ${state.posts[index].number}'),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: const Icon(
+                                              Icons.edit,
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: const Icon(
+                                              Icons.delete,
+                                              semanticLabel: 'Edit',
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )),
                         )),
           floatingActionButton: FloatingActionButton(
             onPressed: () {

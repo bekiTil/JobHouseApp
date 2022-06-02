@@ -10,3 +10,5 @@ class PostCreate extends PostEvent {
 
   PostCreate(this.description, this.number, this.category);
 }
+
+class DeletePost extends PostEvent {}
