@@ -4,11 +4,15 @@ import 'package:frontend/models/Company.dart';
 import 'package:frontend/models/Employee.dart';
 import 'package:frontend/models/company_profile.dart';
 import 'package:frontend/models/employee_profile.dart';
+import 'package:frontend/repository/repository.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 
 class EmployeeDataProvider {
-  static Future<dynamic> fetchSingle(String id) async {
+  static Future<dynamic> fetchSingle() async {
+    StorageService storage = StorageService();
+    final String? id = await storage.getId();
+    final String? token = await storage.getToken();
     var url = Uri.parse("http://localhost:3000/api/users/$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {

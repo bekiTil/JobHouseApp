@@ -13,7 +13,7 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
         print('object');
 
       try {
-        Employee user = await EmployeeDataProvider.fetchSingle(event.id);
+        Employee user = await EmployeeDataProvider.fetchSingle();
         await Future.delayed(const Duration(seconds: 2));
         
         emit(EmployeeHomeLoaded(
