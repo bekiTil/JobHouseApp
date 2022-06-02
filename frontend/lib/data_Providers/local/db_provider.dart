@@ -24,6 +24,7 @@ class DBProvider {
   }
 
   initDB() async {
+    // doesn't work for web but it does work for mac/android/ios
     final documentDirectory = await getDatabasesPath();
     final path = join(documentDirectory, 'jobhouse.db');
 
