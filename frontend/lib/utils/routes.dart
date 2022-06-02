@@ -24,6 +24,7 @@ class AllRoutes {
   final authBloc = AuthBloc(StorageService());
 
   late final router = GoRouter(
+      urlPathStrategy: UrlPathStrategy.path,
       routes: [
         GoRoute(
           path: "/",
@@ -100,7 +101,6 @@ class AllRoutes {
                 ),
               )
             ]),
-
         GoRoute(
             name: 'bookmarkDashboard',
             path: '/bookmarkList',
