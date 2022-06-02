@@ -39,6 +39,10 @@ class PostRepository {
   }
 
   Future<void> delete(String id) async {
-    postDataProvider.delete(id);
+    try {
+      await postDataProvider.delete(id);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

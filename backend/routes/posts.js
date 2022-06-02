@@ -69,6 +69,8 @@ router.get("/user/:id", async (req, res) => {
 
 // Delete a post by its id
 router.delete("/:id", authorize(Role.Company), async (req, res) => {
+  console.log(req.params.id);
+  
   let post;
   try {
     post = await Post.findOne({ _id: req.params.id });
@@ -76,8 +78,7 @@ router.delete("/:id", authorize(Role.Company), async (req, res) => {
     if (req.auth._id != post.poster_id) {
       throw Error("Not the owner");
     }
-
-    res.send(await post.delete());
+    res.status(204).send(await post.delete());
   } catch (error) {
     res.status(401).send("Post is not found!");
   }

@@ -42,51 +42,92 @@ class _DrawerCustomState extends State<DrawerCustom> {
                 : state is EmployeeHomeLoadingFailed
                     ? const Center(
                         child: Text('Err... Loading Failed'),
-                      ): Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 10,
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              state.username,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Text(
+                              state.email,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Text(
+                              state.fullName,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Text(
+                              state.location,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Text(
+                              state.bio,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    context.go('/employeeHome/editEmployeeProfile');
+                                  },
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {},
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                BlocBuilder<AuthBloc, AuthState>(
+                                  builder: ((context, state) {
+                                    return state is AuthLoggingOut
+                                        ? const CircularProgressIndicator()
+                                        : ElevatedButton(
+                                            onPressed: () {
+                                              BlocProvider.of<AuthBloc>(context)
+                                                  .add(LogOut());
+                                              context.go("/login");
+                                            },
+                                            child: const Text('Log out'),
+                                          );
+                                  }),
+                                )
+                              ],
+                            ),
+                          ],
                         ),
-                        Text(state.username, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Text(state.email, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Text(state.fullName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Text(state.location, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Text(state.bio, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        BlocBuilder<AuthBloc, AuthState>(
-                          builder: ((context, state) {
-                            return state is AuthLoggingOut
-                                ? const CircularProgressIndicator()
-                                : ElevatedButton(
-                                    onPressed: () {
-                                      BlocProvider.of<AuthBloc>(context)
-                                          .add(LogOut());
-                                      context.go("/login");
-                                    },
-                                    child: const Text('Log out'),
-                                  );
-                          }),
-                        )
-                      ],
-                    ),
-                  );
+                      );
           },
         ),
       ],

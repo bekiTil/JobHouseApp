@@ -17,7 +17,6 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
         Company user = await companyRepository.fetchSingle();
         PostRepository postRepository = PostRepository(PostDataProvider());
         List<Post> posts = await postRepository.fetchAllByUserID();
-        print(posts);
         emit(CompanyHomeLoaded(
             username: user.username,
             email: user.email,
