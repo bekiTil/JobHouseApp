@@ -74,7 +74,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
                                 : ElevatedButton(
                                     onPressed: () {
                                       BlocProvider.of<AuthBloc>(context)
-                                          .add(LoggedOut());
+                                          .add(LogOut());
                                       context.go("/login");
                                     },
                                     child: const Text('Log out'),

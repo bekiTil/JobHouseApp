@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
-import 'package:frontend/blocs/blocs.dart';
 import 'package:go_router/go_router.dart';
 import '../../../blocs/employee/employee_bloc.dart';
 
@@ -78,7 +77,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
                                 : ElevatedButton(
                                     onPressed: () {
                                       BlocProvider.of<AuthBloc>(context)
-                                          .add(LoggedOut());
+                                          .add(LogOut());
                                       context.go("/login");
                                     },
                                     child: const Text('Log out'),

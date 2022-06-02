@@ -19,8 +19,8 @@ class _BottomNavCustomState extends State<BottomNavCustom> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star_border),
-            label: 'Bookmarks',
+            icon: Icon(Icons.message),
+            label: 'Requests',
             
           ),
         
