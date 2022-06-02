@@ -13,6 +13,8 @@ class SimpleBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
   }
 
+  
+ 
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);

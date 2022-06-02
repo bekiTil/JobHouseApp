@@ -16,9 +16,15 @@ import 'package:frontend/screens/auth/authentication_page.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/utils/routes.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
+import 'package:frontend/bloc_observer.dart';
 
 void main() {
-  runApp(const MyApp());
+   BlocOverrides.runZoned(
+    (){
+      runApp(const MyApp());
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class MyApp extends StatefulWidget {
