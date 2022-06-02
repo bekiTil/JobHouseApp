@@ -13,7 +13,7 @@ class BookmarkLoading extends BookmarkState {}
 class BookmarkLoadSuccess extends BookmarkState {
   final List<Bookmark> bookmarks;
 
-  BookmarkLoadSuccess({this.bookmarks = const <Bookmark>[]});
+ const  BookmarkLoadSuccess({this.bookmarks = const <Bookmark>[]});
 
   @override
   List<Object> get props => [bookmarks];
@@ -24,3 +24,5 @@ class BookmarkOperationFailure extends BookmarkState {
 
   const BookmarkOperationFailure({this.error});
 }
+
+

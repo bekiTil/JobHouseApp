@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bookmark.dart';
+import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/bookmark_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -24,6 +25,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       }
     });
 
+ 
     on<BookmarkCreate>((event, emit) async {
       try {
         await bookmarkRepository.createBookmark(event.bookmark);

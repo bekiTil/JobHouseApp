@@ -6,7 +6,9 @@ abstract class BookmarkEvent extends Equatable {
 }
 
 class BookmarkLoad extends BookmarkEvent {
+  
   const BookmarkLoad();
+
 
   @override
   List<Object> get props => [];
@@ -14,7 +16,7 @@ class BookmarkLoad extends BookmarkEvent {
 
 class BookmarkCreate extends BookmarkEvent {
   final Bookmark bookmark;
-
+  
   const BookmarkCreate({required this.bookmark});
 
   @override
@@ -38,5 +40,6 @@ class BookmarkDelete extends BookmarkEvent {
   @override
   List<Object> get props => [bookmark];
 }
+
 
 

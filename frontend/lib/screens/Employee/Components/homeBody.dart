@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
+import 'package:frontend/models/bookmark.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeBody extends StatefulWidget {
@@ -67,8 +69,9 @@ class _HomeBodyState extends State<HomeBody> {
                                               children: [
                                                 TextButton(
                                                   onPressed: () {
-                                                    context.go('/bookmarkList');
+                                                    context.go('/bookmarkList/addUpdateBookmark', extra: state.posts[index]);
                                                   },
+                                                  
                                                   child: const Icon(
                                                     Icons.star_border,
                                                     color: Colors.blue,
@@ -76,7 +79,6 @@ class _HomeBodyState extends State<HomeBody> {
                                                 ),
                                                 TextButton(
                                                   onPressed: () {
-
                                                   },
                                                   child: const Icon(
                                                     Icons.file_present,

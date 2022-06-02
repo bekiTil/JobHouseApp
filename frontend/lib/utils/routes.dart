@@ -12,8 +12,8 @@ import 'package:frontend/screens/Employee/employeeHome.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/screens/auth/company_registration.dart';
 import 'package:frontend/screens/auth/employee_registration.dart';
-import '../screens/post/post.dart';
 import 'package:go_router/go_router.dart';
+import '../models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/authentication_page.dart';
 
@@ -81,7 +81,7 @@ class AllRoutes {
               GoRoute(
                 path: "post",
                 builder: (BuildContext context, GoRouterState state) =>
-                    const Post(),
+                    const PostScreen(),
               ),
             ]),
         GoRoute(
@@ -114,7 +114,7 @@ class AllRoutes {
                   path: 'addUpdateBookmark',
                   pageBuilder: (context, state) => MaterialPage(
                         key: state.pageKey,
-                        child: AddUpdateCourse(),
+                        child: AddUpdateBookmark(post: state.extra! as Post,),
                       ))
             ]),
       ],

@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/models.dart';
+class AddUpdateBookmark extends StatelessWidget {
+  final Post post;
+  const AddUpdateBookmark({Key? key, required this.post}) : super(key: key);
 
-class AddUpdateCourse extends StatefulWidget {
-  AddUpdateCourse({Key? key}) : super(key: key);
-
-  @override
-  State<AddUpdateCourse> createState() => _AddUpdateCourseState();
-}
-
-class _AddUpdateCourseState extends State<AddUpdateCourse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('add or update'),
+        title:  const Text('Add memo to your bookmark'),
       ),
-      body: const Text('add and update functionality'),
+      body: Text('post category: ${post.category} .....'),
     );
   }
 }
