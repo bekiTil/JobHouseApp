@@ -1,4 +1,4 @@
-import 'models.dart';
+import 'employee_profile.dart';
 class Employee {
   final String id;
   final String fullName;

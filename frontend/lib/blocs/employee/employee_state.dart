@@ -7,32 +7,33 @@ abstract class EmployeeState {
   final String fullName;
   final String location;
   final String bio;
+  List<Post> posts;
 
-  const EmployeeState(
-      this.username, this.email, this.fullName, this.location, this.bio);
+EmployeeState(
+      this.username, this.email, this.fullName, this.location, this.bio, this.posts);
 }
-
 class EmployeeInitial extends EmployeeState {
-  const EmployeeInitial() : super(' ', ' ', ' ', ' ', ' ');
+    EmployeeInitial() : super(' ', ' ', ' ', ' ', ' ', []);
 }
 
 class EmployeeHomeLoading extends EmployeeState {
-  const EmployeeHomeLoading() : super(' ', ' ', ' ', ' ', ' ');
+    EmployeeHomeLoading() : super(' ', ' ', ' ', ' ', ' ', []);
 }
 
 class EmployeeHomeLoaded extends EmployeeState {
-  const EmployeeHomeLoaded(
+    EmployeeHomeLoaded(
       {required String username,
       required String email,
       required String fullName,
       required String location,
-      required String bio})
-      : super(username, email, fullName, location, bio);
+      required String bio,
+      required List<Post> posts})
+      : super(username, email, fullName, location, bio, posts);
 }
 
 class EmployeeHomeLoadingFailed extends EmployeeState {
   final String exception;
 
-  const EmployeeHomeLoadingFailed({required this.exception})
-      : super(' ', ' ', ' ', ' ', ' ');
+    EmployeeHomeLoadingFailed({required this.exception})
+      : super(' ', ' ', ' ', ' ', ' ', []);
 }

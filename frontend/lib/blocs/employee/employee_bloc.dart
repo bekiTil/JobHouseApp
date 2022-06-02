@@ -1,27 +1,34 @@
 import 'package:bloc/bloc.dart';
-import 'package:frontend/data_Providers/employee_data_provider.dart';
-import 'package:frontend/models/Employee.dart';
+import 'package:frontend/data_Providers/data_providers.dart';
+
+import 'package:frontend/repository/employee_repository.dart';
+import 'package:frontend/repository/post_repository.dart';
 import 'package:meta/meta.dart';
+import 'package:frontend/models/employee.dart';
+
+import '../../models/post.dart';
 
 part 'employee_event.dart';
 part 'employee_state.dart';
 
 class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
-  EmployeeBloc() : super(const EmployeeInitial()) {
+  EmployeeBloc() : super(EmployeeInitial()) {
     on<EmployeeHomeVisited>((event, emit) async {
-      emit(const EmployeeHomeLoading());
-        print('object');
+      emit(EmployeeHomeLoading());
 
       try {
-        Employee user = await EmployeeDataProvider.fetchSingle();
-        await Future.delayed(const Duration(seconds: 2));
-        
+        EmployeeRepository employeeRepository = EmployeeRepository();
+        Employee user = await employeeRepository.fetchSingle();
+        print("user");
+        PostRepository postRepository = PostRepository(PostDataProvider());
+        List<Post> posts = await postRepository.fetchAll();
         emit(EmployeeHomeLoaded(
             username: user.username,
             email: user.email,
             fullName: user.fullName,
             location: user.employeeProfile.location,
-            bio: user.employeeProfile.bio));
+            bio: user.employeeProfile.bio,
+            posts: posts));
       } catch (e) {
         emit(EmployeeHomeLoadingFailed(exception: e.toString()));
       }
