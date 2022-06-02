@@ -13,7 +13,7 @@ class Bookmark extends Equatable {
     this.createdAt,
   });
 
-  final int id;
+  final String id;
   final String user_id;
   final String post_id;
   final String? memo;
@@ -28,6 +28,6 @@ class Bookmark extends Equatable {
         user_id: json["user_id"],
         post_id: json["post_id"],
         memo: json["memo"],
-        createdAt: json["createdAt"]);
+        createdAt: DateTime.parse(json["createdAt"]));
   }
 }

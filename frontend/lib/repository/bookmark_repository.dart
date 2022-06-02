@@ -21,7 +21,7 @@ class BookmarkRepository {
     return await dataRepository.updateBookmarks(bookmark);
   }
 
-  Future<void> deleteBookmark(int id) async {
+  Future<void> deleteBookmark(String id) async {
     return await dataRepository.deleteBookmark(id);
   }
 }

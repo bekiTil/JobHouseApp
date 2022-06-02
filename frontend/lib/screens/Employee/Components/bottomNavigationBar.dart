@@ -8,7 +8,6 @@ class BottomNavCustom extends StatefulWidget {
   State<BottomNavCustom> createState() => _BottomNavCustomState();
 }
 
-
 class _BottomNavCustomState extends State<BottomNavCustom> {
   int _selectedindex = 0;
   @override
