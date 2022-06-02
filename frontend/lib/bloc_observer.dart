@@ -14,13 +14,9 @@ class SimpleBlocObserver extends BlocObserver {
   }
 
   
+ 
   @override
-  void onClose(Bloc bloc, Close close) {
-    super.onClose(bloc);
-    print('onClose -- $close');
-  }
-  @override
-  void onChange(Bloc bloc, Change change) {
+  void onChange(Blocbase bloc, Change change) {
     super.onChange(bloc, change);
     print('onChnage $change');
   }
