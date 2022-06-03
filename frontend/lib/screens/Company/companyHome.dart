@@ -87,7 +87,11 @@ class _HomePageState extends State<HomePage> {
                                               child: Row(
                                                 children: [
                                                   TextButton(
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      BlocProvider.of<PostBloc>(
+                                                              context)
+                                                          .add(EditPost());
+                                                    },
                                                     child: const Icon(
                                                       Icons.edit,
                                                       color: Colors.blue,
