@@ -53,7 +53,15 @@ class _BookmarkListState extends State<BookmarkList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${bookmark.post.description}'),
+            Text(bookmark.post.description),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(bookmark.post.category),
+            const SizedBox(
+              height: 10,
+            ),
+            Text('${bookmark.post.number}'),
             const SizedBox(
               height: 10,
             ),
@@ -67,7 +75,7 @@ class _BookmarkListState extends State<BookmarkList> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    context.go('/bookmarkList/UpdateBookmark');
+                    context.go('/bookmarkList/UpdateBookmark', extra: bookmark);
                   },
                 ),
                 IconButton(

@@ -10,7 +10,6 @@ class BookmarkRepository {
   }) : assert(dataRepository != null);
 
   Future<Bookmark> createBookmark(Bookmark bookmark) async {
-    
     return await dataRepository.createBookmark(bookmark);
   }
 
