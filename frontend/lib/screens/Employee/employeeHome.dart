@@ -20,10 +20,7 @@ class EmployeeHomePage extends StatefulWidget {
 
 class _HomePageState extends State<EmployeeHomePage> {
   int _selectedindex = 0;
-  final List<Widget> screens =const  [
-    HomeBody(),
-    BookmarkList()
-  ];
+  final List<Widget> screens = const [HomeBody(), BookmarkList()];
   @override
   void initState() {
     super.initState();
@@ -43,25 +40,23 @@ class _HomePageState extends State<EmployeeHomePage> {
           appBar: AppBar(title: Text(state.fullName)),
           body: screens[_selectedindex],
           bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedindex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            currentIndex: _selectedindex,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.star_border),
+                label: 'Bookmarks',
+              ),
+            ],
+            onTap: (value) {
+              setState(() {
+                _selectedindex = value;
+              });
+            },
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star_border),
-            label: 'Bookmarks',
-
-          ),
-        
-        ],
-      onTap: (value){
-        setState(() {
-          _selectedindex = value;
-        });
-      },
-      ),
         );
       },
     );
