@@ -32,9 +32,8 @@ class _DrawerCustomState extends State<DrawerCustom> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Image(
-                image: AssetImage('drawerImage.jpg'),
+                image: AssetImage('images/profile.jpg'),
                 width: 100,
-                height: 400,
               ),
               Text('Drawer Header'),
             ],
