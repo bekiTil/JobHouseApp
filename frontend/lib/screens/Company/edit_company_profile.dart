@@ -42,7 +42,7 @@ class _EditCompanyProfileState extends State<EditCompanyProfile> {
     getToken();
   }
 
-  String title = "Barter";
+  String title = "JobHouse";
   final _formKey = GlobalKey<FormState>();
   String editResult = '';
   final TextEditingController _locationController = TextEditingController();

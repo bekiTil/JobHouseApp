@@ -24,11 +24,21 @@ class _DrawerCustomState extends State<DrawerCustom> {
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
       children: [
-        const DrawerHeader(
-          decoration: BoxDecoration(
+        DrawerHeader(
+          decoration: const BoxDecoration(
             color: Colors.blue,
           ),
-          child: Text('Drawer Header'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Image(
+                image: AssetImage('drawerImage.jpg'),
+                width: 100,
+                height: 400,
+              ),
+              Text('Drawer Header'),
+            ],
+          ),
         ),
         BlocBuilder<EmployeeBloc, EmployeeState>(
           builder: (context, state) {
@@ -51,42 +61,106 @@ class _DrawerCustomState extends State<DrawerCustom> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              state.username,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.person,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Text(
+                                  state.username,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 40,
                             ),
-                            Text(
-                              state.email,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.email,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Text(
+                                  state.email,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 40,
                             ),
-                            Text(
-                              state.fullName,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.person,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 19,
+                                ),
+                                Text(
+                                  state.fullName,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 40,
                             ),
-                            Text(
-                              state.location,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      state.location,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 19),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 40,
                             ),
-                            Text(
-                              state.bio,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.engineering_outlined,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Text(
+                                  state.bio,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 40,
@@ -95,7 +169,8 @@ class _DrawerCustomState extends State<DrawerCustom> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    context.go('/employeeHome/editEmployeeProfile');
+                                    context.go(
+                                        '/employeeHome/editEmployeeProfile');
                                   },
                                   child: const Icon(
                                     Icons.edit,
