@@ -9,13 +9,11 @@ class ChooseRole extends StatefulWidget {
 }
 
 class _ChooseRoleState extends State<ChooseRole> {
-  String title = "Employee";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text(title)),
-      ),
+    
       body: Center(
         child: Card(
           elevation: 20,
