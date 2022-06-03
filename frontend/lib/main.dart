@@ -76,10 +76,9 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(create: ((context) => PostBloc())),
             BlocProvider(
-              create: (context) => BookmarkBloc(
-                bookmarkRepository: context.read<BookmarkRepository>(),
-              )
-            ),
+                create: (context) => BookmarkBloc(
+                      bookmarkRepository: context.read<BookmarkRepository>(),
+                    )),
           ],
           child: MaterialApp.router(
               debugShowCheckedModeBanner: false,

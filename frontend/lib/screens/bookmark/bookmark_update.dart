@@ -14,17 +14,7 @@ class UpdateBookmark extends StatefulWidget {
 }
 
 class _UpdateBookmarkState extends State<UpdateBookmark> {
-  // late final String? id;
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   StorageService storage = StorageService();
-  //   getInfo() async {
-  //     id = await storage.getId();
-  //   }
-
-  //   super.initState();
-  //   getInfo();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +22,7 @@ class _UpdateBookmarkState extends State<UpdateBookmark> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add memo to your bookmark'),
+          title: const Text('Update you bookmark'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -54,7 +44,7 @@ class _UpdateBookmarkState extends State<UpdateBookmark> {
                   context
                       .read<BookmarkBloc>()
                       .add(BookmarkUpdate(bookmark: bookmark));
-                  context.go('/bookmarkList');
+                  context.go('/employeeHome');
                 },
                 child: const Text('update'),
               )
