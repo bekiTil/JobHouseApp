@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/secureStorage.dart';
+import 'package:go_router/go_router.dart';
 
 class UpdateBookmark extends StatefulWidget {
   final Bookmark bookmark;
@@ -42,20 +43,20 @@ class _UpdateBookmarkState extends State<UpdateBookmark> {
               ElevatedButton(
                 onPressed: () {
                   Bookmark bookmark = Bookmark(
-                      post: widget.bookmark.post,
-                      memo: memoController.value.text,
-                      user_id: widget.bookmark.user_id,
-                      post_id: widget.bookmark.post_id,
-                      id: widget.bookmark.id,
-                      // createdAt: DateTime.now(),
-                      );
+                    post: widget.bookmark.post,
+                    memo: memoController.value.text,
+                    user_id: widget.bookmark.user_id,
+                    post_id: widget.bookmark.post_id,
+                    id: widget.bookmark.id,
+                    // createdAt: DateTime.now(),
+                  );
 
                   context
                       .read<BookmarkBloc>()
                       .add(BookmarkUpdate(bookmark: bookmark));
-//
+                  context.go('/bookmarkList');
                 },
-                child: const Text('Add To Bookmark'),
+                child: const Text('update'),
               )
             ],
           ),
