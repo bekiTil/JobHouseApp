@@ -19,8 +19,8 @@ import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:frontend/bloc_observer.dart';
 
 void main() {
-   BlocOverrides.runZoned(
-    (){
+  BlocOverrides.runZoned(
+    () {
       runApp(const MyApp());
     },
     blocObserver: SimpleBlocObserver(),
@@ -84,6 +84,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
           child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
               routeInformationParser: router.routeInformationParser,
               routerDelegate: router.routerDelegate),
         ));
