@@ -10,6 +10,7 @@ class CompanyDataProvider {
   Future<dynamic> fetchSingle() async {
     StorageService storage = StorageService();
     String? id = await storage.getId();
+    print("id = $id");
     var url = Uri.parse("http://localhost:3000/api/users/$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -57,7 +58,7 @@ class CompanyDataProvider {
     }
   }
 
- static Future deleteSingle(String userName) async {
+  static Future deleteSingle(String userName) async {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
 
