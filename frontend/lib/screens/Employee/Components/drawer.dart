@@ -18,7 +18,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(
-      // Important: Remove any padding from the ListView.
+      
       padding: EdgeInsets.zero,
       children: [
         BlocBuilder<EmployeeBloc, EmployeeState>(
@@ -224,7 +224,6 @@ class _DrawerCustomState extends State<DrawerCustom> {
                                     onPressed: () {
                                       BlocProvider.of<EmployeeBloc>(context)
                                           .add(DeleteEmployee(state.username));
-                                      state is EmployeeDeletionSuccess?context.go('/login') :{};
                                     },
                                     child: const Text("Delete Profile")),
                           ],
