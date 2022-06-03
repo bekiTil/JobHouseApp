@@ -10,6 +10,5 @@ class EmployeeHomeVisited extends EmployeeEvent {
 }
 
 class DeleteEmployee extends EmployeeEvent{
-final String id;
-  DeleteEmployee({required this.id});
+  DeleteEmployee();
 }

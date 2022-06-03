@@ -99,7 +99,12 @@ class _DrawerCustomState extends State<DrawerCustom> {
                   );
           },
         ),
-        BlocBuilder<EmployeeBloc, EmployeeState>(
+        BlocConsumer<EmployeeBloc, EmployeeState>(
+          listener:(context, state) {
+            if (state is EmployeeDeletionSuccess){
+              context.go('/logout');
+            }
+          },
           builder: (context, state) {
             return state is EmployeeHomeLoading
                 ? Row(
@@ -220,7 +225,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
                                   )
                                 : ElevatedButton(
                                     onPressed: () {
-                                      // BlocProvider.of<EmployeeBloc>(context).add(DeleteEmployee(state.id));
+                                      BlocProvider.of<EmployeeBloc>(context).add(DeleteEmployee());
                                     },
                                     child: const Text("Delete Profile")),
                           ],
