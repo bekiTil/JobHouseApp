@@ -6,8 +6,10 @@ import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/screens/Employee/Components/bottomNavigationBar.dart';
 import 'package:frontend/screens/Employee/Components/drawer.dart';
 import 'package:frontend/screens/Employee/Components/homeBody.dart';
+import 'package:frontend/screens/Employee/Employee_/employee_drawer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+
 import '../../blocs/blocs.dart';
 import '../../screens/bookmark/bookmark_list.dart';
 
@@ -36,7 +38,7 @@ class _HomePageState extends State<EmployeeHomePage> {
       },
       builder: (context, state) {
         return Scaffold(
-          drawer: const DrawerCustom(),
+          drawer: DrawerCustom(),
           appBar: AppBar(title: Text(state.fullName)),
           body: screens[_selectedindex],
           bottomNavigationBar: BottomNavigationBar(

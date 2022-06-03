@@ -1,4 +1,5 @@
 import 'dart:js';
+import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
@@ -115,7 +116,9 @@ class AllRoutes {
                   path: 'updateBookmark',
                   pageBuilder: (context, state) => MaterialPage(
                         key: state.pageKey,
-                        child: const UpdateBookmark(),
+                        child: UpdateBookmark(
+                          bookmark: state.extra! as Bookmark,
+                        ),
                       )),
               GoRoute(
                   name: 'addBookmark',

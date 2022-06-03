@@ -38,3 +38,20 @@ class CompanyHomeLoadingFailed extends CompanyState {
    CompanyHomeLoadingFailed({required this.exception})
       : super(' ', ' ', ' ', ' ', ' ', List.empty());
 }
+
+
+class DeletingCompanuProfile extends CompanyState{
+
+   DeletingCompanuProfile(): super(' ', ' ', ' ', ' ', ' ', List.empty());
+
+}
+
+
+class CompanyProfileDeletionSuccessfull extends CompanyState{
+
+  CompanyProfileDeletionSuccessfull():super(' ', ' ', ' ', ' ', ' ', List.empty());
+}
+
+class CompanyProfileDeletionFailed extends CompanyState{
+  CompanyProfileDeletionFailed() : super(' ', ' ', ' ', ' ', ' ', List.empty());
+}
