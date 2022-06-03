@@ -67,14 +67,14 @@ class _BookmarkListState extends State<BookmarkList> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    context.go('/bookmarkList/addUpdateBookmark');
+                    context.go('/bookmarkList/UpdateBookmark');
                   },
                 ),
                 IconButton(
                   onPressed: () {
-                    // context
-                    //     .read<BookmarkBloc>()
-                    //     .add(BookmarkDelete(bookmark: bookmark));
+                    context
+                        .read<BookmarkBloc>()
+                        .add(BookmarkDelete(bookmark: bookmark));
                   },
                   icon: const Icon(Icons.cancel),
                 ),

@@ -15,10 +15,10 @@ class Bookmark extends Equatable {
     this.createdAt,
   });
 
-  late String? id;
+  final String? id;
   final String user_id;
   final String post_id;
-  late Post post;
+  final Post post;
   final String? memo;
   final DateTime? createdAt;
 
@@ -27,11 +27,13 @@ class Bookmark extends Equatable {
 
   factory Bookmark.fromJson(Map<String, dynamic> json) {
     return Bookmark(
-        id: json["_id"],
-        user_id: json["user_id"],
-        post_id: json["post_id"],
-        memo: json["memo"],
-        post: json["post"],
-        createdAt: DateTime.parse(json["createdAt"]));
+      id: json["_id"],
+      user_id: json["user_id"],
+      post_id: json["post_id"],
+      memo: json["memo"],
+      post: Post.fromJson(
+        json["post"],
+      ),
+    );
   }
 }

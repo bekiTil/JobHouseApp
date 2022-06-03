@@ -25,11 +25,9 @@ class BookmarkDataProvider {
         "user_id": bookmark.user_id,
         "post_id": bookmark.post_id,
         "memo": bookmark.memo,
-        "createdAt": bookmark.createdAt!.toIso8601String()
       }),
     );
 
-    print(response.statusCode);
     if (response.statusCode == 200) {
       return Bookmark.fromJson(jsonDecode(response.body));
     } else {
@@ -52,8 +50,7 @@ class BookmarkDataProvider {
         "Access-Control-Allow-Credentials": "true"
       },
     );
-    print(response.statusCode);
-    print(response.body);
+
     if (response.statusCode == 200) {
       final bookmarks = jsonDecode(response.body) as List;
       return bookmarks.map((bookmark) => Bookmark.fromJson(bookmark)).toList();

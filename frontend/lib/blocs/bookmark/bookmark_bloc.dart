@@ -25,7 +25,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       }
     });
 
- 
     on<BookmarkCreate>((event, emit) async {
       try {
         await bookmarkRepository.createBookmark(event.bookmark);
