@@ -17,9 +17,6 @@ class _DrawerCustomState extends State<DrawerCustom> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
@@ -100,9 +97,10 @@ class _DrawerCustomState extends State<DrawerCustom> {
           },
         ),
         BlocConsumer<EmployeeBloc, EmployeeState>(
-          listener:(context, state) {
-            if (state is EmployeeDeletionSuccess){
-              context.go('/logout');
+          listener: (context, state) {
+            if (state is EmployeeDeletionSuccess) {
+              BlocProvider.of<AuthBloc>(context).add(LogOut());
+              context.go("/login");
             }
           },
           builder: (context, state) {
@@ -215,7 +213,6 @@ class _DrawerCustomState extends State<DrawerCustom> {
                             const SizedBox(
                               height: 20,
                             ),
-
                             state is EmployeeDeleting
                                 ? Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +222,9 @@ class _DrawerCustomState extends State<DrawerCustom> {
                                   )
                                 : ElevatedButton(
                                     onPressed: () {
-                                      BlocProvider.of<EmployeeBloc>(context).add(DeleteEmployee());
+                                      BlocProvider.of<EmployeeBloc>(context)
+                                          .add(DeleteEmployee(state.username));
+                                      state is EmployeeDeletionSuccess?context.go('/login') :{};
                                     },
                                     child: const Text("Delete Profile")),
                           ],

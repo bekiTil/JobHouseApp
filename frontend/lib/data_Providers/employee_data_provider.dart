@@ -80,18 +80,27 @@ class EmployeeDataProvider {
     }
   }
 
-  static Future<dynamic> deleteSingle() async {
-
+  static Future<dynamic> deleteSingle(String userName) async {
     StorageService storage = StorageService();
-    final String? id = await storage.getId();
-    var url = Uri.parse("http://localhost:3000/api/users/$id");
-    final response = await http.delete(url);
+    final String? token = await storage.getToken();
+    
+    var url = Uri.parse("http://localhost:3000/api/users/$userName");
+    
+    final response = await http.delete(url,       
+    headers: {
+        "x-auth-token": token!,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Credentials": "true"
+      },);
+  print(response.statusCode);
     if (response.statusCode == 200) {
-      return; 
-    }
-    else {
+      return;
+    } else {
       throw AuthException("Couldn't Delete user");
     }
-    
-}
+  }
 }

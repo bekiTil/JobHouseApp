@@ -90,20 +90,23 @@ router.put("/:id", verifyToken, async (req, res) => {
   }
 });
 
-router.delete("/delete/:username", verifyToken, async (req, res) => {
+router.delete("/:username", verifyToken, async (req, res) => {
   const { username } = req.params.username
-  const usernameExist = await User.findOne({ username: username });
-
+  const usernameExist = await User.findOne({ username: req.params.username });
   if (!usernameExist) {
     return res.status(400).send("User not found");
   }
 
+  console.log(username)
+  console.log(req.params.username)
   try {
-    User.deleteOne({ username: username });
-    res.redirect("/login");
+    const deleteSuccess = await User.deleteOne({ username: req.params.username})
+    
+    deleteSuccess? res.status(200).send("deleted succussfully"): res.status(400)
   } catch (error) {
     res.status(400).send("Error while deletting");
   }
+
 });
 
 module.exports = router;
