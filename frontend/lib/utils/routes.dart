@@ -1,4 +1,3 @@
-import 'dart:js';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
