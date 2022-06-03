@@ -10,13 +10,14 @@ class BookmarkRepository {
   }) : assert(dataRepository != null);
 
   Future<Bookmark> createBookmark(Bookmark bookmark) async {
+    
     return await dataRepository.createBookmark(bookmark);
   }
 
   Future<List<Bookmark>> getBookmarks() async {
-    try{
-    return await dataRepository.getBookmarks();
-    }catch(e){
+    try {
+      return await dataRepository.getBookmarks();
+    } catch (e) {
       rethrow;
     }
   }
@@ -25,7 +26,7 @@ class BookmarkRepository {
     return await dataRepository.updateBookmarks(bookmark);
   }
 
-  Future<void> deleteBookmark(String id) async {
-    return await dataRepository.deleteBookmark(id);
+  Future<void> deleteBookmark(String? id) async {
+    return await dataRepository.deleteBookmark(id!);
   }
 }

@@ -5,35 +5,31 @@ import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../models/post.dart';
 import '../repository/repository.dart';
 
 class BookmarkDataProvider {
   final String _baseUrl = 'http://localhost:3000/api/bookmarks';
-  
 
   Future<Bookmark> createBookmark(Bookmark bookmark) async {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
+    print(bookmark.user_id);
     final response = await http.post(
       Uri.parse(_baseUrl),
-      headers: {
+      headers: <String, String>{
         "x-auth-token": token!,
-        "Accept": "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Methods": "*",
-        "Access-Control-Allow-Credentials": "true"
       },
-      body: jsonEncode(<String, dynamic>{
+      body: json.encode({
         "user_id": bookmark.user_id,
         "post_id": bookmark.post_id,
-        "_id": bookmark.id,
         "memo": bookmark.memo,
-        "create": bookmark.createdAt
+        "createdAt": bookmark.createdAt!.toIso8601String()
       }),
     );
 
+    print(response.statusCode);
     if (response.statusCode == 200) {
       return Bookmark.fromJson(jsonDecode(response.body));
     } else {
@@ -56,8 +52,8 @@ class BookmarkDataProvider {
         "Access-Control-Allow-Credentials": "true"
       },
     );
-
-
+    print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200) {
       final bookmarks = jsonDecode(response.body) as List;
       return bookmarks.map((bookmark) => Bookmark.fromJson(bookmark)).toList();
@@ -112,4 +108,3 @@ class BookmarkDataProvider {
     }
   }
 }
-

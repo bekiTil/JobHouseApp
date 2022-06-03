@@ -53,10 +53,7 @@ class _BookmarkListState extends State<BookmarkList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'The Post',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-            ),
+            Text('${bookmark.post.description}'),
             const SizedBox(
               height: 10,
             ),
@@ -70,7 +67,6 @@ class _BookmarkListState extends State<BookmarkList> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-      
                     context.go('/bookmarkList/addUpdateBookmark');
                   },
                 ),
