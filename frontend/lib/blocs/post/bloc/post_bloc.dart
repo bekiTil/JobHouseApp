@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:frontend/data_Providers/data_providers.dart';
+import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/post_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -37,10 +38,10 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }
     });
 
-    on<EditPost>((event, emit) {
-      emit(PostOperationLoading());
-
+    on<EditPost>((event, emit) async {
+      emit(PostEditingOperationStarted(event.post));
       try {
+        await Future.delayed(const Duration(seconds: 3));
         emit(PostOperationSuccess());
       } catch (e) {
         emit(PostOperationFailed(e.toString()));
