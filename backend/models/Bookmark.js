@@ -21,9 +21,8 @@ const bookmarkSchema = mongoose.Schema({
     required: false,
   },
   createdAt: {
-    type: String,
-    required: true,
-    default: Date.now.toString,
+    type: Date,
+    default: Date.now,
   },
 });
 

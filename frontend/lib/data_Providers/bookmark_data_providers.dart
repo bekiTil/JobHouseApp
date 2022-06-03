@@ -14,7 +14,6 @@ class BookmarkDataProvider {
   Future<Bookmark> createBookmark(Bookmark bookmark) async {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
-    print(bookmark.user_id);
     final response = await http.post(
       Uri.parse(_baseUrl),
       headers: <String, String>{
@@ -25,12 +24,9 @@ class BookmarkDataProvider {
         "user_id": bookmark.user_id,
         "post_id": bookmark.post_id,
         "memo": bookmark.memo,
-      
       }),
     );
 
-    print(response.statusCode);
-  
     if (response.statusCode == 200) {
       return Bookmark.fromJson(jsonDecode(response.body));
     } else {
@@ -53,8 +49,7 @@ class BookmarkDataProvider {
         "Access-Control-Allow-Credentials": "true"
       },
     );
-    print(response.statusCode);
-    print(response.body);
+
     if (response.statusCode == 200) {
       final bookmarks = jsonDecode(response.body) as List;
       return bookmarks.map((bookmark) => Bookmark.fromJson(bookmark)).toList();
@@ -76,9 +71,7 @@ class BookmarkDataProvider {
       body: jsonEncode(<String, dynamic>{
         "user_id": bookmark.user_id,
         "post_id": bookmark.post_id,
-        "_id": bookmark.id,
         "memo": bookmark.memo,
-        "create": bookmark.createdAt
       }),
     );
 

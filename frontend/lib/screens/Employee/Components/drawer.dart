@@ -24,11 +24,80 @@ class _DrawerCustomState extends State<DrawerCustom> {
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
       children: [
-        const DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.blue,
-          ),
-          child: Text('Drawer Header'),
+        BlocBuilder<EmployeeBloc, EmployeeState>(
+          builder: (context, state) {
+            return state is EmployeeHomeLoading
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(),
+                    ],
+                  )
+                : DrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircleAvatar(
+                          radius: 50,
+                          backgroundImage: AssetImage('images/profile.jpg'),
+                        ),
+                        const SizedBox(
+                          width: 17,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 9,
+                            ),
+                            Row(
+                              children: [
+                                const Text(
+                                  "@",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  state.username,
+                                  style: const TextStyle(fontSize: 19),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 9,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.email_outlined,
+                                  color: Colors.black,
+                                  size: 19,
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  state.email,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+          },
         ),
         BlocBuilder<EmployeeBloc, EmployeeState>(
           builder: (context, state) {
@@ -48,83 +117,139 @@ class _DrawerCustomState extends State<DrawerCustom> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // Row(
+                            //   children: [
+                            //     const Icon(
+                            //       Icons.person,
+                            //       color: Colors.black,
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 15,
+                            //     ),
+                            //     Text(
+                            //       state.username,
+                            //       style: const TextStyle(
+                            //           fontWeight: FontWeight.bold,
+                            //           fontSize: 19),
+                            //     ),
+                            //   ],
+                            // ),
+                            // const SizedBox(
+                            //   height: 40,
+                            // ),
+                            // Row(
+                            //   children: [
+                            //     const Icon(
+                            //       Icons.email,
+                            //       color: Colors.black,
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 15,
+                            //     ),
+                            //     Text(
+                            //       state.email,
+                            //       style: const TextStyle(
+                            //           fontWeight: FontWeight.bold,
+                            //           fontSize: 19),
+                            //     ),
+                            //   ],
+                            // ),
                             const SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              state.username,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                              state.email,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                              state.fullName,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                              state.location,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                              state.bio,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.person,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 19,
+                                ),
+                                Text(
+                                  state.fullName,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 40,
                             ),
                             Row(
                               children: [
-                                TextButton(
-                                  onPressed: () {
-                                    context.go('/employeeHome/editEmployeeProfile');
-                                  },
-                                  child: const Icon(
-                                    Icons.edit,
-                                    color: Colors.blue,
-                                  ),
+                                const Icon(
+                                  Icons.location_on,
+                                  color: Colors.black,
                                 ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ),
+                                const SizedBox(
+                                  width: 15,
                                 ),
-                                BlocBuilder<AuthBloc, AuthState>(
-                                  builder: ((context, state) {
-                                    return state is AuthLoggingOut
-                                        ? const CircularProgressIndicator()
-                                        : ElevatedButton(
-                                            onPressed: () {
-                                              BlocProvider.of<AuthBloc>(context)
-                                                  .add(LogOut());
-                                              context.go("/login");
-                                            },
-                                            child: const Text('Log out'),
-                                          );
-                                  }),
-                                )
+                                Row(
+                                  children: [
+                                    Text(
+                                      state.location,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 19),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.engineering_outlined,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Text(
+                                  state.bio,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  context
+                                      .go('/employeeHome/editEmployeeProfile');
+                                },
+                                child: const Text("Edit Profile")),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            BlocBuilder<AuthBloc, AuthState>(
+                              builder: ((context, state) {
+                                return state is AuthLoggingOut
+                                    ? const CircularProgressIndicator()
+                                    : ElevatedButton(
+                                        onPressed: () {
+                                          BlocProvider.of<AuthBloc>(context)
+                                              .add(LogOut());
+                                          context.go("/login");
+                                        },
+                                        child: const Text('Log out'),
+                                      );
+                              }),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {},
+                                child: const Text("Delete Profile")),
                           ],
                         ),
                       );

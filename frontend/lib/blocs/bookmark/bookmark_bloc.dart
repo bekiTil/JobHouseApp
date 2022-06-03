@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -25,7 +24,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       }
     });
 
- 
     on<BookmarkCreate>((event, emit) async {
       try {
         await bookmarkRepository.createBookmark(event.bookmark);

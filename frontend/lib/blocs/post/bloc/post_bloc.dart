@@ -36,5 +36,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         emit(PostOperationFailed(e.toString()));
       }
     });
+
+    on<EditPost>((event, emit) {
+      emit(PostOperationLoading());
+
+      try {
+        emit(PostOperationSuccess());
+      } catch (e) {
+        emit(PostOperationFailed(e.toString()));
+      }
+    });
   }
 }
