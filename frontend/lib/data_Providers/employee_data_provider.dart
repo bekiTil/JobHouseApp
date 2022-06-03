@@ -79,4 +79,19 @@ class EmployeeDataProvider {
       throw AuthException(response.body);
     }
   }
+
+  static Future<dynamic> deleteSingle() async {
+
+    StorageService storage = StorageService();
+    final String? id = await storage.getId();
+    var url = Uri.parse("http://localhost:3000/api/users/$id");
+    final response = await http.delete(url);
+    if (response.statusCode == 200) {
+      return; 
+    }
+    else {
+      throw AuthException("Couldn't Delete user");
+    }
+    
+}
 }

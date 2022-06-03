@@ -117,43 +117,6 @@ class _DrawerCustomState extends State<DrawerCustom> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Row(
-                            //   children: [
-                            //     const Icon(
-                            //       Icons.person,
-                            //       color: Colors.black,
-                            //     ),
-                            //     const SizedBox(
-                            //       width: 15,
-                            //     ),
-                            //     Text(
-                            //       state.username,
-                            //       style: const TextStyle(
-                            //           fontWeight: FontWeight.bold,
-                            //           fontSize: 19),
-                            //     ),
-                            //   ],
-                            // ),
-                            // const SizedBox(
-                            //   height: 40,
-                            // ),
-                            // Row(
-                            //   children: [
-                            //     const Icon(
-                            //       Icons.email,
-                            //       color: Colors.black,
-                            //     ),
-                            //     const SizedBox(
-                            //       width: 15,
-                            //     ),
-                            //     Text(
-                            //       state.email,
-                            //       style: const TextStyle(
-                            //           fontWeight: FontWeight.bold,
-                            //           fontSize: 19),
-                            //     ),
-                            //   ],
-                            // ),
                             const SizedBox(
                               height: 10,
                             ),
@@ -247,9 +210,19 @@ class _DrawerCustomState extends State<DrawerCustom> {
                             const SizedBox(
                               height: 20,
                             ),
-                            ElevatedButton(
-                                onPressed: () {},
-                                child: const Text("Delete Profile")),
+
+                            state is EmployeeDeleting
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      CircularProgressIndicator(),
+                                    ],
+                                  )
+                                : ElevatedButton(
+                                    onPressed: () {
+                                      // BlocProvider.of<EmployeeBloc>(context).add(DeleteEmployee(state.id));
+                                    },
+                                    child: const Text("Delete Profile")),
                           ],
                         ),
                       );

@@ -12,5 +12,13 @@ class EmployeeRepository {
     }
   }
 
+  Future deleteSingle() async{
+    try{
+      return await EmployeeDataProvider.deleteSingle();
+    }catch(e){
+      rethrow;
+    }
+  }
+
 
 }

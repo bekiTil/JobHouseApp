@@ -30,10 +30,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-<<<<<<< HEAD
-
-
-=======
   assets:
     - images/
->>>>>>> 613afc87d11b169385164fc6d2d3c1a628aef57f
