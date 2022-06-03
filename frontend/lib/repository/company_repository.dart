@@ -19,4 +19,11 @@ class CompanyRepository {
       rethrow;
     }
   }
+  Future deleteSingle(String userName) async{
+    try{
+      return await CompanyDataProvider.deleteSingle(userName);
+    }catch(e){
+      rethrow;
+    }
+  }
 }

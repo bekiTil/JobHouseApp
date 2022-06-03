@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Icon(Icons.add),
           ),
-          bottomNavigationBar: const BottomNavCustom(),
+  
         );
       },
     );
