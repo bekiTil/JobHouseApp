@@ -37,10 +37,12 @@ router.post(
 );
 
 // Get all posts
-router.get("", async (req, res) => {
-  Post.find({})
-    .then((posts) => res.send(users))
-    .catch((error) => res.status(400).send("An Error occured"));
+router.get("/", async (req, res) => {
+  Post.find()
+    .then((posts) => res.send(posts))
+    .catch((error) => {
+      console.log(error)
+      return res.status(400).send("An Error occured")});
 });
 
 // Get post information by its post id
@@ -54,18 +56,21 @@ router.get("/:id", async (req, res) => {
 });
 
 // Get all posts from a given user
-router.get("/user/:username", async (req, res) => {
-  const user = await User.findOne({ username: req.params.username });
-
+router.get("/user/:id", async (req, res) => {
+  const user = await User.findOne({ id: req.params.id });
+  
   if (!user) {
     return req.status(401).send("User doesn't exist!");
   }
-
-  res.send(await Post.find({ poster_id: user._id }));
+  const response = await Post.find({ poster_id: req.params.id });
+  console.log(req.params.id)
+  res.send(response);
 });
 
 // Delete a post by its id
 router.delete("/:id", authorize(Role.Company), async (req, res) => {
+  console.log(req.params.id);
+  
   let post;
   try {
     post = await Post.findOne({ _id: req.params.id });
@@ -73,8 +78,7 @@ router.delete("/:id", authorize(Role.Company), async (req, res) => {
     if (req.auth._id != post.poster_id) {
       throw Error("Not the owner");
     }
-
-    res.send(await post.delete());
+    res.status(204).send(await post.delete());
   } catch (error) {
     res.status(401).send("Post is not found!");
   }

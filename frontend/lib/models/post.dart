@@ -1,10 +1,12 @@
 class Post {
+  String id;
   int number;
   String description;
   String category;
   int? image;
 
-  Post({
+  Post(
+      {required this.id,
       required this.number,
       required this.description,
       required this.category,
@@ -12,6 +14,7 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
+        id: json['_id'],
         number: json['number'],
         description: json['description'],
         category: json['category'],

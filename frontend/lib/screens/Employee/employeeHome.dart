@@ -3,9 +3,13 @@ import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
+import 'package:frontend/screens/Employee/Components/bottomNavigationBar.dart';
+import 'package:frontend/screens/Employee/Components/drawer.dart';
+import 'package:frontend/screens/Employee/Components/homeBody.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
+import '../../screens/bookmark/bookmark_list.dart';
 
 class EmployeeHomePage extends StatefulWidget {
   const EmployeeHomePage({Key? key}) : super(key: key);
@@ -15,9 +19,15 @@ class EmployeeHomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<EmployeeHomePage> {
+  int _selectedindex = 0;
+  final List<Widget> screens =const  [
+    HomeBody(),
+    BookmarkList()
+  ];
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited());
   }
 
   @override
@@ -29,46 +39,29 @@ class _HomePageState extends State<EmployeeHomePage> {
       },
       builder: (context, state) {
         return Scaffold(
+          drawer: const DrawerCustom(),
           appBar: AppBar(title: Text(state.fullName)),
-          body: Center(
-            child: state is EmployeeHomeLoading
-                ? const SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3,
-                      semanticsLabel: "Loading...",
-                    ),
-                  )
-                : state is EmployeeHomeLoadingFailed
-                    ? const Center(
-                        child: Text('Err... Loading Failed'),
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(state.username),
-                          Text(state.email),
-                          Text(state.fullName),
-                          Text(state.location),
-                          Text(state.bio),
-                          BlocBuilder<AuthBloc, AuthState>(
-                            builder: ((context, state) {
-                              return state is AuthLoggingOut
-                                  ? const CircularProgressIndicator()
-                                  : ElevatedButton(
-                                      onPressed: () {
-                                        BlocProvider.of<AuthBloc>(context)
-                                            .add(LoggedOut());
-                                        context.go('/login');
-                                      },
-                                      child: const Text('Log out'),
-                                    );
-                            }),
-                          )
-                        ],
-                      ),
+          body: screens[_selectedindex],
+          bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedindex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star_border),
+            label: 'Bookmarks',
+
+          ),
+        
+        ],
+      onTap: (value){
+        setState(() {
+          _selectedindex = value;
+        });
+      },
+      ),
         );
       },
     );

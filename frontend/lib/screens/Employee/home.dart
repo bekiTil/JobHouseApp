@@ -22,7 +22,7 @@ class New extends StatelessWidget {
               child: ElevatedButton(
             child: const Text('logout'),
             onPressed: () {
-              BlocProvider.of<AuthBloc>(context).add(LoggedOut());
+              BlocProvider.of<AuthBloc>(context).add(LogOut());
             },
           ));
         },
@@ -30,3 +30,5 @@ class New extends StatelessWidget {
     );
   }
 }
+
+

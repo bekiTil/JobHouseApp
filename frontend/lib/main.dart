@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/blocs.dart';
+import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/blocs/company/EditCompany/editcompany_bloc.dart';
 import 'package:frontend/blocs/employee/editEmployee/editEmployee_bloc.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
+import 'package:frontend/data_Providers/bookmark_data_providers.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/repository/user_repository.dart';
+import 'package:frontend/repository/bookmark_repository.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/login/LoginBloc.dart';
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
@@ -13,9 +16,15 @@ import 'package:frontend/screens/auth/authentication_page.dart';
 import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/utils/routes.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
+import 'package:frontend/bloc_observer.dart';
 
 void main() {
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+    () {
+      runApp(const MyApp());
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -27,12 +36,22 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final UserRepository userRepository = UserRepository();
+  final BookmarkDataProvider bookmarkDataProvider = BookmarkDataProvider();
   final storage = StorageService();
   final router = AllRoutes().router;
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-        create: (context) => UserRepository(),
+    return MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(
+            create: (context) => UserRepository(),
+          ),
+          RepositoryProvider(
+            create: (context) => BookmarkRepository(
+              dataRepository: bookmarkDataProvider,
+            ),
+          ),
+        ],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -55,9 +74,17 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: ((context) => EditEmployeeBloc()),
             ),
-            BlocProvider(create: ((context) => PostBloc()))
+            BlocProvider(create: ((context) => PostBloc())),
+            BlocProvider(
+              create: (context) => BookmarkBloc(
+                bookmarkRepository: context.read<BookmarkRepository>(),
+              )..add(
+                  BookmarkLoad(),
+                ),
+            ),
           ],
           child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
               routeInformationParser: router.routeInformationParser,
               routerDelegate: router.routerDelegate),
         ));

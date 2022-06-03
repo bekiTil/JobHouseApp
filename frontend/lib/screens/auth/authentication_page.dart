@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
         if (state.role == Roles.Company) {
           context.go("/companyHome");
         } else if (state.role == Roles.Employee) {
-          BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited(state.id));
+          BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited());
           context.go('/employeeHome');
         }
       }

@@ -7,32 +7,34 @@ abstract class CompanyState {
   final String fullName;
   final String location;
   final String bio;
-
-  const CompanyState(
-      this.username, this.email, this.fullName, this.location, this.bio);
+  List<Post> posts;
+  
+  CompanyState(
+      this.username, this.email, this.fullName, this.location, this.bio, this.posts);
 }
 
 class CompanyInitial extends CompanyState {
-  const CompanyInitial() : super(' ', ' ', ' ', ' ', ' ');
+   CompanyInitial() : super(' ', ' ', ' ', ' ', ' ' , List.empty());
 }
 
 class CompanyHomeLoading extends CompanyState {
-  const CompanyHomeLoading() : super(' ', ' ', ' ', ' ', ' ');
+   CompanyHomeLoading() : super(' ', ' ', ' ', ' ', ' ', List.empty());
 }
 
 class CompanyHomeLoaded extends CompanyState {
-  const CompanyHomeLoaded(
+   CompanyHomeLoaded(
       {required String username,
       required String email,
       required String fullName,
       required String location,
-      required String bio})
-      : super(username, email, fullName, location, bio);
+      required String bio,
+      required List<Post> posts})
+      : super(username, email, fullName, location, bio, posts);
 }
 
 class CompanyHomeLoadingFailed extends CompanyState {
   final String exception;
 
-  const CompanyHomeLoadingFailed({required this.exception})
-      : super(' ', ' ', ' ', ' ', ' ');
+   CompanyHomeLoadingFailed({required this.exception})
+      : super(' ', ' ', ' ', ' ', ' ', List.empty());
 }

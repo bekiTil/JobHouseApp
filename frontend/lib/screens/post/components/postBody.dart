@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../models/roles.dart';
@@ -94,31 +95,30 @@ class _PostBodyState extends State<PostBody> {
           ),
           BlocConsumer<PostBloc, PostState>(
             listener: (context, state) {
-              if (state is PostCreated){
+              if (state is PostOperationSuccess) {
+                BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
                 context.go('/companyHome');
               }
             },
             builder: (context, state) {
-              return state is PostCreationFailed
-                      ? Column(
-                          children: [
-                            Text(
-                              state.exception,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            )
-                          ],
+              return state is PostOperationFailed
+                  ? Column(
+                      children: [
+                        Text(
+                          state.exception,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                        const SizedBox(
+                          height: 20,
                         )
-                      : const Text('');
-              
-              
+                      ],
+                    )
+                  : const Text('');
             },
           ),
           BlocBuilder<PostBloc, PostState>(
             builder: (context, state) {
-              return state is PostCreating
+              return state is PostOperationLoading
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
                       style: ButtonStyle(

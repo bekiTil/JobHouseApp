@@ -58,7 +58,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
       listener: (context, state) {
         if (state is EditProfileSuccess) {
           print(id);
-          BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited(id));
+          BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited());
           context.go('/employeeHome');
         } else if (state is EditProfileFailed) {
           editResult = state.exception;
