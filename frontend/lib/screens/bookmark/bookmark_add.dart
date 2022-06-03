@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/secureStorage.dart';
+import 'package:go_router/go_router.dart';
 
 class AddBookmark extends StatefulWidget {
   final Post post;
@@ -16,7 +17,6 @@ class AddBookmark extends StatefulWidget {
 }
 
 class _AddBookmarkState extends State<AddBookmark> {
-
   late final String? id;
 
   @override
@@ -58,6 +58,8 @@ class _AddBookmarkState extends State<AddBookmark> {
                   context
                       .read<BookmarkBloc>()
                       .add(BookmarkCreate(bookmark: bookmark));
+
+                  context.go('/bookmarkList');
 //
                 },
                 child: const Text('Add To Bookmark'),
