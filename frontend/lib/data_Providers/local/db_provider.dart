@@ -11,6 +11,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:frontend/models/Company.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class DBProvider {
   static Database? _database;
@@ -24,6 +25,11 @@ class DBProvider {
 
   DBProvider._();
   Future<Database?> get database async {
+    if (kIsWeb){
+
+      print("web is it");
+      return null;
+    }
     if (_database != null) return _database;
 
     _database = await initDB();
@@ -88,7 +94,12 @@ category TEXT
   //creating new Employee Profile
   createEmployeeProfile(MockEmpProfile employeeProfile) async {
     await deleteAll();
+    
     final db = await database;
+    print(db);
+    if (db==null){
+      print("becaues it is null we can't use web");
+    }
     final response = await db!.insert(empProfile, employeeProfile.toJson());
     return response;
   }
@@ -108,11 +119,13 @@ category TEXT
 
   //creating new Company Profile
   createCompanyProfile(MockCompProfile companyProfile) async {
+    print(companyProfile);
     final db = await database;
     final response = await db!.insert(
       comProfile,
       companyProfile.toJson(),
     );
+    print(response);
     return response;
   }
 
@@ -149,7 +162,11 @@ category TEXT
 
   Future<MockCompProfile?> findCompanyById(String id) async {
     final db = await database;
-    final companyJson = await db!.query(empProfile, where: "id='"+ id + "'");
+     print(db);
+    if (db==null){
+      print('helo');
+    }
+    final companyJson = await db!.query(comProfile, where: "id='"+ id + "'");
     print(companyJson);
     if (companyJson.isNotEmpty) {
       return MockCompProfile.fromJson(companyJson.first);

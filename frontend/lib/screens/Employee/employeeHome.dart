@@ -38,7 +38,7 @@ class _HomePageState extends State<EmployeeHomePage> {
       },
       builder: (context, state) {
         return Scaffold(
-          drawer: DrawerCustom(),
+          drawer: const DrawerCustom(),
           appBar: AppBar(title: Text(state.fullName)),
           body: screens[_selectedindex],
           bottomNavigationBar: BottomNavigationBar(

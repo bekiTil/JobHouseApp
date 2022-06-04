@@ -39,13 +39,13 @@ class _PostHeaderState extends State<PostHeader> {
           },
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 150, 159, 163),
-                minRadius: 30,
-                maxRadius: 31,
-                backgroundImage:
-                    NetworkImage("https://www.addiscoder.com/img/working.jpg"),
-              ),
+              // CircleAvatar(
+              //   backgroundColor: Color.fromARGB(255, 150, 159, 163),
+              //   minRadius: 30,
+              //   maxRadius: 31,
+              //   backgroundImage:
+              //       NetworkImage(post.posterProfilePicture!),
+              // ),
               const SizedBox(
                 width: 13,
               ),

@@ -37,6 +37,12 @@ Company mergeComProfile(MockCompProfile moc_emp) {
     moc_emp.location!,
     moc_emp.bio!,
   );
+  print(moc_emp.id);
+  print(moc_emp.username);
+  print(moc_emp.fullName);
+  print(moc_emp.email);
+  print(moc_emp.role);
+
   return Company(
       moc_emp.id!,
       moc_emp.fullName!,

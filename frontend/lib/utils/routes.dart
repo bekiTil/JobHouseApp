@@ -26,7 +26,6 @@ class AllRoutes {
   final signup = SignUpBloc();
 
   final authBloc;
-  // final loginBloc = LoginBloc(AuthBloc(StorageService()));
 
   AllRoutes({this.authBloc});
 
@@ -115,26 +114,7 @@ class AllRoutes {
                   key: state.pageKey,
                   child: const BookmarkList(),
                 ),
-            routes: [
-              // GoRoute(
-              //     name: 'updateBookmark',
-              //     path: 'updateBookmark',
-              //     pageBuilder: (context, state) => MaterialPage(
-              //           key: state.pageKey,
-              //           child: UpdateBookmark(
-              //             bookmark: state.extra! as Bookmark,
-              //           ),
-              //         )),
-              // GoRoute(
-              //     name: 'addBookmark',
-              //     path: 'addBookmark',
-              //     pageBuilder: (context, state) => MaterialPage(
-              //           key: state.pageKey,
-              //           child: AddBookmark(
-              //             post: state.extra! as Post,
-              //           ),
-              //         )),
-            ]),
+            routes: []),
       ],
       errorPageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
@@ -148,17 +128,15 @@ class AllRoutes {
             ),
           ),
       redirect: (state) {
-        print(authBloc.state);
+        List<String> authPaths = ['/login', '/chooseRole', '/companyRegistration', '/employeeRegistration'];
 
         final isLoggedIn = authBloc.state is Authenticated;
         final isLoggingIn = state.location == '/login';
+        final registerRoute=["/chooseRole","/employeeRegistration","/companyRegistration"];
+        final inRegister=registerRoute.contains(state.location);
+      
 
-        print('----------');
-        print(isLoggedIn);
-        print(isLoggingIn);
-        print('---------');
-
-        if (!isLoggedIn && !isLoggingIn) return "/login";
+        if (!isLoggedIn && !isLoggingIn && !inRegister) return "/login";
 
         if (isLoggedIn && isLoggingIn) return '/';
 

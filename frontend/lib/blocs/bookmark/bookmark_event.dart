@@ -1,7 +1,7 @@
 part of 'bookmark_bloc.dart';
 
 @immutable
-abstract class BookmarkEvent extends Equatable {
+abstract class BookmarkEvent {
   const BookmarkEvent();
 }
 
@@ -10,8 +10,8 @@ class BookmarkLoad extends BookmarkEvent {
   const BookmarkLoad();
 
 
-  @override
-  List<Object> get props => [];
+  // @override
+  // List<Object> get props => [];
 }
 
 class BookmarkCreate extends BookmarkEvent {
@@ -19,8 +19,8 @@ class BookmarkCreate extends BookmarkEvent {
   
   const BookmarkCreate({required this.bookmark});
 
-  @override
-  List<Object> get props => [bookmark];
+  // @override
+  // List<Object> get props => [bookmark];
 }
 
 class BookmarkUpdate extends BookmarkEvent {
@@ -28,8 +28,8 @@ class BookmarkUpdate extends BookmarkEvent {
 
   const BookmarkUpdate({required this.bookmark});
 
-  @override
-  List<Object> get props => [bookmark];
+  // @override
+  // List<Object> get props => [bookmark];
 }
 
 class BookmarkDelete extends BookmarkEvent {
@@ -37,8 +37,8 @@ class BookmarkDelete extends BookmarkEvent {
 
   const BookmarkDelete({required this.bookmark});
 
-  @override
-  List<Object> get props => [bookmark];
+  // @override
+  // List<Object> get props => [bookmark];
 }
 
 

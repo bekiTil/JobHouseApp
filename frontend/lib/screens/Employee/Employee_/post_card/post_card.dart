@@ -9,7 +9,11 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    post.image = "https://www.addiscoder.com/img/working.jpg";
+    print('-------------');
+    print(post.image);
+    print(post.description);
+    print(post.posterProfilePicture);
+    print('-------------');
 
     return Container(
       padding: const EdgeInsets.all(10.0),

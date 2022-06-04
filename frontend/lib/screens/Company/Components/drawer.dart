@@ -32,7 +32,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
         ),
         BlocConsumer<CompanyBloc, CompanyState>(
           listener: (context, state) {
-            if (state is CompanyProfileDeletionSuccessfull){
+            if (state is CompanyProfileDeletionSuccessfull) {
               context.go('/login');
             }
           },
@@ -105,7 +105,8 @@ class _DrawerCustomState extends State<DrawerCustom> {
                             ),
                             TextButton(
                               onPressed: () {
-                                BlocProvider.of<CompanyBloc>(context).add(DeleteCompany(state.username));
+                                BlocProvider.of<CompanyBloc>(context)
+                                    .add(DeleteCompany(state.username));
                               },
                               child: const Icon(
                                 Icons.delete,

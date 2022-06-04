@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/models/post.dart';
-import 'package:frontend/screens/bookmark/bookmark_postCard_header.dart';
+import 'package:frontend/screens/bookmark/bookmark_card_header.dart';
 import 'package:frontend/screens/bookmark/bookmark_update_popup.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,35 +49,45 @@ class BookmarkCard extends StatelessWidget {
               height: 10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                FilterChip(
-                  label: Text("Category: ${bookmark.post.category}"),
-                  onSelected: (bool value) {},
+                Expanded(
+                  child: FilterChip(
+                    label: Text("Category: ${bookmark.post.category}"),
+                    onSelected: (bool value) {},
+                  ),
                 ),
-                const SizedBox(
-                  width: 20,
-                ),
-                FilterChip(
-                  label: Text("Candidates Needed: ${bookmark.post.number}"),
-                  onSelected: (bool value) {},
+            
+                Expanded(
+                  child: FilterChip(
+                    label: Text("Candidates: ${bookmark.post.number}"),
+                    onSelected: (bool value) {},
+                  ),
                 ),
               ],
             ),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 220, 224, 226),
-              ),
-              width: double.maxFinite,
-              padding: const EdgeInsets.all(6.0),
-              child: Text(
-                '${bookmark.memo}',
-                style:
-                    const TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
-              ),
+            Column(
+              children: [
+                const Text('Memo', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold), ),
+                const SizedBox(height: 5,),
+                Container(
+
+                  decoration:  BoxDecoration(
+                    color: Color.fromARGB(255, 220, 224, 226),
+                    borderRadius: BorderRadius.circular(5)
+                  ),
+                  width: double.maxFinite,
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    '${bookmark.memo}',
+                    style:
+                        const TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 10,
@@ -87,10 +97,9 @@ class BookmarkCard extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // context.go('/bookmarkList/UpdateBookmark', extra: bookmark);
                     updatePopup(context, bookmark);
                   },
-                  child: Text('UPDATE'),
+                  child: const Text('UPDATE'),
                 ),
                 const SizedBox(
                   width: 10,
