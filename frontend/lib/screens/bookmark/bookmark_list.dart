@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/screens/Employee/Employee_/post_card/post_card.dart';
-import 'package:frontend/screens/bookmark/bookmark_postCard.dart';
+import 'package:frontend/screens/bookmark/bookmark_card.dart';
 import 'package:go_router/go_router.dart';
 
 class BookmarkList extends StatefulWidget {
@@ -23,7 +23,6 @@ class _BookmarkListState extends State<BookmarkList> {
   @override
   Widget build(BuildContext context) {
 
-    // wrap with scaffold if called from drawwer.
     return  BlocBuilder<BookmarkBloc, BookmarkState>(builder: (context, state) {
       if (state is BookmarkOperationFailure) {
         return const Text('Failed operation');
@@ -39,7 +38,7 @@ class _BookmarkListState extends State<BookmarkList> {
         );
       } else {
         return const CircularProgressIndicator();
-        // return Text('You are going to see bookmarks here.');
+        
       }
     });
   }

@@ -114,26 +114,7 @@ class AllRoutes {
                   key: state.pageKey,
                   child: const BookmarkList(),
                 ),
-            routes: [
-              // GoRoute(
-              //     name: 'updateBookmark',
-              //     path: 'updateBookmark',
-              //     pageBuilder: (context, state) => MaterialPage(
-              //           key: state.pageKey,
-              //           child: UpdateBookmark(
-              //             bookmark: state.extra! as Bookmark,
-              //           ),
-              //         )),
-              // GoRoute(
-              //     name: 'addBookmark',
-              //     path: 'addBookmark',
-              //     pageBuilder: (context, state) => MaterialPage(
-              //           key: state.pageKey,
-              //           child: AddBookmark(
-              //             post: state.extra! as Post,
-              //           ),
-              //         )),
-            ]),
+            routes: []),
       ],
       errorPageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,

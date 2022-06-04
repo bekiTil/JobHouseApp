@@ -5,7 +5,7 @@
         <entry key="async">
           <value>
             <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib" />
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/lib" />
             </list>
           </value>
         </entry>
@@ -432,7 +432,7 @@
       </option>
     </properties>
     <CLASSES>
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/bloc-8.0.3/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.2.0/lib" />

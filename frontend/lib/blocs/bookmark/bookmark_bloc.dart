@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +5,13 @@ import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/bookmark_repository.dart';
 import 'package:meta/meta.dart';
-
 part 'bookmark_event.dart';
 part 'bookmark_state.dart';
 
 class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
-  final BookmarkRepository bookmarkRepository;
+  final BookmarkRepository bookmarkRepository = BookmarkRepository();
 
-  BookmarkBloc({required this.bookmarkRepository}) : super(BookmarkLoading()) {
+  BookmarkBloc() : super(BookmarkLoading()) {
     on<BookmarkLoad>((event, emit) async {
       emit(BookmarkLoading());
       try {
@@ -43,6 +41,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       }
     });
     on<BookmarkDelete>((event, emit) async {
+      emit(BookmarkLoading());
       try {
         await bookmarkRepository.deleteBookmark(event.bookmark.id);
         final bookmarks = await bookmarkRepository.getBookmarks();
