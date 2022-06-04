@@ -20,7 +20,7 @@ class CompanyDataProvider {
     //   return mergeComProfile(company);
     // }
 
-    var url = Uri.parse("http://localhost:3000/api/users/$id");
+    var url = Uri.parse("http://10.0.2.2:3000/api/users/$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String, dynamic> responded = jsonDecode(response.body);
@@ -47,7 +47,7 @@ class CompanyDataProvider {
     Map<String, dynamic> data = {'profile': profile};
     print(token);
     final response =
-        await http.put(Uri.parse("http://localhost:3000/api/users/$id"),
+        await http.put(Uri.parse("http://10.0.2.2:3000/api/users/$id"),
             headers: {
               "x-auth-token": token.toString(),
               "Accept": "application/json",
@@ -80,7 +80,7 @@ class CompanyDataProvider {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
 
-    var url = Uri.parse("http://localhost:3000/api/users/$userName");
+    var url = Uri.parse("http://10.0.2.2:3000/api/users/$userName");
 
     final response = await http.delete(
       url,

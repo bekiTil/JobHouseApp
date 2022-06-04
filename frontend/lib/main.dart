@@ -47,9 +47,7 @@ class _MyAppState extends State<MyApp> {
             create: (context) => UserRepository(),
           ),
           RepositoryProvider(
-            create: (context) => BookmarkRepository(
-              dataRepository: bookmarkDataProvider,
-            ),
+            create: (context) => BookmarkRepository(),
           ),
         ],
         child: MultiBlocProvider(
@@ -75,10 +73,7 @@ class _MyAppState extends State<MyApp> {
               create: ((context) => EditEmployeeBloc()),
             ),
             BlocProvider(create: ((context) => PostBloc())),
-            BlocProvider(
-                create: (context) => BookmarkBloc(
-                      bookmarkRepository: context.read<BookmarkRepository>(),
-                    )),
+            BlocProvider(create: (context) => BookmarkBloc()),
           ],
           child: MaterialApp.router(
               debugShowCheckedModeBanner: false,
