@@ -208,14 +208,18 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           const SizedBox(height: 10),
                           const Expanded(
+                            flex: 2,
                             child:  Text(
                               "Don't have an account?   ",
+                              textAlign: TextAlign.right,
                               style: TextStyle(
+                              
                                 fontSize: 16,
                               ),
                             ),
                           ),
                           Expanded(
+
                             child: TextButton(
                               clipBehavior: Clip.none,
                                 onPressed: () {
@@ -223,6 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 child: const Text(
                                   'Sign up',
+                                  textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontSize: 17,
                                   ),
