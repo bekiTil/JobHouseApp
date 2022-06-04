@@ -1,0 +1,15 @@
+{
+    "status": 201,
+    "user": {
+        "id": "fakeID",
+        "username": "fakeUserName",
+        "email": "fakeEmail@gmail.com",
+        "fullName": "First Last",
+        "role": "company",
+        "profile": {
+            "location": "Addis Ababa",
+            "bio": "some description"
+        }
+    },
+    "token": "random token"
+}

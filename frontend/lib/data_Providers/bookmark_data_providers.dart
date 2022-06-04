@@ -7,7 +7,6 @@ import 'package:frontend/data_Providers/local/mock_model/post_.dart';
 import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/post.dart';
 import '../repository/repository.dart';
@@ -87,8 +86,8 @@ class BookmarkDataProvider {
     );
 
     if (response.statusCode == 200) {
-  // final bookValue = MockBookmark.fromApi(jsonDecode(response.body));
-  // await DBProvider.db.UpdateBookmark(bookValue);
+      // final bookValue = MockBookmark.fromApi(jsonDecode(response.body));
+      // await DBProvider.db.UpdateBookmark(bookValue);
       return Bookmark.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to update bookmark');
