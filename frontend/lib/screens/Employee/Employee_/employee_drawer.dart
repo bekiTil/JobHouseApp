@@ -6,6 +6,7 @@ import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:frontend/utils/constants.dart';
 
 class EmployeeDrawer extends StatelessWidget {
   const EmployeeDrawer({Key});
@@ -40,7 +41,7 @@ class EmployeeDrawer extends StatelessWidget {
                   ),
                 ),
                 accountEmail: Text(
-                  state.username,
+                  "@${state.username}",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

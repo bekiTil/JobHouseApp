@@ -116,7 +116,7 @@ class PostDataProvider {
       };
     }
 
-    print('acced is denied');
+    // print('acced is denied');
     throw Exception('Error');
   }
 
