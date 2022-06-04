@@ -119,11 +119,13 @@ category TEXT
 
   //creating new Company Profile
   createCompanyProfile(MockCompProfile companyProfile) async {
+    print(companyProfile);
     final db = await database;
     final response = await db!.insert(
       comProfile,
       companyProfile.toJson(),
     );
+    print(response);
     return response;
   }
 
@@ -164,7 +166,7 @@ category TEXT
     if (db==null){
       print('helo');
     }
-    final companyJson = await db!.query(empProfile, where: "id='"+ id + "'");
+    final companyJson = await db!.query(comProfile, where: "id='"+ id + "'");
     print(companyJson);
     if (companyJson.isNotEmpty) {
       return MockCompProfile.fromJson(companyJson.first);

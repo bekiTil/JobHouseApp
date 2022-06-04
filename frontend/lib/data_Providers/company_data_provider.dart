@@ -73,14 +73,19 @@ print('becasuse it is web we dont perisit files using sqfile');
 print('becasuse it is web we dont perisit files using sqfile');
     }
     else{
-       final employee = await DBProvider.db.findEmployeeById(id);
+       final employee = await DBProvider.db.findCompanyById(id);
+       print(employee);
       final comValue = MockCompProfile.fromApi(jsonDecode(response.body));
+      print(comValue);
       if (employee != null) {
+        print('inside');
         final changedProfile =
             await DBProvider.db.updateCompanyProfile(comValue);
       } else {
+        print('outside');
         final changedProfile =
             await DBProvider.db.createCompanyProfile(comValue);
+        print(changedProfile);
       }}
       Map<String, dynamic> user = jsonDecode(response.body);
     } else {

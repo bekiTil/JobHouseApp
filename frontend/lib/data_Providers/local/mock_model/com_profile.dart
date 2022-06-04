@@ -34,7 +34,7 @@ class MockCompProfile extends Equatable {
       email: json["email"],
       password: json["password"],
       role: json["role"],
-      fullName: json["name"],
+      fullName: json["fullName"],
       location: json["location"],
       bio: json["bio"],
     );
@@ -47,7 +47,7 @@ class MockCompProfile extends Equatable {
       email: json["email"],
       password: json["password"],
       role: json["role"],
-      fullName: json["name"],
+      fullName: json["fullName"],
       location:json["profile"][0]["location"],
       bio:json["profile"][0]["bio"],
     
