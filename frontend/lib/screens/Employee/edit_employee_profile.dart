@@ -56,7 +56,6 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
     return BlocListener<EditEmployeeBloc, EditEmployeeState>(
       listener: (context, state) {
         if (state is EditProfileSuccess) {
-          print(id);
           BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited());
           context.go('/employeeHome');
         } else if (state is EditProfileFailed) {
@@ -72,201 +71,190 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
         ),
         key: _scaffoldKey,
         body: Center(
-          child: Card(
-            elevation: 20,
-            child: SizedBox(
-              width: 350,
-              height: 550,
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 30),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Edit Profile",
-                          style: TextStyle(
-                            fontSize: 40.0,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30),
+            child: Card(
+              elevation: 50,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: SizedBox(
+                width: 350,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Edit Profile",
+                            style: TextStyle(
+                              fontSize: 33.0,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Form(
-                          key: _formKey,
-                          child: Container(
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Form(
+                            key: _formKey,
                             child: Column(
                               children: [
                                 TextFormField(
                                   controller: _fieldOfStudyController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.person_pin_circle),
+                                    icon: Icon(Icons.person_off),
                                     hintText: 'What is your profession?',
                                     labelText: 'Field of study *',
                                   ),
-                                  onSaved: (value) {
-                                    // This optional block of code can be used to run
-                                    // code when the user saves the form.
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Field of study cannot be empty";
+                                    }
+                                    return null;
                                   },
-                                  // validator: (String value) {
-                                  //   return value.contains('@')
-                                  //       ? 'Do not use the @ char.'
-                                  //       : null;
-                                  // },
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 TextFormField(
                                   controller: _educationLevelController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.description),
+                                    icon: Icon(Icons.school_sharp),
                                     hintText:
                                         'What are your current academics?',
                                     labelText: 'Education Level *',
                                   ),
-                                  onSaved: (value) {
-                                    // This optional block of code can be used to run
-                                    // code when the user saves the form.
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Education level cannot be empty";
+                                    }
+                                    return null;
                                   },
-                                  // validator: (String value) {
-                                  //   return value.contains('@')
-                                  //       ? 'Do not use the @ char.'
-                                  //       : null;
-                                  // },
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 TextFormField(
                                   controller: _yearsOfExperienceController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.description),
+                                    icon: Icon(Icons.work_history_sharp),
                                     hintText: 'How much have you learnt?',
                                     labelText: 'Years of experience  *',
                                   ),
-                                  onSaved: (value) {
-                                    // This optional block of code can be used to run
-                                    // code when the user saves the form.
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Years of experience cannot be empty";
+                                    }
+                                    return null;
                                   },
-                                  // validator: (String value) {
-                                  //   return value.contains('@')
-                                  //       ? 'Do not use the @ char.'
-                                  //       : null;
-                                  // },
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 TextFormField(
                                   controller: _locationController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.description),
+                                    icon: Icon(Icons.location_city),
                                     hintText: 'Where do you live?',
-                                    labelText: 'location *',
+                                    labelText: 'Location *',
                                   ),
-                                  onSaved: (value) {
-                                    // This optional block of code can be used to run
-                                    // code when the user saves the form.
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Location cannot be empty";
+                                    }
+                                    return null;
                                   },
-                                  // validator: (String value) {
-                                  //   return value.contains('@')
-                                  //       ? 'Do not use the @ char.'
-                                  //       : null;
-                                  // },
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 TextFormField(
                                   controller: _bioController,
                                   autovalidateMode: AutovalidateMode.always,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.abc_outlined),
+                                    icon: Icon(Icons.abc_sharp),
                                     hintText: 'Tell us about your self',
-                                    labelText: 'bio *',
+                                    labelText: 'Bio *',
                                   ),
-                                  onSaved: (value) {
-                                    // This optional block of code can be used to run
-                                    // code when the user saves the form.
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Bio cannot be empty";
+                                    }
+                                    return null;
                                   },
-                                ),
-                                const SizedBox(
-                                  height: 10,
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        BlocBuilder<EditEmployeeBloc, EditEmployeeState>(
-                            builder: ((context, state) {
-                          return state is EditProfileFailed
-                              ? Container(
-                                  margin: const EdgeInsets.only(top: 20),
-                                  child: Text(
+                          BlocBuilder<EditEmployeeBloc, EditEmployeeState>(
+                              builder: ((context, state) {
+                            return state is EditProfileFailed
+                                ? Text(
                                     editResult,
                                     style: const TextStyle(color: Colors.red),
-                                  ),
-                                )
-                              : Text(editResult);
-                        }))
-                      ],
+                                  )
+                                : Text(editResult);
+                          }))
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  BlocBuilder<EditEmployeeBloc, EditEmployeeState>(
-                    builder: (context, state) {
-                      return state is EditingProfile
-                          ? const CircularProgressIndicator()
-                          : BlocBuilder<EmployeeBloc, EmployeeState>(
-                              builder: (context, state) {
-                                return ElevatedButton(
-                                  style: ButtonStyle(
-                                    elevation: MaterialStateProperty.all(16),
-                                  ),
-                                  child: Container(
-                                    width: 200,
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: const Center(
-                                      child: Text(
-                                        "Confirm",
-                                        style: TextStyle(
-                                          fontSize: 18,
+                    BlocBuilder<EditEmployeeBloc, EditEmployeeState>(
+                      builder: (context, state) {
+                        return state is EditingProfile
+                            ? const CircularProgressIndicator()
+                            : BlocBuilder<EmployeeBloc, EmployeeState>(
+                                builder: (context, state) {
+                                  return ElevatedButton(
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(16),
+                                    ),
+                                    child: Container(
+                                      width: 120,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15),
+
+                                      // margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                      child: const Center(
+                                        child: Text(
+                                          "Save",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      int yearsOfExperience =
-                                          (_yearsOfExperienceController
-                                                  .text.isNotEmpty)
-                                              ? int.parse(
-                                                  _yearsOfExperienceController
-                                                      .text)
-                                              : 0;
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        int yearsOfExperience =
+                                            (_yearsOfExperienceController
+                                                    .text.isNotEmpty)
+                                                ? int.parse(
+                                                    _yearsOfExperienceController
+                                                        .text)
+                                                : 0;
 
-                                      (BlocProvider.of<EditEmployeeBloc>(
-                                              context)
-                                          .add(
-                                        EditEmployee(
-                                            _locationController.text,
-                                            _bioController.text,
-                                            token,
-                                            id,
-                                            _fieldOfStudyController.text,
-                                            _educationLevelController.text,
-                                            yearsOfExperience),
-                                      ));
-                                    }
-                                  },
-                                );
-                              },
-                            );
-                    },
-                  ),
-                ],
+                                        (BlocProvider.of<EditEmployeeBloc>(
+                                                context)
+                                            .add(
+                                          EditEmployee(
+                                              _locationController.text,
+                                              _bioController.text,
+                                              token,
+                                              id,
+                                              _fieldOfStudyController.text,
+                                              _educationLevelController.text,
+                                              yearsOfExperience),
+                                        ));
+                                      }
+                                    },
+                                  );
+                                },
+                              );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

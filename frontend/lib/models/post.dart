@@ -16,10 +16,6 @@ class Post {
     var url = "http://10.0.2.2:3000/";
     final postDataProvider = PostDataProvider();
 
-    print('nnnnnnnnnnnnnnn');
-    print(poster_id);
-    print('nnnnnnnnnnnnn');
-
     final userData = await postDataProvider.findOwnerInfo(poster_id);
 
     posterName = userData['posterName'];

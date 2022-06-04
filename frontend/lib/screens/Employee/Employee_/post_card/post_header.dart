@@ -34,9 +34,7 @@ class _PostHeaderState extends State<PostHeader> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: () {
-            //TODO: go to the user's profile;
-          },
+          onTap: () {},
           child: Row(
             children: [
               CircleAvatar(
