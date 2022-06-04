@@ -1,10 +1,7 @@
 // import 'dart:js';
-<<<<<<< HEAD
-=======
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/login/LoginBloc.dart';
 import 'package:frontend/blocs/login/LoginState.dart';
->>>>>>> ccc02864daabba97b298dc1dfbdf58363dbce7c3
 import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';

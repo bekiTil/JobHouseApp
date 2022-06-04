@@ -52,15 +52,6 @@ class _PostHeaderState extends State<PostHeader> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-<<<<<<< HEAD
-                  // Text(
-                  //   post.posterName!,
-                  //   style: const TextStyle(
-                  //     fontSize: 18,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-=======
                   Text(
                     widget.post.posterName ?? "Yeabsira Driba",
                     style: const TextStyle(
@@ -68,7 +59,6 @@ class _PostHeaderState extends State<PostHeader> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
->>>>>>> ccc02864daabba97b298dc1dfbdf58363dbce7c3
                   const SizedBox(
                     height: 3.0,
                   ),
