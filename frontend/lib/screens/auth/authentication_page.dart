@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
@@ -41,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
       if (state is Authenticated) {
         if (state.role == Roles.Company) {
+          BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
           context.go("/companyHome");
         } else if (state.role == Roles.Employee) {
           BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited());
@@ -208,11 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 10),
                           const Expanded(
                             flex: 2,
-<<<<<<< HEAD
-                            child:  Text(
-=======
                             child: Text(
->>>>>>> 80c990a107f480c5a78bee77eaa7833e74f9efd7
                               "Don't have an account?   ",
                               textAlign: TextAlign.right,
                               style: TextStyle(

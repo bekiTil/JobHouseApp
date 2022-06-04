@@ -1,7 +1,9 @@
 // import 'dart:js';
+import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
+import 'package:frontend/models/models.dart';
 import 'package:frontend/screens/Company/companyHome.dart';
 import 'package:frontend/screens/Company/edit_company_profile.dart';
 import 'package:frontend/screens/bookmark/bookmark_list.dart';
@@ -125,16 +127,20 @@ class AllRoutes {
       redirect: (state) {
         final isLoggedIn = authBloc.state is Authenticated;
         final isLoggingIn = state.location == '/login';
-        final registerRoute = [
+
+        
+        final registerRoute = [ 
           "/chooseRole",
-          "/employeeRegistration",
+          "/employeeRegistration",          
           "/companyRegistration"
         ];
         final inRegister = registerRoute.contains(state.location);
 
         if (!isLoggedIn && !isLoggingIn && !inRegister) return "/login";
 
-        if (isLoggedIn && isLoggingIn) return '/';
+        if (isLoggedIn && isLoggingIn) {
+          return authBloc.state == Roles.Company ? '/companyHome' : '/employeeHome';
+          }
 
         return null;
       },
