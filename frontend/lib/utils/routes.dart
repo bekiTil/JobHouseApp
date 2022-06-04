@@ -1,10 +1,6 @@
 // import 'dart:js';
 import 'package:frontend/blocs/auth/AuthState.dart';
-import 'package:frontend/blocs/login/LoginBloc.dart';
-import 'package:frontend/blocs/login/LoginState.dart';
-import 'package:frontend/models/bookmark.dart';
-import 'package:frontend/repository/secureStorage.dart';
-import 'package:frontend/blocs/auth/AuthBloc.dart';
+
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/screens/Company/companyHome.dart';
 import 'package:frontend/screens/Company/edit_company_profile.dart';
@@ -16,7 +12,6 @@ import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/screens/auth/company_registration.dart';
 import 'package:frontend/screens/auth/employee_registration.dart';
 import 'package:go_router/go_router.dart';
-import '../models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/authentication_page.dart';
 
@@ -128,13 +123,6 @@ class AllRoutes {
             ),
           ),
       redirect: (state) {
-        List<String> authPaths = [
-          '/login',
-          '/chooseRole',
-          '/companyRegistration',
-          '/employeeRegistration'
-        ];
-
         final isLoggedIn = authBloc.state is Authenticated;
         final isLoggingIn = state.location == '/login';
         final registerRoute = [
