@@ -98,7 +98,7 @@ class PostDataProvider {
   }
 
   Future<Map<String, String>> findOwnerInfo(String id) async {
-    var url = Uri.parse('http://localhost:3000/api/users/$id');
+    var url = Uri.parse('http://10.0.2.2:3000/api/users/$id');
     var defaultProfilePicture = "images/default_profile.png";
 
     print('the url is');
@@ -116,7 +116,7 @@ class PostDataProvider {
       };
     }
 
-    print('acced is denied');
+    // print('acced is denied');
     throw Exception('Error');
   }
 

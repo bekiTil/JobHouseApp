@@ -15,17 +15,17 @@ class EmployeeDataProvider {
     StorageService storage = StorageService();
     final String? id = await storage.getId();
 
-    final database =await DBProvider.db;
-    if (database==null){
-print('becasuse it is web we dont perisit files using sqfile');
+    final database = await DBProvider.db;
+    if (database == null) {
+      print('becasuse it is web we dont perisit files using sqfile');
+    } else {
+      final employee = await DBProvider.db.findEmployeeById(id!);
+      print(employee);
+      if (employee != null) {
+        print(employee.bio);
+        return mergeEmpProfile(employee);
+      }
     }
-    else{
-    final employee = await DBProvider.db.findEmployeeById(id!);
-    print(employee);
-    if (employee != null) {
-      print(employee.bio);
-      return mergeEmpProfile(employee);
-    }}
     var url = Uri.parse("http://10.0.2.2:3000/api/users/$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -89,31 +89,31 @@ print('becasuse it is web we dont perisit files using sqfile');
             encoding: Encoding.getByName("utf-8"));
 
     if (response.statusCode == 200) {
-      final database =await DBProvider.db;
-    if (database==null){
-print('becasuse it is web we dont perisit files using sqfile');
-    }
-    else{
-      final employee = await DBProvider.db.findEmployeeById(id);
-      print(employee);
-      print(jsonDecode(response.body));
-      print('-------------');
-
-      final empValue = MockEmpProfile.fromApi(jsonDecode(response.body));
-      print('-----------');
-      // print(empValue);
-      // print(employee);
-
-      if (employee != null) {
-        print('--------------');
-        final changedProfile =
-            await DBProvider.db.updateEmployeeProfile(empValue);
+      final database = await DBProvider.db;
+      if (database == null) {
+        print('becasuse it is web we dont perisit files using sqfile');
       } else {
-        print('--------------');
-        final changedProfile =
-            await DBProvider.db.createEmployeeProfile(empValue);
+        final employee = await DBProvider.db.findEmployeeById(id);
+        print(employee);
+        print(jsonDecode(response.body));
+        print('-------------');
+
+        final empValue = MockEmpProfile.fromApi(jsonDecode(response.body));
+        print('-----------');
+        // print(empValue);
+        // print(employee);
+
+        if (employee != null) {
+          print('--------------');
+          final changedProfile =
+              await DBProvider.db.updateEmployeeProfile(empValue);
+        } else {
+          print('--------------');
+          final changedProfile =
+              await DBProvider.db.createEmployeeProfile(empValue);
+        }
+        print("helo");
       }
-        print("helo");}
       // Map<String, dynamic> user = jsonDecode(response.body)[0];
     } else {
       throw AuthException(response.body);
@@ -123,11 +123,12 @@ print('becasuse it is web we dont perisit files using sqfile');
   static Future<dynamic> deleteSingle(String userName) async {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
-    
+
     var url = Uri.parse("http://10.0.2.2:3000/api/users/$userName");
-    
-    final response = await http.delete(url,       
-    headers: {
+
+    final response = await http.delete(
+      url,
+      headers: {
         "x-auth-token": token!,
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -135,8 +136,9 @@ print('becasuse it is web we dont perisit files using sqfile');
         "Access-Control-Allow-Headers": "*",
         "Access-Control-Allow-Methods": "*",
         "Access-Control-Allow-Credentials": "true"
-      },);
-  print(response.statusCode);
+      },
+    );
+    print(response.statusCode);
     if (response.statusCode == 200) {
       return;
     } else {

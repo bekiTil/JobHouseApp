@@ -13,7 +13,7 @@ class PostHeader extends StatefulWidget {
 }
 
 class _PostHeaderState extends State<PostHeader> {
-   late final String? id;
+  late final String? id;
 
   @override
   void initState() {
@@ -26,6 +26,7 @@ class _PostHeaderState extends State<PostHeader> {
     super.initState();
     getInfo();
   }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,18 +35,17 @@ class _PostHeaderState extends State<PostHeader> {
       children: [
         GestureDetector(
           onTap: () {
-            print('go to the user\'s profile page');
             //TODO: go to the user's profile;
           },
           child: Row(
             children: [
-              // CircleAvatar(
-              //   backgroundColor: Color.fromARGB(255, 150, 159, 163),
-              //   minRadius: 30,
-              //   maxRadius: 31,
-              //   backgroundImage:
-              //       NetworkImage(post.posterProfilePicture!),
-              // ),
+              CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 150, 159, 163),
+                minRadius: 30,
+                maxRadius: 31,
+                backgroundImage:
+                    NetworkImage(widget.post.posterProfilePicture!),
+              ),
               const SizedBox(
                 width: 13,
               ),
@@ -75,8 +75,8 @@ class _PostHeaderState extends State<PostHeader> {
               popBookmark(context, widget.post, id);
             },
             icon: const Icon(
-              Icons.favorite_border_outlined,
-              color: Colors.red,
+              Icons.bookmark_add,
+              // color: Colors.red,
             ),
           ),
         ),
