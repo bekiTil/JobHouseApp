@@ -91,7 +91,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 });
 
 router.delete("/delete/:username", verifyToken, async (req, res) => {
-  const { username } = req.params.username
+  const { username } = req.params.username;
   const usernameExist = await User.findOne({ username: username });
 
   if (!usernameExist) {
