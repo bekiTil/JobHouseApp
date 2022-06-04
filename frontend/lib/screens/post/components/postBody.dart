@@ -36,9 +36,9 @@ class _PostBodyState extends State<PostBody> {
       key: _formKey,
       child: Column(
         children: [
-          Text(
+          const Text(
             "Post a new Job",
-            style: const TextStyle(
+            style:  TextStyle(
               fontSize: 30.0,
               fontWeight: FontWeight.bold,
             ),

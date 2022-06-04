@@ -60,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
           title: const Text('JobHouse'),
         ),
         key: _scaffoldKey,
+<<<<<<< HEAD
         body: Center(
           child: SingleChildScrollView(
             child: Center(
@@ -149,29 +150,106 @@ class _LoginPageState extends State<LoginPage> {
                                               ? 'Please enter password'
                                               : null;
                                         },
+=======
+        body: SingleChildScrollView(
+          child: Center(
+            child: Card(
+              elevation: 20,
+              margin: const EdgeInsets.only(top: 60),
+              child: SizedBox(
+                width: 350,
+                height: 450,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 30),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Sign in",
+                            style: TextStyle(
+                              fontSize: 40.0,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          BlocListener<LoginBloc, LoginState>(
+                            listener: ((context, state) {
+                              if (state is LoginFailure) {
+                                loginResult = "Invalid username or password!";
+                              } else if (state is LoginSuccessfull) {
+                                BlocProvider.of<AuthBloc>(context).add(LoggedIn(
+                                    id: state.id,
+                                    role: state.role,
+                                    token: state.token));
+                              }
+                            }),
+                            child: Form(
+                              key: _formKey,
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      controller: _usernameController,
+                                      decoration: const InputDecoration(
+                                        icon: Icon(Icons.email),
+                                        hintText: 'Your personal Username?',
+                                        labelText: 'Username *',
                                       ),
-                                      BlocBuilder<LoginBloc, LoginState>(
-                                          builder: ((context, state) {
-                                        return state is LoginFailure
-                                            ? Container(
-                                                margin: const EdgeInsets.only(
-                                                    top: 20),
-                                                child: Text(
-                                                  state.exception,
-                                                  style: const TextStyle(
-                                                      color: Colors.red),
-                                                ),
-                                              )
-                                            : Text(loginResult);
-                                      }))
-                                    ],
-                                  ),
+                                      onSaved: (value) {
+                                        email = value!;
+                                      },
+                                      validator: (String? value) {
+                                        return value!.isEmpty
+                                            ? 'Please username Email!'
+                                            : null;
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextFormField(
+                                      controller: _passwordController,
+                                      obscureText: true,
+                                      decoration: const InputDecoration(
+                                        icon: Icon(Icons.security),
+                                        hintText: 'The one you only you know?',
+                                        labelText: 'Password *',
+>>>>>>> e1909220921bd9fb8d830d50dc5f85a8195ef90a
+                                      ),
+                                      onSaved: (value) {
+                                        password = value!;
+                                      },
+                                      validator: (String? value) {
+                                        return value!.isEmpty
+                                            ? 'Please enter password'
+                                            : null;
+                                      },
+                                    ),
+                                    BlocBuilder<LoginBloc, LoginState>(
+                                        builder: ((context, state) {
+                                      return state is LoginFailure
+                                          ? Container(
+                                              margin: const EdgeInsets.only(
+                                                  top: 20),
+                                              child: Text(
+                                                state.exception,
+                                                style: const TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                            )
+                                          : Text(loginResult);
+                                    }))
+                                  ],
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
+<<<<<<< HEAD
                       // const SizedBox(height: 5),
                       BlocBuilder<LoginBloc, LoginState>(
                         builder: ((context, state) {
@@ -227,12 +305,68 @@ class _LoginPageState extends State<LoginPage> {
                                 'Sign up',
                                 style: TextStyle(
                                   fontSize: 17,
+=======
+                    ),
+                    const SizedBox(height: 20),
+                    BlocBuilder<LoginBloc, LoginState>(
+                      builder: ((context, state) {
+                        return state is LoginLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.brown,
+                              )
+                            : ElevatedButton(
+                                style: ButtonStyle(
+                                  elevation: MaterialStateProperty.all(16),
                                 ),
-                              ))
-                        ],
-                      ),
-                    ],
-                  ),
+                                child: Container(
+                                  width: 200,
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: const Center(
+                                    child: Text(
+                                      "Sign in",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+>>>>>>> e1909220921bd9fb8d830d50dc5f85a8195ef90a
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    BlocProvider.of<LoginBloc>(context).add(
+                                        LoginPressed(
+                                            username: _usernameController.text,
+                                            password:
+                                                _passwordController.text));
+                                  }
+                                },
+                              );
+                      }),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 40),
+                        const Text(
+                          "Don't have an account?   ",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              context.go('/chooseRole');
+                            },
+                            child: const Text(
+                              'Sign up',
+                              style: TextStyle(
+                                fontSize: 17,
+                              ),
+                            ))
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),

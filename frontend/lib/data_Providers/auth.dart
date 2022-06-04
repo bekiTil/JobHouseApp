@@ -10,7 +10,7 @@ class AuthProvider {
   AuthProvider();
 
   Future signup(User user) async {
-      var url = Uri.parse('http://localhost:3000/api/users');
+      var url = Uri.parse('http://10.0.2.2:3000/api/users');
 
       final response = await http.post(url, body: {
         "username": user.username,
@@ -35,7 +35,7 @@ class AuthProvider {
 
   Future<dynamic> login(String username, String password) async {
       Map data = {"username": username, 'password': password};
-      var url = Uri.parse("http://localhost:3000/login");
+      var url = Uri.parse("http://10.0.2.2:3000/login");
       final response = await http.post(url, body: data);
 
       if (response.statusCode == 201) {
