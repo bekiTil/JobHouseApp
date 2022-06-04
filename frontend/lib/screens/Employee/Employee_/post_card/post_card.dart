@@ -9,11 +9,6 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('-------------');
-    print(post.image);
-    print(post.description);
-    print(post.posterProfilePicture);
-    print('-------------');
 
     return Container(
       padding: const EdgeInsets.all(10.0),
