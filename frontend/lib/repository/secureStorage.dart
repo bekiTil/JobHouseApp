@@ -59,9 +59,7 @@ class StorageService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     ;
 
-    await prefs.remove('token');
-    await prefs.remove('id');
-    await prefs.remove('role');
+    await prefs.clear();
   }
 
   Future<String?> getId() async {
