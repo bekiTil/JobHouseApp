@@ -152,13 +152,17 @@ class AllRoutes {
 
         final isLoggedIn = authBloc.state is Authenticated;
         final isLoggingIn = state.location == '/login';
+        final registerRoute=["/chooseRole","/employeeRegistration","/companyRegistration"];
+        final inRegister=registerRoute.contains(state.location);
+        final register= 
+        
 
         print('----------');
         print(isLoggedIn);
         print(isLoggingIn);
         print('---------');
 
-        if (!isLoggedIn && !isLoggingIn) return "/login";
+        if (!isLoggedIn && !isLoggingIn && !inRegister) return "/login";
 
         if (isLoggedIn && isLoggingIn) return '/';
 
