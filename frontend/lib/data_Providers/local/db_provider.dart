@@ -162,7 +162,7 @@ category TEXT
     final db = await database;
      print(db);
     if (db==null){
-      print("becaues it is null we can't use web");
+      print('helo');
     }
     final companyJson = await db!.query(empProfile, where: "id='"+ id + "'");
     print(companyJson);
