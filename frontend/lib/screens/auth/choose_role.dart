@@ -9,11 +9,13 @@ class ChooseRole extends StatefulWidget {
 }
 
 class _ChooseRoleState extends State<ChooseRole> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('JobHouse'),
+      ),
       body: Center(
         child: Card(
           elevation: 20,
@@ -44,7 +46,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w100),
+                                  fontWeight: FontWeight.w400),
                             ),
                           )),
                       onPressed: () {
@@ -63,7 +65,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w100),
+                                fontWeight: FontWeight.w400),
                           ),
                         ),
                       ),

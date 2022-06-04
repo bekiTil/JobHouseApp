@@ -19,8 +19,11 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
       try {
         EmployeeRepository employeeRepository = EmployeeRepository();
         Employee user = await employeeRepository.fetchSingle();
+        
         PostRepository postRepository = PostRepository(PostDataProvider());
         List<Post> posts = await postRepository.fetchAll();
+        
+
         emit(EmployeeHomeLoaded(
             id: user.id,
             username: user.username,

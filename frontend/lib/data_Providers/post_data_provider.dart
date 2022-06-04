@@ -48,8 +48,10 @@ class PostDataProvider {
   Future<List<Post>> fetchAll() async {
     final response = await http.get(Uri.parse(_baseUrl));
     if (response.statusCode == 200) {
-      final posts = jsonDecode(response.body) as List;
-      return posts.map((c) => Post.fromJson(c)).toList();
+      var posts = jsonDecode(response.body) as List;
+      posts = posts.map((post) => Post.fromJson(post)).toList();
+      await Future.delayed(Duration(seconds: 1));
+      return posts as List<Post>;
     } else {
       throw Exception("Could not fetch posts");
     }
@@ -94,4 +96,39 @@ class PostDataProvider {
       throw AuthException(response.body);
     }
   }
+
+  Future<Map<String, String>> findOwnerInfo(String id) async {
+    var url = Uri.parse('http://localhost:3000/api/users/$id');
+    var defaultProfilePicture = "images/default_profile.png";
+
+    print('the url is');
+    print(url);
+
+    final http.Response response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      print('body');
+      print(response.body);
+      final user = jsonDecode(response.body);
+      return {
+        'posterName': user['fullName'],
+        'posterProfilePicture': user['image'] ?? defaultProfilePicture
+      };
+    }
+
+    print('acced is denied');
+    throw Exception('Error');
+  }
+
+  // Future<Post> addPosterInfo(Post post) async {
+  //   print('inside add info');
+  //   var posterData = await findOwnerInfo(post.poster_id);
+
+  //   print(posterData['posterName']);
+
+  //   post.posterName = posterData['posterName'];
+  //   post.posterProfilePicture = posterData['posterProfilePicture'];
+
+  //   return post;
+  // }
 }

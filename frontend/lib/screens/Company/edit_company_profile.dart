@@ -56,6 +56,7 @@ class _EditCompanyProfileState extends State<EditCompanyProfile> {
       listener: (context, state) {
         if (state is EditProfileSuccess){
           print(id);
+          BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
           context.go('/companyHome');
         }
         else if (state is EditProfileFailed){

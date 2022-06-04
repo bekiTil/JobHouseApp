@@ -11,6 +11,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:frontend/models/Company.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class DBProvider {
   static Database? _database;
@@ -24,6 +25,11 @@ class DBProvider {
 
   DBProvider._();
   Future<Database?> get database async {
+    if (kIsWeb){
+
+      print("web is it");
+      return null;
+    }
     if (_database != null) return _database;
 
     _database = await initDB();
@@ -62,10 +68,9 @@ category TEXT
   password TEXT,
   role TEXT,
   fullName TEXT,
-    id TEXT PRIMARY KEY,
     fieldOfStudy TEXT,
     educationLevel TEXT,
-    yearOfExperience INTEGER,
+    yearsOfExperience INTEGER,
     location TEXT,
     bio TEXT
   )
@@ -89,7 +94,12 @@ category TEXT
   //creating new Employee Profile
   createEmployeeProfile(MockEmpProfile employeeProfile) async {
     await deleteAll();
+    
     final db = await database;
+    print(db);
+    if (db==null){
+      print("becaues it is null we can't use web");
+    }
     final response = await db!.insert(empProfile, employeeProfile.toJson());
     return response;
   }
@@ -98,7 +108,7 @@ category TEXT
     await deleteAll();
     final db = await database;
     final response = await db!.update(empProfile, employeeProfile.toJson(),
-        where: 'id= ${employeeProfile.id}');
+        where: "id= '${employeeProfile.id}'");
     return response;
   }
 
@@ -120,7 +130,7 @@ category TEXT
   updateCompanyProfile(MockCompProfile compProfile) async {
     final db = await database;
     final response = await db!.update(empProfile, compProfile.toJson(),
-        where: 'id= ${compProfile.id}');
+        where: "id= '${compProfile.id}'");
     return response;
   }
 
@@ -138,9 +148,10 @@ category TEXT
 
   Future<MockEmpProfile?> findEmployeeById(String id) async {
     final db = await database;
-    final userJson = await db!.query(empProfile, where: 'id= $id');
+    final userJson = await db!.query(empProfile, where: "id='"+ id + "'");
+    print('skjdksjdksjdksj');
     print(userJson);
-    if (userJson.isEmpty) {
+    if (userJson.isNotEmpty) {
       return MockEmpProfile.fromJson(userJson.first);
     } else {
       return null;
@@ -149,8 +160,13 @@ category TEXT
 
   Future<MockCompProfile?> findCompanyById(String id) async {
     final db = await database;
-    final companyJson = await db!.query(empProfile, where: 'id= $id');
-    if (companyJson.isEmpty) {
+     print(db);
+    if (db==null){
+      print('helo');
+    }
+    final companyJson = await db!.query(empProfile, where: "id='"+ id + "'");
+    print(companyJson);
+    if (companyJson.isNotEmpty) {
       return MockCompProfile.fromJson(companyJson.first);
     } else {
       return null;
@@ -179,7 +195,7 @@ category TEXT
     await deleteAll();
     final db = await database;
     final response = await db!.update(bookTable, mockBookmark.toJson(),
-        where: 'id= ${mockBookmark.id}');
+        where: "id= '${mockBookmark.id}'");
     return response;
   }
 
@@ -187,19 +203,19 @@ category TEXT
     await deleteAll();
     final db = await database;
     final response = await db!
-        .update(bookTable, mockPost.toJson(), where: 'id= ${mockPost.id}');
+        .update(bookTable, mockPost.toJson(), where: "id= '${mockPost.id}'");
     return response;
   }
 
   deleteBookmark(MockBookmark mockBookmark) async {
     final db = await database;
     final response =
-        await db!.delete(bookTable, where: 'id= ${mockBookmark.id}');
+        await db!.delete(bookTable, where: "id= '${mockBookmark.id}'");
   }
 
   deletePost(MockPost mockPost) async {
     final db = await database;
-    final response = await db!.delete(bookTable, where: 'id= ${mockPost.id}');
+    final response = await db!.delete(bookTable, where: "id= '${mockPost.id}'");
   }
 
   Future<List<MockBookmark>> mockbookmarks() async {

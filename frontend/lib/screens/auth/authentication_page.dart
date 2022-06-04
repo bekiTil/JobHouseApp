@@ -27,6 +27,8 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   late ScaffoldMessengerState scaffoldMessenger;
 
+  bool _passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     _submit() {
@@ -47,17 +49,21 @@ class _LoginPageState extends State<LoginPage> {
       }
     }, builder: (context, state) {
       return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('JobHouse'),
+        ),
         key: _scaffoldKey,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 120.0),
+        body: Center(
           child: SingleChildScrollView(
             child: Center(
               child: Card(
-                elevation: 20,
-                margin: const EdgeInsets.only(top: 60),
+                elevation: 80,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
                 child: SizedBox(
-                  width: 350,
-                  height: 450,
+                  width: 340,
                   child: Column(
                     children: [
                       Container(
@@ -79,10 +85,11 @@ class _LoginPageState extends State<LoginPage> {
                                 if (state is LoginFailure) {
                                   loginResult = "Invalid username or password!";
                                 } else if (state is LoginSuccessfull) {
-                                  BlocProvider.of<AuthBloc>(context).add(LoggedIn(
-                                      id: state.id,
-                                      role: state.role,
-                                      token: state.token));
+                                  BlocProvider.of<AuthBloc>(context).add(
+                                      LoggedIn(
+                                          id: state.id,
+                                          role: state.role,
+                                          token: state.token));
                                 }
                               }),
                               child: Form(
@@ -94,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                                         controller: _usernameController,
                                         decoration: const InputDecoration(
                                           icon: Icon(Icons.email),
-                                          hintText: 'Your personal Username?',
+                                          hintText: 'Enter your username',
                                           labelText: 'Username *',
                                         ),
                                         onSaved: (value) {
@@ -102,24 +109,35 @@ class _LoginPageState extends State<LoginPage> {
                                         },
                                         validator: (String? value) {
                                           return value!.isEmpty
-                                              ? 'Please username Email!'
+                                              ? 'Please enter username'
                                               : null;
                                         },
                                       ),
                                       const SizedBox(
-                                        height: 20,
+                                        height: 5,
                                       ),
                                       TextFormField(
                                         controller: _passwordController,
-                                        obscureText: true,
-                                        decoration: const InputDecoration(
-                                          icon: Icon(Icons.security),
-                                          hintText: 'The one you only you know?',
+                                        obscureText: !_passwordVisible,
+                                        decoration: InputDecoration(
+                                          icon: const Icon(Icons.security),
+                                          hintText: 'Enter your password',
                                           labelText: 'Password *',
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              _passwordVisible
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                _passwordVisible =
+                                                    !_passwordVisible;
+                                              });
+                                            },
+                                          ),
                                         ),
-                                        onSaved: (value) {
-                                          password = value!;
-                                        },
+                                        // ),
                                         validator: (String? value) {
                                           return value!.isEmpty
                                               ? 'Please enter password'
@@ -148,7 +166,6 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
                       BlocBuilder<LoginBloc, LoginState>(
                         builder: ((context, state) {
                           return state is LoginLoading
@@ -175,7 +192,8 @@ class _LoginPageState extends State<LoginPage> {
                                     if (_formKey.currentState!.validate()) {
                                       BlocProvider.of<LoginBloc>(context).add(
                                           LoginPressed(
-                                              username: _usernameController.text,
+                                              username:
+                                                  _usernameController.text,
                                               password:
                                                   _passwordController.text));
                                     }
@@ -183,11 +201,11 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                         }),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 10),
                           const Text(
                             "Don't have an account?   ",
                             style: TextStyle(

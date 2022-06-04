@@ -1,4 +1,7 @@
 // import 'dart:js';
+import 'package:frontend/blocs/auth/AuthState.dart';
+import 'package:frontend/blocs/login/LoginBloc.dart';
+import 'package:frontend/blocs/login/LoginState.dart';
 import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
@@ -21,7 +24,10 @@ class AllRoutes {
   static const String loginPage = '/login';
   static const String registerPage = '/signup';
   final signup = SignUpBloc();
-  final authBloc = AuthBloc(StorageService());
+
+  final authBloc;
+
+  AllRoutes({this.authBloc});
 
   late final router = GoRouter(
       urlPathStrategy: UrlPathStrategy.path,
@@ -121,5 +127,20 @@ class AllRoutes {
               ),
             ),
           ),
-      refreshListenable: GoRouterRefreshStream(signup.stream));
+      redirect: (state) {
+        List<String> authPaths = ['/login', '/chooseRole', '/companyRegistration', '/employeeRegistration'];
+
+        final isLoggedIn = authBloc.state is Authenticated;
+        final isLoggingIn = state.location == '/login';
+        final registerRoute=["/chooseRole","/employeeRegistration","/companyRegistration"];
+        final inRegister=registerRoute.contains(state.location);
+      
+
+        if (!isLoggedIn && !isLoggingIn && !inRegister) return "/login";
+
+        if (isLoggedIn && isLoggingIn) return '/';
+
+        return null;
+      },
+      refreshListenable: GoRouterRefreshStream(authBloc.stream));
 }

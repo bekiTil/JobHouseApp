@@ -11,40 +11,54 @@ import '../../../models/post.dart';
 import 'book_mark.dart';
 
 Employee mergeEmpProfile(MockEmpProfile mocEmp) {
-  return Employee(
-      mocEmp.id!,
-      mocEmp.fullName!,
-      mocEmp.email!,
-      mocEmp.password!,
-      mocEmp.role!,
-      EmployeeProfile(
-        mocEmp.fieldOfStudy!,
-        mocEmp.educationLevel!,
-        mocEmp.yearsOfExperience!,
-        mocEmp.bio!,
-        mocEmp.location!,
-      ));}
+  print('insideeeeeee');
+  final newEmp = EmployeeProfile(
+    mocEmp.fieldOfStudy!,
+    mocEmp.educationLevel!,
+    mocEmp.yearsOfExperience!,
+    mocEmp.location!,
+    mocEmp.bio!,
+  );
+  print(newEmp.fieldOfStudy);
+  print(mocEmp.fullName!);
+  print(mocEmp.id);
+  print(mocEmp.username);
+  print(mocEmp.email);
+  print(mocEmp.role);
 
-   Company mergeComProfile(MockCompProfile moc_emp) {
+  final nsew = Employee(mocEmp.id!, mocEmp.fullName!, mocEmp.username!,
+      mocEmp.email!, mocEmp.role!, newEmp);
+  print(nsew.employeeProfile);
+  return nsew;
+}
+
+Company mergeComProfile(MockCompProfile moc_emp) {
+  final newComp =CompanyProfile(
+    moc_emp.location!,
+    moc_emp.bio!,
+  );
   return Company(
       moc_emp.id!,
       moc_emp.fullName!,
       moc_emp.email!,
-      moc_emp.password!,
+      moc_emp.username!,
       moc_emp.role!,
-      CompanyProfile(
-        moc_emp.location!,
-        moc_emp.bio!,
-      ));
+    newComp
+
+      );
 }
 
- Bookmark mergeBookmark(MockBookmark mockBookmark,) {
+Bookmark mergeBookmark(
+  MockBookmark mockBookmark,
+) {
   return Bookmark(
       user_id: mockBookmark.user_id!,
       post_id: mockBookmark.post_id!,
       post: Post(
-          category: mockBookmark.category,
-          description: mockBookmark.description,
-          id: mockBookmark.post_id!,
-          number: mockBookmark.number, poster_id: '',));
+        category: mockBookmark.category,
+        description: mockBookmark.description,
+        id: mockBookmark.post_id!,
+        number: mockBookmark.number,
+        poster_id: '',
+      ));
 }
