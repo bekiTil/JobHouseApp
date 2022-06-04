@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
 import '../../screens/bookmark/bookmark_list.dart';
 
+import 'Employee_/employee_drawer.dart';
+
 class EmployeeHomePage extends StatefulWidget {
   const EmployeeHomePage({Key? key}) : super(key: key);
 
@@ -38,8 +40,10 @@ class _HomePageState extends State<EmployeeHomePage> {
       },
       builder: (context, state) {
         return Scaffold(
-          drawer: const DrawerCustom(),
-          appBar: AppBar(title: Text(state.fullName)),
+          drawer: const EmployeeDrawer(),
+          appBar: AppBar(
+            title: Text("JobHouse"),
+          ),
           body: screens[_selectedindex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedindex,

@@ -64,6 +64,12 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Center(
+            child: Text("JobHouse"),
+          ),
+        ),
         key: _scaffoldKey,
         body: Center(
           child: Card(
