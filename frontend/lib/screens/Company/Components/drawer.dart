@@ -30,7 +30,12 @@ class _DrawerCustomState extends State<DrawerCustom> {
           ),
           child: Text('Drawer Header'),
         ),
-        BlocBuilder<CompanyBloc, CompanyState>(
+        BlocConsumer<CompanyBloc, CompanyState>(
+          listener: (context, state) {
+            if (state is CompanyProfileDeletionSuccessfull){
+              context.go('/login');
+            }
+          },
           builder: (context, state) {
             return state is CompanyHomeLoading
                 ? Row(
@@ -99,7 +104,9 @@ class _DrawerCustomState extends State<DrawerCustom> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                BlocProvider.of<CompanyBloc>(context).add(DeleteCompany(state.username));
+                              },
                               child: const Icon(
                                 Icons.delete,
                                 color: Colors.red,

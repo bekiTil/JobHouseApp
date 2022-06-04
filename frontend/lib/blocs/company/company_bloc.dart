@@ -28,5 +28,17 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
         emit(CompanyHomeLoadingFailed(exception: e.toString()));
       }
     });
+    on<DeleteCompany>(((event, emit) async {
+      emit(DeletingCompanuProfile());
+
+      try {
+        CompanyRepository companyRepository = CompanyRepository();
+
+        await companyRepository.deleteSingle(event.userName);
+        emit(CompanyProfileDeletionSuccessfull());
+      } catch (e) {
+        emit(CompanyProfileDeletionFailed());
+      }
+    }));
   }
 }

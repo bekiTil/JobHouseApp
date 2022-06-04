@@ -1,15 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:frontend/data_Providers/local/db_provider.dart';
+import 'package:frontend/data_Providers/local/mock_model/book_mark.dart';
+import 'package:frontend/data_Providers/local/mock_model/merge.dart';
+import 'package:frontend/data_Providers/local/mock_model/post_.dart';
 import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/post.dart';
 import '../repository/repository.dart';
 
 class BookmarkDataProvider {
-  final String _baseUrl = 'http://localhost:3000/api/bookmarks';
+  final String _baseUrl = 'http://10.0.2.2:3000/api/bookmarks';
 
   Future<Bookmark> createBookmark(Bookmark bookmark) async {
     StorageService storage = StorageService();
@@ -28,6 +31,9 @@ class BookmarkDataProvider {
     );
 
     if (response.statusCode == 200) {
+      // final bookValue = MockBookmark.fromApi(jsonDecode(response.body));
+      // final createdBook = await DBProvider.db.createBookmark(bookValue);
+
       return Bookmark.fromJson(jsonDecode(response.body));
     } else {
       throw AuthException('Failed to load bookmark');
@@ -37,6 +43,10 @@ class BookmarkDataProvider {
   Future<List<Bookmark>> getBookmarks() async {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
+    // final fetchbookmarks = await DBProvider.db.mockbookmarks();
+    // if (fetchbookmarks != null) {
+    //   return fetchbookmarks.map((mockbook) => mergeBookmark(mockbook)).toList();
+    // }
     final response = await http.get(
       Uri.parse(_baseUrl),
       headers: {
@@ -76,6 +86,8 @@ class BookmarkDataProvider {
     );
 
     if (response.statusCode == 200) {
+      // final bookValue = MockBookmark.fromApi(jsonDecode(response.body));
+      // await DBProvider.db.UpdateBookmark(bookValue);
       return Bookmark.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to update bookmark');

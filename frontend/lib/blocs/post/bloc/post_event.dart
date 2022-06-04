@@ -17,4 +17,8 @@ class DeletePost extends PostEvent {
   DeletePost(this.id);
 }
 
-class EditPost extends PostEvent {}
+class EditPost extends PostEvent {
+  final Post post;
+
+  EditPost(this.post);
+}

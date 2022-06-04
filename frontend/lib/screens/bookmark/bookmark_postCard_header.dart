@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/post.dart';
+import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/secureStorage.dart';
 
-import 'bookmark_popup.dart';
-
-class PostHeader extends StatefulWidget {
-  final Post post;
-  const PostHeader({Key? key, required this.post}) : super(key: key);
+class BookmarkHeader extends StatefulWidget {
+  final Bookmark bookmark;
+  const BookmarkHeader({Key? key, required this.bookmark}) : super(key: key);
 
   @override
-  State<PostHeader> createState() => _PostHeaderState();
+  State<BookmarkHeader> createState() => _BookmarkHeaderState();
 }
 
-class _PostHeaderState extends State<PostHeader> {
-   late final String? id;
+class _BookmarkHeaderState extends State<BookmarkHeader> {
+  late final String? id;
 
   @override
   void initState() {
@@ -26,6 +24,7 @@ class _PostHeaderState extends State<PostHeader> {
     super.initState();
     getInfo();
   }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -39,36 +38,26 @@ class _PostHeaderState extends State<PostHeader> {
           },
           child: Row(
             children: [
-              // CircleAvatar(
-              //   backgroundColor: Color.fromARGB(255, 150, 159, 163),
-              //   minRadius: 30,
-              //   maxRadius: 31,
-              //   backgroundImage:
-              //       NetworkImage(post.posterProfilePicture!),
-              // ),
+              const CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 150, 159, 163),
+                minRadius: 30,
+                maxRadius: 31,
+                backgroundImage:
+                    NetworkImage("https://www.addiscoder.com/img/working.jpg"),
+              ),
               const SizedBox(
                 width: 13,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-<<<<<<< HEAD
-                  // Text(
-                  //   post.posterName!,
-                  //   style: const TextStyle(
-                  //     fontSize: 18,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-=======
                   Text(
-                    widget.post.posterName ?? "Yeabsira Driba",
+                    widget.bookmark.post.posterName ?? "Yeabsira Driba",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
->>>>>>> ccc02864daabba97b298dc1dfbdf58363dbce7c3
                   const SizedBox(
                     height: 3.0,
                   ),
@@ -78,18 +67,19 @@ class _PostHeaderState extends State<PostHeader> {
             ],
           ),
         ),
-        MouseRegion(
-          cursor: SystemMouseCursors.text,
-          child: IconButton(
-            onPressed: () {
-              popBookmark(context, widget.post, id);
-            },
-            icon: const Icon(
-              Icons.favorite_border_outlined,
-              color: Colors.red,
-            ),
-          ),
-        ),
+
+        // MouseRegion(
+        //   cursor: SystemMouseCursors.text,
+        //   child: IconButton(
+        //     onPressed: () {
+        //       // popBookmark(context, widget.post, id);
+        //     },
+        //     icon: const Icon(
+        //       Icons.more_vert,
+        //       color: Colors.red,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

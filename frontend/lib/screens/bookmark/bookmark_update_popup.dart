@@ -6,7 +6,7 @@ import 'package:frontend/models/post.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:go_router/go_router.dart';
 
-void popBookmark(BuildContext context, Post post, id) async {
+void updatePopup(BuildContext context, bookmark) async {
   final _formKey = GlobalKey<FormState>();
   TextEditingController memoController = TextEditingController();
   await showDialog(
@@ -20,7 +20,7 @@ void popBookmark(BuildContext context, Post post, id) async {
           child: TextFormField(
             controller: memoController,
             decoration: const InputDecoration(
-              labelText: 'Memo *',
+              labelText: 'Update Memo *',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
@@ -36,16 +36,18 @@ void popBookmark(BuildContext context, Post post, id) async {
           IconButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {}
-              Bookmark bookmark = Bookmark(
-                  post: post,
-                  memo: memoController.value.text,
-                  post_id: post.id,
-                  user_id: id
-                  // createdAt: DateTime.now(),
-                  );
+              Bookmark newBookmark = Bookmark(
+                post: bookmark.post,
+                memo: memoController.value.text,
+                user_id: bookmark.user_id,
+                post_id: bookmark.post_id,
+                id: bookmark.id,
+                // createdAt: DateTime.now(),
+              );
+
               context
                   .read<BookmarkBloc>()
-                  .add(BookmarkCreate(bookmark: bookmark));
+                  .add(BookmarkUpdate(bookmark: newBookmark));
 
               Navigator.of(context).pop();
             },

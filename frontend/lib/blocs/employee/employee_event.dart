@@ -10,5 +10,7 @@ class EmployeeHomeVisited extends EmployeeEvent {
 }
 
 class DeleteEmployee extends EmployeeEvent{
-  DeleteEmployee();
+  
+  final String userName;
+  DeleteEmployee(this.userName);
 }

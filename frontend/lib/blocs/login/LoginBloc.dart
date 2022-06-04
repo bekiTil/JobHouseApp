@@ -15,6 +15,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final response = await userRepository.Login(
             username: event.username, password: event.password);
 
+        print(response);
 
         emit(LoginSuccessfull(response["user"]["role"], response["user"]["_id"],
             response["token"]));

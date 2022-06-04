@@ -40,12 +40,14 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
     on<DeleteEmployee>((event, emit) async {
       emit(EmployeeDeleting());
 
-      try {
-        await Future.delayed(Duration(seconds: 2));
+      try{
         EmployeeRepository employeeRepository = EmployeeRepository();
-        await employeeRepository.deleteSingle();
+
+        await employeeRepository.deleteSingle(event.userName);
         emit(EmployeeDeletionSuccess());
-      } catch (e) {
+        
+      }catch(e){
+      
         emit(EmployeeDeletionFailed(e.toString()));
       }
     });

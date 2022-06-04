@@ -38,7 +38,15 @@ class _MyAppState extends State<MyApp> {
   final UserRepository userRepository = UserRepository();
   final BookmarkDataProvider bookmarkDataProvider = BookmarkDataProvider();
   final storage = StorageService();
-  final router = AllRoutes().router;
+  late final router;
+  late final AuthBloc authBloc;
+
+  @override
+  void initState() {
+    authBloc = AuthBloc(storage);
+    router = AllRoutes(authBloc: authBloc).router;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -55,7 +63,7 @@ class _MyAppState extends State<MyApp> {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: ((context) => AuthBloc(storage)),
+              create: ((context) => authBloc),
             ),
             BlocProvider(
               create: ((context) =>
@@ -76,9 +84,10 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(create: ((context) => PostBloc())),
             BlocProvider(
-                create: (context) => BookmarkBloc(
-                      bookmarkRepository: context.read<BookmarkRepository>(),
-                    )),
+              create: (context) => BookmarkBloc(
+                bookmarkRepository: context.read<BookmarkRepository>(),
+              ),
+            ),
           ],
           child: MaterialApp.router(
               debugShowCheckedModeBanner: false,

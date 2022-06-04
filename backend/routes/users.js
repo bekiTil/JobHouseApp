@@ -75,7 +75,11 @@ router.put("/:id", verifyToken, async (req, res) => {
 
   let user = await User.findOne({ _id: req.params.id });
 
+  console.log(req.body.profile);
+
   user.profile = req.body.profile;
+
+  console.log(user.profile);
 
   if (req.file) {
     user.image = req.file.path;
@@ -83,27 +87,39 @@ router.put("/:id", verifyToken, async (req, res) => {
 
   await user.save();
 
+  console.log(user);
+
   try {
-    res.send(_.pick(user, ["_id", "name", "email"]));
+    res.send(user);
   } catch (err) {
     res.status(400).send("Something went wrong!");
   }
 });
 
+<<<<<<< HEAD
 router.delete("/delete/:username", verifyToken, async (req, res) => {
   const { username } = req.params.username;
   const usernameExist = await User.findOne({ username: username });
 
+=======
+router.delete("/:username", verifyToken, async (req, res) => {
+  const { username } = req.params.username
+  const usernameExist = await User.findOne({ username: req.params.username });
+>>>>>>> ccc02864daabba97b298dc1dfbdf58363dbce7c3
   if (!usernameExist) {
     return res.status(400).send("User not found");
   }
 
+  console.log(username)
+  console.log(req.params.username)
   try {
-    User.deleteOne({ username: username });
-    res.redirect("/login");
+    const deleteSuccess = await User.deleteOne({ username: req.params.username})
+    
+    deleteSuccess? res.status(200).send("deleted succussfully"): res.status(400)
   } catch (error) {
     res.status(400).send("Error while deletting");
   }
+
 });
 
 module.exports = router;

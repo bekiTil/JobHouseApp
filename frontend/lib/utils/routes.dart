@@ -1,13 +1,17 @@
 // import 'dart:js';
+<<<<<<< HEAD
+=======
+import 'package:frontend/blocs/auth/AuthState.dart';
+import 'package:frontend/blocs/login/LoginBloc.dart';
+import 'package:frontend/blocs/login/LoginState.dart';
+>>>>>>> ccc02864daabba97b298dc1dfbdf58363dbce7c3
 import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/screens/Company/companyHome.dart';
 import 'package:frontend/screens/Company/edit_company_profile.dart';
-import 'package:frontend/screens/bookmark/bookmark_add.dart';
 import 'package:frontend/screens/bookmark/bookmark_list.dart';
-import 'package:frontend/screens/bookmark/bookmark_update.dart';
 import 'package:frontend/screens/post/post.dart';
 import 'package:frontend/screens/Employee/edit_employee_profile.dart';
 import 'package:frontend/screens/Employee/employeeHome.dart';
@@ -23,7 +27,11 @@ class AllRoutes {
   static const String loginPage = '/login';
   static const String registerPage = '/signup';
   final signup = SignUpBloc();
-  final authBloc = AuthBloc(StorageService());
+
+  final authBloc;
+  // final loginBloc = LoginBloc(AuthBloc(StorageService()));
+
+  AllRoutes({this.authBloc});
 
   late final router = GoRouter(
       urlPathStrategy: UrlPathStrategy.path,
@@ -111,24 +119,24 @@ class AllRoutes {
                   child: const BookmarkList(),
                 ),
             routes: [
-              GoRoute(
-                  name: 'updateBookmark',
-                  path: 'updateBookmark',
-                  pageBuilder: (context, state) => MaterialPage(
-                        key: state.pageKey,
-                        child: UpdateBookmark(
-                          bookmark: state.extra! as Bookmark,
-                        ),
-                      )),
-              GoRoute(
-                  name: 'addBookmark',
-                  path: 'addBookmark',
-                  pageBuilder: (context, state) => MaterialPage(
-                        key: state.pageKey,
-                        child: AddBookmark(
-                          post: state.extra! as Post,
-                        ),
-                      )),
+              // GoRoute(
+              //     name: 'updateBookmark',
+              //     path: 'updateBookmark',
+              //     pageBuilder: (context, state) => MaterialPage(
+              //           key: state.pageKey,
+              //           child: UpdateBookmark(
+              //             bookmark: state.extra! as Bookmark,
+              //           ),
+              //         )),
+              // GoRoute(
+              //     name: 'addBookmark',
+              //     path: 'addBookmark',
+              //     pageBuilder: (context, state) => MaterialPage(
+              //           key: state.pageKey,
+              //           child: AddBookmark(
+              //             post: state.extra! as Post,
+              //           ),
+              //         )),
             ]),
       ],
       errorPageBuilder: (context, state) => MaterialPage(
@@ -142,5 +150,20 @@ class AllRoutes {
               ),
             ),
           ),
-      refreshListenable: GoRouterRefreshStream(signup.stream));
+      redirect: (state) {
+        List<String> authPaths = ['/login', '/chooseRole', '/companyRegistration', '/employeeRegistration'];
+
+        final isLoggedIn = authBloc.state is Authenticated;
+        final isLoggingIn = state.location == '/login';
+        final registerRoute=["/chooseRole","/employeeRegistration","/companyRegistration"];
+        final inRegister=registerRoute.contains(state.location);
+      
+
+        if (!isLoggedIn && !isLoggingIn && !inRegister) return "/login";
+
+        if (isLoggedIn && isLoggingIn) return '/';
+
+        return null;
+      },
+      refreshListenable: GoRouterRefreshStream(authBloc.stream));
 }

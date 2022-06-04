@@ -30,5 +30,4 @@ app.use("/api/posts", postRoute);
 app.use("/api/bookmarks", bookmarkRoute);
 app.use("/api/users", users);
 app.use("/login", auth);
-
 app.listen(3000, () => console.log("Server started listening!!"));
