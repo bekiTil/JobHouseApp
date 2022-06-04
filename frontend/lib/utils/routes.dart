@@ -26,7 +26,6 @@ class AllRoutes {
   final signup = SignUpBloc();
 
   final authBloc;
-  // final loginBloc = LoginBloc(AuthBloc(StorageService()));
 
   AllRoutes({this.authBloc});
 

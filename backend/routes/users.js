@@ -96,16 +96,9 @@ router.put("/:id", verifyToken, async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-router.delete("/delete/:username", verifyToken, async (req, res) => {
-  const { username } = req.params.username;
-  const usernameExist = await User.findOne({ username: username });
-
-=======
 router.delete("/:username", verifyToken, async (req, res) => {
   const { username } = req.params.username
   const usernameExist = await User.findOne({ username: req.params.username });
->>>>>>> ccc02864daabba97b298dc1dfbdf58363dbce7c3
   if (!usernameExist) {
     return res.status(400).send("User not found");
   }
