@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/models/Company.dart';
 import 'package:frontend/models/company_profile.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   test("The model should be able to recieve the following data", () {
