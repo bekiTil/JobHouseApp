@@ -25,7 +25,7 @@ class MockEmpProfile extends Equatable {
   required this.email,
   required this.password,
   required this.role,
-  required this.fullName,
+    this.fullName,
   this.fieldOfStudy, 
   this.educationLevel,
   this.yearsOfExperience, 
@@ -36,13 +36,14 @@ class MockEmpProfile extends Equatable {
   @override
   List<Object?> get props => []; 
   factory MockEmpProfile.fromJson(Map<String, dynamic> json){
+    print(json);
     return MockEmpProfile(
-      id: json["_id"],
+      id: json["id"],
       username: json["username"],
       email: json["email"],
       password: json["password"],
       role: json["role"],
-      fullName: json["name"],
+      fullName: json["fullName"],
       fieldOfStudy: json["fieldOfStudy"],
       educationLevel: json["educationLevel"],
       yearsOfExperience: json["yearsOfExperience"],
@@ -53,13 +54,14 @@ class MockEmpProfile extends Equatable {
   }
 
   factory MockEmpProfile.fromApi (Map<String, dynamic> json){
+    print(json);
     return MockEmpProfile(
       id: json["_id"],
       username: json["username"],
       email: json["email"],
       password: json["password"],
       role: json["role"],
-      fullName: json["name"],
+      fullName: json["fullName"],
       fieldOfStudy:json["profile"][0]["fieldOfStudy"],
       educationLevel: json["profile"][0]["educationLevel"],
       yearsOfExperience: json["profile"][0]["yearsOfExperience"],
@@ -74,7 +76,7 @@ class MockEmpProfile extends Equatable {
         "email": email,
         "password":password ,
         "role": role,
-        "fulName": fullName,
+        "fullName": fullName,
         "fieldOfStudy":fieldOfStudy,
         "educationLevel":educationLevel,
         "yearsOfExperience":yearsOfExperience,
