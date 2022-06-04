@@ -20,3 +20,9 @@ class PostOperationFailed extends PostState {
 
   PostOperationFailed(this.exception) : super();
 }
+
+class PostEditingOperationStarted extends PostState {
+  final Post post;
+
+  PostEditingOperationStarted(this.post);
+}

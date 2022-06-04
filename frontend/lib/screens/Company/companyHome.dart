@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/screens/Company/Components/drawer.dart';
+import 'package:frontend/screens/post/post.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
@@ -20,6 +21,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
   }
+
+  final _formKey = GlobalKey<FormState>();
 
   int pressedPost = 0;
   late List<Post> posts;
@@ -88,9 +91,41 @@ class _HomePageState extends State<HomePage> {
                                                 children: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      BlocProvider.of<PostBloc>(
-                                                              context)
-                                                          .add(EditPost());
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              content: Stack(
+                                                                clipBehavior:
+                                                                    Clip.none,
+                                                                children: <
+                                                                    Widget>[
+                                                                  Positioned(
+                                                                    right:
+                                                                        -40.0,
+                                                                    top: -40.0,
+                                                                    child:
+                                                                        InkResponse(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .pop();
+                                                                      },
+                                                                      child:
+                                                                          const CircleAvatar(
+                                                                        child: Icon(
+                                                                            Icons.close),
+                                                                        backgroundColor:
+                                                                            Colors.red,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  const PostScreen()
+                                                                ],
+                                                              ),
+                                                            );
+                                                          });
                                                     },
                                                     child: const Icon(
                                                       Icons.edit,
