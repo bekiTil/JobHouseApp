@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/blocs/company/EditCompany/editcompany_bloc.dart';
@@ -44,6 +45,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     authBloc = AuthBloc(storage);
+    authBloc.add(CheckLogIn());
     router = AllRoutes(authBloc: authBloc).router;
   }
 
