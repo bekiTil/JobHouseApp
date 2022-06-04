@@ -203,25 +203,31 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 8),
                       Row(
+                        
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(height: 10),
-                          const Text(
-                            "Don't have an account?   ",
-                            style: TextStyle(
-                              fontSize: 16,
+                          const Expanded(
+                            child:  Text(
+                              "Don't have an account?   ",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                          TextButton(
-                              onPressed: () {
-                                context.go('/chooseRole');
-                              },
-                              child: const Text(
-                                'Sign up',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              ))
+                          Expanded(
+                            child: TextButton(
+                              clipBehavior: Clip.none,
+                                onPressed: () {
+                                  context.go('/chooseRole');
+                                },
+                                child: const Text(
+                                  'Sign up',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                )),
+                          )
                         ],
                       ),
                     ],
