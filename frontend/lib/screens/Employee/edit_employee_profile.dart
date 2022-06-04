@@ -56,7 +56,6 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
     return BlocListener<EditEmployeeBloc, EditEmployeeState>(
       listener: (context, state) {
         if (state is EditProfileSuccess) {
-          print(id);
           BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited());
           context.go('/employeeHome');
         } else if (state is EditProfileFailed) {
@@ -174,7 +173,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                   controller: _bioController,
                                   autovalidateMode: AutovalidateMode.always,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.abc_outlined),
+                                    icon: Icon(Icons.abc_sharp),
                                     hintText: 'Tell us about your self',
                                     labelText: 'Bio *',
                                   ),
@@ -192,10 +191,9 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                               builder: ((context, state) {
                             return state is EditProfileFailed
                                 ? Text(
-                                  editResult,
-                                  style:
-                                      const TextStyle(color: Colors.red),
-                                )
+                                    editResult,
+                                    style: const TextStyle(color: Colors.red),
+                                  )
                                 : Text(editResult);
                           }))
                         ],
@@ -209,12 +207,12 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                 builder: (context, state) {
                                   return ElevatedButton(
                                     style: ButtonStyle(
-                                      elevation:
-                                          MaterialStateProperty.all(16),
+                                      elevation: MaterialStateProperty.all(16),
                                     ),
                                     child: Container(
                                       width: 120,
-                                      padding: const EdgeInsets.symmetric(vertical: 15),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15),
 
                                       // margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                       child: const Center(
