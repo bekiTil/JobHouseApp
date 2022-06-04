@@ -75,7 +75,11 @@ router.put("/:id", verifyToken, async (req, res) => {
 
   let user = await User.findOne({ _id: req.params.id });
 
+  console.log(req.body.profile);
+
   user.profile = req.body.profile;
+
+  console.log(user.profile);
 
   if (req.file) {
     user.image = req.file.path;
@@ -83,8 +87,10 @@ router.put("/:id", verifyToken, async (req, res) => {
 
   await user.save();
 
+  console.log(user);
+
   try {
-    res.send(_.pick(user, ["_id", "name", "email"]));
+    res.send(user);
   } catch (err) {
     res.status(400).send("Something went wrong!");
   }

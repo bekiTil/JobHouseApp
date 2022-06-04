@@ -29,7 +29,7 @@ class MockCompProfile extends Equatable {
   List<Object?> get props => [];
   factory MockCompProfile.fromJson(Map<String, dynamic> json) {
     return MockCompProfile(
-      id: json["_id"],
+      id: json["id"],
       username: json["username"],
       email: json["email"],
       password: json["password"],
@@ -59,7 +59,7 @@ class MockCompProfile extends Equatable {
         "email": email,
         "password": password,
         "role": role,
-        "fulName": fullName,
+        "fullName": fullName,
         "location": location,
         "bio": bio
       };

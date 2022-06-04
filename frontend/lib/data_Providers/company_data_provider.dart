@@ -15,12 +15,13 @@ class CompanyDataProvider {
     StorageService storage = StorageService();
     String? id = await storage.getId();
 
-    // final company = await DBProvider.db.findCompanyById(id!);
-    // if (company != null) {
-    //   return mergeComProfile(company);
-    // }
+    final company = await DBProvider.db.findCompanyById(id!);
+    print(company);
+    if (company != null) {
+      return mergeComProfile(company);
+    }
 
-    var url = Uri.parse("http://localhost:3000/api/users/$id");
+    var url = Uri.parse("http://10.0.2.2:3000/api/users/$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String, dynamic> responded = jsonDecode(response.body);
@@ -47,7 +48,7 @@ class CompanyDataProvider {
     Map<String, dynamic> data = {'profile': profile};
     print(token);
     final response =
-        await http.put(Uri.parse("http://localhost:3000/api/users/$id"),
+        await http.put(Uri.parse("http://10.0.2.2:3000/api/users/$id"),
             headers: {
               "x-auth-token": token.toString(),
               "Accept": "application/json",
@@ -61,15 +62,15 @@ class CompanyDataProvider {
             encoding: Encoding.getByName("utf-8"));
 
     if (response.statusCode == 200) {
-      //  final employee = await DBProvider.db.findEmployeeById(id);
-      // final comValue = MockCompProfile.fromApi(jsonDecode(response.body));
-      // if (employee != null) {
-      //   final changedProfile =
-      //       await DBProvider.db.updateCompanyProfile(comValue);
-      // } else {
-      //   final changedProfile =
-      //       await DBProvider.db.createCompanyProfile(comValue);
-      // }
+       final employee = await DBProvider.db.findEmployeeById(id);
+      final comValue = MockCompProfile.fromApi(jsonDecode(response.body));
+      if (employee != null) {
+        final changedProfile =
+            await DBProvider.db.updateCompanyProfile(comValue);
+      } else {
+        final changedProfile =
+            await DBProvider.db.createCompanyProfile(comValue);
+      }
       Map<String, dynamic> user = jsonDecode(response.body);
     } else {
       throw AuthException(response.body);
@@ -80,7 +81,7 @@ class CompanyDataProvider {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
 
-    var url = Uri.parse("http://localhost:3000/api/users/$userName");
+    var url = Uri.parse("http://10.0.2.2:3000/api/users/$userName");
 
     final response = await http.delete(
       url,

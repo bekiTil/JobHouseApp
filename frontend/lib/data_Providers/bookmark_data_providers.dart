@@ -12,7 +12,7 @@ import '../models/post.dart';
 import '../repository/repository.dart';
 
 class BookmarkDataProvider {
-  final String _baseUrl = 'http://localhost:3000/api/bookmarks';
+  final String _baseUrl = 'http://10.0.2.2:3000/api/bookmarks';
 
   Future<Bookmark> createBookmark(Bookmark bookmark) async {
     StorageService storage = StorageService();
@@ -86,8 +86,8 @@ class BookmarkDataProvider {
     );
 
     if (response.statusCode == 200) {
-  // final bookValue = MockBookmark.fromApi(jsonDecode(response.body));
-  // await DBProvider.db.UpdateBookmark(bookValue);
+      // final bookValue = MockBookmark.fromApi(jsonDecode(response.body));
+      // await DBProvider.db.UpdateBookmark(bookValue);
       return Bookmark.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to update bookmark');

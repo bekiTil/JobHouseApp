@@ -52,7 +52,7 @@ class EmployeeDrawer extends StatelessWidget {
                       title: const Text('Bookmark'),
                       leading: const Icon(Icons.bookmark),
                       onTap: () {
-                        Navigator.pop(context);
+                        context.go('/bookmarkList');
                         //TODO: context.go('bookmarks');
                       },
                     ),
@@ -78,7 +78,7 @@ class EmployeeDrawer extends StatelessWidget {
                   title: const Text('Logout'),
                   leading: const Icon(Icons.logout),
                   onTap: () {
-                    Navigator.pop(context);
+                    context.go('/login');
                     //TODO: context.go('editprofile');
                   },
                 ),
