@@ -148,6 +148,7 @@ class AllRoutes {
             ),
           ),
       redirect: (state) {
+        List<String> authPaths = ['/login', '/chooseRole', '/companyRegistration', '/employeeRegistration'];
         print(authBloc.state);
 
         final isLoggedIn = authBloc.state is Authenticated;
@@ -157,6 +158,7 @@ class AllRoutes {
         final register= 
         
 
+        print(state.location);
         print('----------');
         print(isLoggedIn);
         print(isLoggingIn);
