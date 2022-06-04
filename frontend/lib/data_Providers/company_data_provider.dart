@@ -14,17 +14,15 @@ class CompanyDataProvider {
   Future<dynamic> fetchSingle() async {
     StorageService storage = StorageService();
     String? id = await storage.getId();
-    final database =await DBProvider.db;
-    if (database==null){
-print('becasuse it is web we dont perisit files using sqfile');
-    }
-    else{
-
-    final company = await DBProvider.db.findCompanyById(id!);
-    print(company);
-    if (company != null) {
-      return mergeComProfile(company);
-    }
+    final database = await DBProvider.db;
+    if (database == null) {
+      print('becasuse it is web we dont perisit files using sqfile');
+    } else {
+      final company = await DBProvider.db.findCompanyById(id!);
+      print(company);
+      if (company != null) {
+        return mergeComProfile(company);
+      }
     }
     var url = Uri.parse("http://10.0.2.2:3000/api/users/$id");
     final response = await http.get(url);
@@ -65,28 +63,27 @@ print('becasuse it is web we dont perisit files using sqfile');
             },
             body: json.encode(data),
             encoding: Encoding.getByName("utf-8"));
-        
-    if (response.statusCode == 200) {
 
-      final database =await DBProvider.db;
-    if (database==null){
-print('becasuse it is web we dont perisit files using sqfile');
-    }
-    else{
-       final employee = await DBProvider.db.findCompanyById(id);
-       print(employee);
-      final comValue = MockCompProfile.fromApi(jsonDecode(response.body));
-      print(comValue);
-      if (employee != null) {
-        print('inside');
-        final changedProfile =
-            await DBProvider.db.updateCompanyProfile(comValue);
+    if (response.statusCode == 200) {
+      final database = await DBProvider.db;
+      if (database == null) {
+        print('becasuse it is web we dont perisit files using sqfile');
       } else {
-        print('outside');
-        final changedProfile =
-            await DBProvider.db.createCompanyProfile(comValue);
-        print(changedProfile);
-      }}
+        final employee = await DBProvider.db.findCompanyById(id);
+        print(employee);
+        final comValue = MockCompProfile.fromApi(jsonDecode(response.body));
+        print(comValue);
+        if (employee != null) {
+          print('inside');
+          final changedProfile =
+              await DBProvider.db.updateCompanyProfile(comValue);
+        } else {
+          print('outside');
+          final changedProfile =
+              await DBProvider.db.createCompanyProfile(comValue);
+          print(changedProfile);
+        }
+      }
       Map<String, dynamic> user = jsonDecode(response.body);
     } else {
       throw AuthException(response.body);

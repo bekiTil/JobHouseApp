@@ -128,13 +128,21 @@ class AllRoutes {
             ),
           ),
       redirect: (state) {
-        List<String> authPaths = ['/login', '/chooseRole', '/companyRegistration', '/employeeRegistration'];
+        List<String> authPaths = [
+          '/login',
+          '/chooseRole',
+          '/companyRegistration',
+          '/employeeRegistration'
+        ];
 
         final isLoggedIn = authBloc.state is Authenticated;
         final isLoggingIn = state.location == '/login';
-        final registerRoute=["/chooseRole","/employeeRegistration","/companyRegistration"];
-        final inRegister=registerRoute.contains(state.location);
-      
+        final registerRoute = [
+          "/chooseRole",
+          "/employeeRegistration",
+          "/companyRegistration"
+        ];
+        final inRegister = registerRoute.contains(state.location);
 
         if (!isLoggedIn && !isLoggingIn && !inRegister) return "/login";
 

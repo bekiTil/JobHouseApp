@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:frontend/models/models.dart';
+import 'package:frontend/screens/Company/Components/company_drawer.dart';
 import 'package:frontend/screens/Company/Components/drawer.dart';
 import 'package:frontend/screens/post/post.dart';
 import 'package:go_router/go_router.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(title: Text(state.fullName)),
-          drawer: const DrawerCustom(),
+          drawer: const CompanyDrawer(),
           body: Center(
               child: state is CompanyHomeLoading
                   ? const SizedBox(
