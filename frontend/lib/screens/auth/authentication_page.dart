@@ -29,12 +29,6 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _passwordVisible = false;
 
-  void toggle() {
-    setState(() {
-      _passwordVisible = !_passwordVisible;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     _submit() {

@@ -26,6 +26,10 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
   Widget build(BuildContext context) {
     scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('JobHouse'),
+      ),
       key: _scaffoldKey,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 130.0),
@@ -148,8 +152,8 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                         builder: ((context, state) {
                                       return state is SignUpFailure
                                           ? Container(
-                                              margin:
-                                                  const EdgeInsets.only(top: 20),
+                                              margin: const EdgeInsets.only(
+                                                  top: 20),
                                               child: Text(
                                                 signupResult,
                                                 style: const TextStyle(
