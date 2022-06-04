@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
       return Scaffold(
         key: _scaffoldKey,
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 120.0),
+          padding: const EdgeInsets.only(top: 80),
           child: SingleChildScrollView(
             child: Center(
               child: Card(

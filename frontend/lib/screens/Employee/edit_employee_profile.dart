@@ -38,7 +38,6 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
     getToken();
   }
 
-  String title = "Barter";
   final _formKey = GlobalKey<FormState>();
   String editResult = '';
   final TextEditingController _locationController = TextEditingController();
@@ -66,11 +65,6 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
       },
       child: Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(
-          title: Center(
-            child: Text(title),
-          ),
-        ),
         body: Center(
           child: Card(
             elevation: 20,
@@ -239,7 +233,13 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                   ),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                      int yearsOfExperience = (_yearsOfExperienceController.text.isNotEmpty) ? int.parse(_yearsOfExperienceController.text) : 0;
+                                      int yearsOfExperience =
+                                          (_yearsOfExperienceController
+                                                  .text.isNotEmpty)
+                                              ? int.parse(
+                                                  _yearsOfExperienceController
+                                                      .text)
+                                              : 0;
 
                                       (BlocProvider.of<EditEmployeeBloc>(
                                               context)
