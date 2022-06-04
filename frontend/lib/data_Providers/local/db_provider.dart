@@ -6,7 +6,7 @@ import 'package:frontend/data_Providers/local/mock_model/post_.dart';
 import 'package:frontend/models/company_profile.dart';
 import 'package:frontend/models/employee_profile.dart';
 import 'package:frontend/models/user.dart';
-import 'package:frontend/screens/bookmark/bookmark_update.dart';
+// import 'package:frontend/screens/bookmark/bookmark_update.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
