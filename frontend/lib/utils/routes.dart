@@ -148,17 +148,19 @@ class AllRoutes {
             ),
           ),
       redirect: (state) {
+        List<String> authPaths = ['/login', '/chooseRole', '/companyRegistration', '/employeeRegistration'];
         print(authBloc.state);
 
         final isLoggedIn = authBloc.state is Authenticated;
         final isLoggingIn = state.location == '/login';
 
+        print(state.location);
         print('----------');
         print(isLoggedIn);
         print(isLoggingIn);
         print('---------');
 
-        if (!isLoggedIn && !isLoggingIn) return "/login";
+        if (!isLoggedIn && !isLoggingIn && !authPaths.contains(state.location)) return "/login";
 
         if (isLoggedIn && isLoggingIn) return '/';
 
