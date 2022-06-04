@@ -62,10 +62,9 @@ category TEXT
   password TEXT,
   role TEXT,
   fullName TEXT,
-    id TEXT PRIMARY KEY,
     fieldOfStudy TEXT,
     educationLevel TEXT,
-    yearOfExperience INTEGER,
+    yearsOfExperience INTEGER,
     location TEXT,
     bio TEXT
   )
@@ -98,7 +97,7 @@ category TEXT
     await deleteAll();
     final db = await database;
     final response = await db!.update(empProfile, employeeProfile.toJson(),
-        where: 'id= ${employeeProfile.id}');
+        where: "id= '${employeeProfile.id}'");
     return response;
   }
 
@@ -120,7 +119,7 @@ category TEXT
   updateCompanyProfile(MockCompProfile compProfile) async {
     final db = await database;
     final response = await db!.update(empProfile, compProfile.toJson(),
-        where: 'id= ${compProfile.id}');
+        where: "id= '${compProfile.id}'");
     return response;
   }
 
@@ -138,9 +137,10 @@ category TEXT
 
   Future<MockEmpProfile?> findEmployeeById(String id) async {
     final db = await database;
-    final userJson = await db!.query(empProfile, where: 'id= $id');
+    final userJson = await db!.query(empProfile, where: "id='"+ id + "'");
+    print('skjdksjdksjdksj');
     print(userJson);
-    if (userJson.isEmpty) {
+    if (userJson.isNotEmpty) {
       return MockEmpProfile.fromJson(userJson.first);
     } else {
       return null;
@@ -149,8 +149,9 @@ category TEXT
 
   Future<MockCompProfile?> findCompanyById(String id) async {
     final db = await database;
-    final companyJson = await db!.query(empProfile, where: 'id= $id');
-    if (companyJson.isEmpty) {
+    final companyJson = await db!.query(empProfile, where: "id='"+ id + "'");
+    print(companyJson);
+    if (companyJson.isNotEmpty) {
       return MockCompProfile.fromJson(companyJson.first);
     } else {
       return null;
@@ -179,7 +180,7 @@ category TEXT
     await deleteAll();
     final db = await database;
     final response = await db!.update(bookTable, mockBookmark.toJson(),
-        where: 'id= ${mockBookmark.id}');
+        where: "id= '${mockBookmark.id}'");
     return response;
   }
 
@@ -187,19 +188,19 @@ category TEXT
     await deleteAll();
     final db = await database;
     final response = await db!
-        .update(bookTable, mockPost.toJson(), where: 'id= ${mockPost.id}');
+        .update(bookTable, mockPost.toJson(), where: "id= '${mockPost.id}'");
     return response;
   }
 
   deleteBookmark(MockBookmark mockBookmark) async {
     final db = await database;
     final response =
-        await db!.delete(bookTable, where: 'id= ${mockBookmark.id}');
+        await db!.delete(bookTable, where: "id= '${mockBookmark.id}'");
   }
 
   deletePost(MockPost mockPost) async {
     final db = await database;
-    final response = await db!.delete(bookTable, where: 'id= ${mockPost.id}');
+    final response = await db!.delete(bookTable, where: "id= '${mockPost.id}'");
   }
 
   Future<List<MockBookmark>> mockbookmarks() async {

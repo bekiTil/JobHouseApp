@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../models/post.dart';
 
 class PostDataProvider {
-  static const String _baseUrl = "http://localhost:3000/api/posts";
+  static const String _baseUrl = "http://10.0.2.2:3000/api/posts";
   static const String _token = "TODO:";
 
   String jsonify(Post post) {

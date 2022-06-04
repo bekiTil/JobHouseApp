@@ -14,14 +14,15 @@ class EmployeeDataProvider {
   static Future<dynamic> fetchSingle() async {
     StorageService storage = StorageService();
     final String? id = await storage.getId();
-    print(id);
-    // print(DBProvider.db.findCompanyById(id!));
-    // final employee = await DBProvider.db.findEmployeeById(id!);
-    // print(employee);
-    // if (employee != null) {
-    //   return mergeEmpProfile(employee);
-    // }
-    var url = Uri.parse("http://localhost:3000/api/users/$id");
+
+
+    final employee = await DBProvider.db.findEmployeeById(id!);
+    print(employee);
+    if (employee != null) {
+      print(employee.bio);
+      return mergeEmpProfile(employee);
+    }
+    var url = Uri.parse("http://10.0.2.2:3000/api/users/$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String, dynamic> responded = jsonDecode(response.body);
@@ -70,7 +71,7 @@ class EmployeeDataProvider {
     Map<String, dynamic> data = {'profile': profile};
     print(token);
     final response =
-        await http.put(Uri.parse("http://localhost:3000/api/users/$id"),
+        await http.put(Uri.parse("http://10.0.2.2:3000/api/users/$id"),
             headers: {
               "x-auth-token": token,
               "Accept": "application/json",
@@ -84,16 +85,27 @@ class EmployeeDataProvider {
             encoding: Encoding.getByName("utf-8"));
 
     if (response.statusCode == 200) {
-      // final employee = await DBProvider.db.findEmployeeById(id);
-      // final empValue = MockEmpProfile.fromApi(jsonDecode(response.body));
-      // if (employee != null) {
-      //   final changedProfile =
-      //       await DBProvider.db.updateEmployeeProfile(empValue);
-      // } else {
-      //   final changedProfile =
-      //       await DBProvider.db.createEmployeeProfile(empValue);
-      // }
-      Map<String, dynamic> user = jsonDecode(response.body);
+      final employee = await DBProvider.db.findEmployeeById(id);
+      print(employee);
+      print(jsonDecode(response.body));
+      print('-------------');
+
+      final empValue = MockEmpProfile.fromApi(jsonDecode(response.body));
+      print('-----------');
+      // print(empValue);
+      // print(employee);
+
+      if (employee != null) {
+        print('--------------');
+        final changedProfile =
+            await DBProvider.db.updateEmployeeProfile(empValue);
+      } else {
+        print('--------------');
+        final changedProfile =
+            await DBProvider.db.createEmployeeProfile(empValue);
+      }
+      print("helo");
+      // Map<String, dynamic> user = jsonDecode(response.body)[0];
     } else {
       throw AuthException(response.body);
     }
@@ -103,7 +115,7 @@ class EmployeeDataProvider {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
     
-    var url = Uri.parse("http://localhost:3000/api/users/$userName");
+    var url = Uri.parse("http://10.0.2.2:3000/api/users/$userName");
     
     final response = await http.delete(url,       
     headers: {
