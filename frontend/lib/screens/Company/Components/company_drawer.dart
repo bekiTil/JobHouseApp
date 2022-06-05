@@ -61,7 +61,7 @@ class CompanyDrawer extends StatelessWidget {
                     title: const Text('Edit Profile'),
                     leading: const Icon(Icons.person),
                     onTap: () {
-                      context.go('/companyHome/editprofile');
+                      context.go('/companyHome/editprofile', extra: state);
                       Navigator.of(context).pop();
                     },
                   ),
@@ -71,7 +71,9 @@ class CompanyDrawer extends StatelessWidget {
                     onTap: () {
                       BlocProvider.of<CompanyBloc>(context)
                           .add(DeleteCompany(state.username));
-                      context.go("/login");
+
+                      BlocProvider.of<AuthBloc>(context).add(LogOut());
+                      context.go('/login');
                     },
                   ),
                   ListTile(

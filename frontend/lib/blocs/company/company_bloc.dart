@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:frontend/data_Providers/data_providers.dart';
 import 'package:frontend/repository/company_repository.dart';
 import 'package:frontend/models/models.dart';
@@ -29,7 +30,7 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
       }
     });
     on<DeleteCompany>(((event, emit) async {
-      emit(DeletingCompanuProfile());
+      emit(DeletingCompanyProfile());
 
       try {
         CompanyRepository companyRepository = CompanyRepository();

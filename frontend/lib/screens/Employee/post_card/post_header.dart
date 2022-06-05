@@ -44,6 +44,12 @@ class _PostHeaderState extends State<PostHeader> {
 
   @override
   Widget build(BuildContext context) {
+    print('----------');
+    print(widget.post.posterProfilePicture);
+    print(widget.post.image);
+    print(widget.post.posterName);
+    print('----------');
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +63,7 @@ class _PostHeaderState extends State<PostHeader> {
                 minRadius: 30,
                 maxRadius: 31,
                 backgroundImage:
-                    NetworkImage(widget.post.posterProfilePicture!),
+                    NetworkImage(widget.post.posterProfilePicture),
               ),
               const SizedBox(
                 width: 13,
@@ -66,7 +72,7 @@ class _PostHeaderState extends State<PostHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.post.posterName!,
+                    widget.post.posterName ,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -75,7 +81,7 @@ class _PostHeaderState extends State<PostHeader> {
                   const SizedBox(
                     height: 3.0,
                   ),
-                  Text("Jan, 31"), // TODO: change the date to a proper data
+                  Text(widget.post.date), // TODO: change the date to a proper data
                 ],
               ),
             ],

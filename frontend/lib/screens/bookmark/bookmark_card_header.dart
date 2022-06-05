@@ -11,7 +11,6 @@ class BookmarkHeader extends StatefulWidget {
 }
 
 class _BookmarkHeaderState extends State<BookmarkHeader> {
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,7 +18,6 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-
           child: Row(
             children: [
               CircleAvatar(
@@ -27,7 +25,7 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
                 minRadius: 30,
                 maxRadius: 31,
                 backgroundImage:
-                    NetworkImage(widget.bookmark.post.posterProfilePicture!),
+                    NetworkImage(widget.bookmark.post.posterProfilePicture),
               ),
               const SizedBox(
                 width: 13,
@@ -36,7 +34,7 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.bookmark.post.posterName ?? "User",
+                    widget.bookmark.post.posterName,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -45,8 +43,7 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
                   const SizedBox(
                     height: 3.0,
                   ),
-                  Text("Jan, 31"),
-                  // TODO: change the date to a proper data
+                  Text(widget.bookmark.post.date),
                 ],
               ),
             ],

@@ -1,7 +1,7 @@
 part of 'employee_bloc.dart';
 
 @immutable
-abstract class EmployeeState {
+abstract class EmployeeState extends Equatable {
   final String id;
   final String username;
   final String email;
@@ -28,11 +28,19 @@ abstract class EmployeeState {
 
 class EmployeeInitial extends EmployeeState {
   EmployeeInitial() : super(' ', ' ', ' ', ' ', ' ', [], ' ', ' ', ' ', ' ');
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class EmployeeHomeLoading extends EmployeeState {
   EmployeeHomeLoading()
       : super(' ', ' ', ' ', ' ', ' ', [], ' ', ' ', ' ', ' ');
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class EmployeeHomeLoaded extends EmployeeState {
@@ -49,6 +57,10 @@ class EmployeeHomeLoaded extends EmployeeState {
       required List<Post> posts})
       : super(username, email, fullName, location, bio, posts, id, fieldOfStudy,
             educationLevel, yearsOfExperience);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class EmployeeHomeLoadingFailed extends EmployeeState {
@@ -56,10 +68,18 @@ class EmployeeHomeLoadingFailed extends EmployeeState {
 
   EmployeeHomeLoadingFailed({required this.exception})
       : super(' ', ' ', ' ', ' ', ' ', [], ' ', ' ', ' ', ' ');
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class EmployeeDeleting extends EmployeeState {
   EmployeeDeleting() : super(' ', ' ', ' ', ' ', ' ', [], ' ', ' ', ' ', ' ');
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class EmployeeDeletionFailed extends EmployeeState {
@@ -67,9 +87,17 @@ class EmployeeDeletionFailed extends EmployeeState {
 
   EmployeeDeletionFailed(this.exception)
       : super(' ', ' ', ' ', ' ', ' ', [], ' ', ' ', ' ', ' ');
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class EmployeeDeletionSuccess extends EmployeeState {
   EmployeeDeletionSuccess()
       : super(' ', ' ', ' ', ' ', ' ', [], ' ', ' ', ' ', ' ');
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }

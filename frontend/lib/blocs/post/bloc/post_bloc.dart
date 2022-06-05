@@ -18,6 +18,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           "category": event.category,
         };
 
+        print(createdPost);
+
         PostRepository repo = PostRepository(PostDataProvider());
         await repo.create(createdPost);
         emit(PostOperationSuccess());

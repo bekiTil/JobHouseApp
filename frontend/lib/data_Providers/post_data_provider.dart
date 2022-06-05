@@ -17,6 +17,7 @@ class PostDataProvider {
   }
 
   Future<Post> create(Map post) async {
+
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
     final http.Response response = await http.post(
@@ -51,6 +52,13 @@ class PostDataProvider {
       var posts = jsonDecode(response.body) as List;
       posts = posts.map((post) => Post.fromJson(post)).toList();
       await Future.delayed(Duration(seconds: 1));
+
+      print('pooooooooooosts');
+      for (var post in posts){
+        print(post);
+      }
+      print('pooosssssssssst');
+
       return posts as List<Post>;
     } else {
       throw Exception("Could not fetch posts");

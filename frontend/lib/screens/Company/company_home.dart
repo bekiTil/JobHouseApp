@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/auth/AuthBloc.dart';
+import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/screens/Company/Components/company_drawer.dart';
@@ -31,10 +33,12 @@ class _CompanyHomePageState extends State<CompanyHomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyBloc, CompanyState>(
-      listener: (context, state) => {
-        if (state is CompanyHomeLoaded && state.location == ' ')
-          {context.go('/companyHome/editProfile')},
-        posts = state.posts
+      listener: (context, state) {
+        if (state is CompanyHomeLoaded && state.location == ' ') {
+          context.go('/companyHome/editProfile', extra: state);
+        }
+
+        posts = state.posts;
       },
       builder: (context, state) {
         return Scaffold(
@@ -56,13 +60,21 @@ class _CompanyHomePageState extends State<CompanyHomePage> {
                       ? const Center(
                           child: Text('Error... Loading Failed'),
                         )
-                      : ListView.builder(
-                          itemCount: state.posts.length,
-                          itemBuilder: (context, index) => PostCard(
-                            post: state.posts[index],
-                            isEmployee: false,
-                          ),
-                        )),
+                      : posts.length == 0
+                          ? Center(
+                              child: Text(
+                                "No post found",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500, fontSize: 15),
+                              ),
+                            )
+                          : ListView.builder(
+                              itemCount: state.posts.length,
+                              itemBuilder: (context, index) => PostCard(
+                                post: state.posts[index],
+                                isEmployee: false,
+                              ),
+                            )),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               context.go('/companyHome/post');
