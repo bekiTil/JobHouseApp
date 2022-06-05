@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
@@ -41,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
       if (state is Authenticated) {
         if (state.role == Roles.Company) {
+          BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
           context.go("/companyHome");
         } else if (state.role == Roles.Employee) {
           BlocProvider.of<EmployeeBloc>(context).add(EmployeeHomeVisited());
@@ -203,26 +205,30 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 8),
                       Row(
-                        
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(height: 10),
                           const Expanded(
-                            child:  Text(
+                            flex: 2,
+                            child: Text(
                               "Don't have an account?   ",
+                              textAlign: TextAlign.right,
                               style: TextStyle(
+                              
                                 fontSize: 16,
                               ),
                             ),
                           ),
                           Expanded(
+
                             child: TextButton(
-                              clipBehavior: Clip.none,
+                                clipBehavior: Clip.none,
                                 onPressed: () {
                                   context.go('/chooseRole');
                                 },
                                 child: const Text(
                                   'Sign up',
+                                  textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontSize: 17,
                                   ),

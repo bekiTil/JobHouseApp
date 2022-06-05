@@ -15,12 +15,11 @@ class MockBookmark extends Equatable {
   final String? post_id;
   final String? memo;
   final int number;
-  final  String description;
-  final  String category;
+  final String description;
+  final String category;
 
   MockBookmark({
     this.id,
-
     required this.number,
     required this.description,
     required this.category,
@@ -33,34 +32,31 @@ class MockBookmark extends Equatable {
 
   factory MockBookmark.fromJson(Map<String, dynamic> json) {
     return MockBookmark(
-      id: json["_id"],
-      post_id:json["post_id"],
-      user_id:json["user_id"],
-      memo:json["memo"],
-      number: json['number'],
-      description: json['description'],
-      category: json['category']);
-  
+        id: json["_id"],
+        post_id: json["post_id"],
+        user_id: json["user_id"],
+        memo: json["memo"],
+        number: json['number'],
+        description: json['description'],
+        category: json['category']);
   }
   factory MockBookmark.fromApi(Map<String, dynamic> json) {
     return MockBookmark(
-      id: json["_id"],
-      post_id:json["post_id"],
-      user_id:json["user_id"],
-      memo:json["memo"],
-      number: json['post']['number'],
-      description: json['post']['description'],
-      category: json['post']['category']);
+        id: json["_id"],
+        post_id: json["post_id"],
+        user_id: json["user_id"],
+        memo: json["memo"],
+        number: json['post']['number'],
+        description: json['post']['description'],
+        category: json['post']['category']);
   }
   Map<String, dynamic> toJson() => {
         "id": id,
-        "post_id":post_id,
+        "post_id": post_id,
         "user_id": user_id,
-        "memo":memo ,
+        "memo": memo,
         "number": number,
         "description": description,
         "category": category,
-        
       };
- 
 }
