@@ -138,7 +138,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                 TextFormField(
                                   controller: _yearsOfExperienceController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.work_history_sharp),
+                                    icon: Icon(Icons.work_sharp),
                                     hintText: 'How much have you learnt?',
                                     labelText: 'Years of experience  *',
                                   ),
@@ -146,6 +146,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                     if (value == null || value.isEmpty) {
                                       return "Years of experience cannot be empty";
                                     }
+                                    
                                     return null;
                                   },
                                 ),
@@ -212,7 +213,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                     child: Container(
                                       width: 120,
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 15),
+                                          vertical: 15,),
 
                                       // margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                       child: const Center(

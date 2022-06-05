@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
-import 'package:frontend/screens/Employee/Employee_/post_card/post_card.dart';
+import 'package:frontend/screens/Employee/post_card/post_card.dart';
 import 'package:frontend/screens/bookmark/bookmark_card.dart';
 import 'package:go_router/go_router.dart';
 

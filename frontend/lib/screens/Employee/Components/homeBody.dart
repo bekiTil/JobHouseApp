@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/models/bookmark.dart';
-import 'package:frontend/screens/Employee/Employee_/post_card/post_card.dart';
+import 'package:frontend/screens/Employee/post_card/post_card.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({Key? key}) : super(key: key);
