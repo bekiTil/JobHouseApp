@@ -65,7 +65,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Center(
+          title: const Center(
             child: Text("JobHouse"),
           ),
         ),
@@ -170,7 +170,6 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                 ),
                                 TextFormField(
                                   controller: _bioController,
-                                  autovalidateMode: AutovalidateMode.always,
                                   decoration: const InputDecoration(
                                     icon: Icon(Icons.abc_sharp),
                                     hintText: 'Tell us about your self',
@@ -178,7 +177,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                   ),
                                   validator: (String? value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Location cannot be empty";
+                                      return "Bio cannot be empty";
                                     }
                                     return null;
                                   },
