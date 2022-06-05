@@ -38,7 +38,7 @@ class _PostBodyState extends State<PostBody> {
         children: [
           const Text(
             "Post a new Job",
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 30.0,
               fontWeight: FontWeight.bold,
             ),
@@ -74,7 +74,7 @@ class _PostBodyState extends State<PostBody> {
                 const InputDecoration(labelText: 'Number of available places'),
             validator: (String? value) {
               return double.tryParse(value!) == null
-                  ? 'Please only numbers'
+                  ? 'Please enter only numbers!'
                   : null;
             },
           ),

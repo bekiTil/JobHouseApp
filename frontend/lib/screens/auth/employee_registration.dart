@@ -22,10 +22,17 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   late ScaffoldMessengerState scaffoldMessenger;
+
+  bool _passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('JobHouse'),
+      ),
       key: _scaffoldKey,
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 30),
