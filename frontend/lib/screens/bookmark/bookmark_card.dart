@@ -13,8 +13,6 @@ class BookmarkCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bookmark.post.image = "https://www.addiscoder.com/img/working.jpg";
-
     return Card(
       margin: const EdgeInsets.all(16.0),
       child: Padding(
@@ -57,7 +55,6 @@ class BookmarkCard extends StatelessWidget {
                     onSelected: (bool value) {},
                   ),
                 ),
-            
                 Expanded(
                   child: FilterChip(
                     label: Text("Candidates: ${bookmark.post.number}"),
@@ -71,20 +68,23 @@ class BookmarkCard extends StatelessWidget {
             ),
             Column(
               children: [
-                const Text('Memo', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold), ),
-                const SizedBox(height: 5,),
+                const Text(
+                  'Memo',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
                 Container(
-
-                  decoration:  BoxDecoration(
-                    color: Color.fromARGB(255, 220, 224, 226),
-                    borderRadius: BorderRadius.circular(5)
-                  ),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 220, 224, 226),
+                      borderRadius: BorderRadius.circular(5)),
                   width: double.maxFinite,
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     '${bookmark.memo}',
-                    style:
-                        const TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+                    style: const TextStyle(
+                        fontSize: 20, fontStyle: FontStyle.italic),
                   ),
                 ),
               ],

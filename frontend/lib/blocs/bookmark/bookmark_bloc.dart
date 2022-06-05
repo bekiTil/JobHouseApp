@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bookmark.dart';
 import 'package:frontend/models/models.dart';
@@ -16,7 +15,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       emit(BookmarkLoading());
       try {
         final bookmarks = await bookmarkRepository.getBookmarks();
-        emit(BookmarkLoadSuccess(bookmarks: bookmarks!));
+        emit(BookmarkLoadSuccess(bookmarks: bookmarks!, type: "load"));
       } catch (error) {
         emit(BookmarkOperationFailure(error: error));
       }
@@ -26,7 +25,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       try {
         await bookmarkRepository.createBookmark(event.bookmark);
         final bookmarks = await bookmarkRepository.getBookmarks();
-        emit(BookmarkLoadSuccess(bookmarks: bookmarks!));
+        emit(BookmarkLoadSuccess(bookmarks: bookmarks!, type: "create"));
       } catch (error) {
         emit(BookmarkOperationFailure(error: error));
       }
@@ -35,7 +34,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       try {
         await bookmarkRepository.updateBookmark(event.bookmark);
         final bookmarks = await bookmarkRepository.getBookmarks();
-        emit(BookmarkLoadSuccess(bookmarks: bookmarks!));
+        emit(BookmarkLoadSuccess(bookmarks: bookmarks!, type: "update"));
       } catch (error) {
         emit(BookmarkOperationFailure(error: error));
       }
@@ -45,7 +44,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       try {
         await bookmarkRepository.deleteBookmark(event.bookmark.id);
         final bookmarks = await bookmarkRepository.getBookmarks();
-        emit(BookmarkLoadSuccess(bookmarks: bookmarks!));
+        emit(BookmarkLoadSuccess(bookmarks: bookmarks!, type: "delete"));
       } catch (error) {
         emit(BookmarkOperationFailure(error: error));
       }
