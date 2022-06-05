@@ -78,12 +78,6 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
             _educationLevelController.text = state.educationLevel;
             _yearsOfExperienceController.text = state.yearsOfExperience;
 
-            print('-----------');
-            print(state.bio);
-            print(state.email);
-            print(state.location);
-            print('-------');
-
             return Center(
               child: SingleChildScrollView(
                 padding:

@@ -32,7 +32,8 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
             bio: user.employeeProfile.bio,
             fieldOfStudy: user.employeeProfile.fieldOfStudy,
             educationLevel: user.employeeProfile.educationLevel,
-            yearsOfExperience: user.employeeProfile.yearsOfExperience.toString(),
+            yearsOfExperience:
+                user.employeeProfile.yearsOfExperience.toString(),
             posts: posts));
       } catch (e) {
         emit(EmployeeHomeLoadingFailed(exception: e.toString()));
