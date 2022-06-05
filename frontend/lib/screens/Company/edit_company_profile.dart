@@ -104,6 +104,7 @@ class _EditCompanyProfileState extends State<EditCompanyProfile> {
                               child: Column(
                                 children: [
                                   TextFormField(
+                                    key:Key("location"),
                                     controller: _locationController,
                                     decoration: const InputDecoration(
                                       icon: Icon(Icons.location_city),
@@ -121,6 +122,7 @@ class _EditCompanyProfileState extends State<EditCompanyProfile> {
                                     height: 10,
                                   ),
                                   TextFormField(
+                                    key:Key("bio"),
                                     controller: _bioController,
                                     decoration: const InputDecoration(
                                       icon: Icon(Icons.abc_outlined),
@@ -161,6 +163,7 @@ class _EditCompanyProfileState extends State<EditCompanyProfile> {
                             : BlocBuilder<CompanyBloc, CompanyState>(
                                 builder: (context, state) {
                                   return ElevatedButton(
+                                    key:Key("Edited"),
                                     style: ButtonStyle(
                                       elevation: MaterialStateProperty.all(16),
                                     ),
