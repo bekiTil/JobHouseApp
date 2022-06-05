@@ -115,7 +115,7 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                       ),
                                       validator: (String? value) {
                                         bool validEmail = RegExp(
-                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                             .hasMatch(value!);
                                         return !validEmail
                                             ? 'Please enter valid Email!'
@@ -141,7 +141,7 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                           onPressed: () {
                                             setState(() {
                                               _passwordVisible =
-                                              !_passwordVisible;
+                                                  !_passwordVisible;
                                             });
                                           },
                                         ),
@@ -170,18 +170,18 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                     ),
                                     BlocBuilder<SignUpBloc, SignUpState>(
                                         builder: ((context, state) {
-                                          return state is SignUpFailure
-                                              ? Container(
-                                            margin: const EdgeInsets.only(
-                                                top: 20),
-                                            child: Text(
-                                              signupResult,
-                                              style: const TextStyle(
-                                                  color: Colors.red),
-                                            ),
-                                          )
-                                              : Text(signupResult);
-                                        }))
+                                      return state is SignUpFailure
+                                          ? Container(
+                                              margin: const EdgeInsets.only(
+                                                  top: 20),
+                                              child: Text(
+                                                signupResult,
+                                                style: const TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                            )
+                                          : Text(signupResult);
+                                    }))
                                   ],
                                 ),
                               ),
@@ -194,36 +194,36 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                       builder: ((context, state) {
                         return state is SignUpLoading
                             ? const CircularProgressIndicator(
-                          color: Colors.brown,
-                        )
+                                color: Colors.brown,
+                              )
                             : ElevatedButton(
-                          style: ButtonStyle(
-                            elevation: MaterialStateProperty.all(16),
-                          ),
-                          child: Container(
-                            width: 200,
-                            padding: const EdgeInsets.all(15.0),
-                            child: const Center(
-                              child: Text(
-                                "Sign up",
-                                style: TextStyle(
-                                  fontSize: 18,
+                                style: ButtonStyle(
+                                  elevation: MaterialStateProperty.all(16),
                                 ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              BlocProvider.of<SignUpBloc>(context).add(
-                                  SignUpSubmitted(
-                                      username: _usernameController.text,
-                                      email: _emailController.text,
-                                      name: _employeeNameController.text,
-                                      password: _passwordController.text,
-                                      role: Roles.Employee));
-                            }
-                          },
-                        );
+                                child: Container(
+                                  width: 200,
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: const Center(
+                                    child: Text(
+                                      "Sign up",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    BlocProvider.of<SignUpBloc>(context).add(
+                                        SignUpSubmitted(
+                                            username: _usernameController.text,
+                                            email: _emailController.text,
+                                            name: _employeeNameController.text,
+                                            password: _passwordController.text,
+                                            role: Roles.Employee));
+                                  }
+                                },
+                              );
                       }),
                     ),
                     Row(
