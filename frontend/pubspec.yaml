@@ -19,10 +19,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   sqflite: ^2.0.2+1
   path_provider: ^2.0.10
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^5.2.0
+  build_runner: ^2.1.11
 
   flutter_lints: ^1.0.0
 

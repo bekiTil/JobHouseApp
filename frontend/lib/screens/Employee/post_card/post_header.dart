@@ -15,7 +15,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/blocs/blocs.dart';
 // import 'Components/bottomNavigationBar.dart';
-import 'package:frontend/screens/Employee/Employee_/post_card/post_card.dart';
+import 'package:frontend/screens/Employee/post_card/post_card.dart';
 
 class PostHeader extends StatefulWidget {
   final Post post;
