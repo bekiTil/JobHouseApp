@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
-import 'package:frontend/models/post.dart';
-import 'package:frontend/repository/secureStorage.dart';
-import 'package:go_router/go_router.dart';
 
 void updatePopup(BuildContext context, bookmark) async {
   final _formKey = GlobalKey<FormState>();

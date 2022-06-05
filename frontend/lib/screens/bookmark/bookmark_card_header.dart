@@ -11,19 +11,6 @@ class BookmarkHeader extends StatefulWidget {
 }
 
 class _BookmarkHeaderState extends State<BookmarkHeader> {
-  late final String? id;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    StorageService storage = StorageService();
-    getInfo() async {
-      id = await storage.getId();
-    }
-
-    super.initState();
-    getInfo();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +19,15 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: () {
-            print('go to the user\'s profile page');
-            //TODO: go to the user's profile;
-          },
+
           child: Row(
             children: [
-              const CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 150, 159, 163),
+              CircleAvatar(
+                backgroundColor: const Color.fromARGB(255, 150, 159, 163),
                 minRadius: 30,
                 maxRadius: 31,
                 backgroundImage:
-                    NetworkImage("https://www.addiscoder.com/img/working.jpg"),
+                    NetworkImage(widget.bookmark.post.posterProfilePicture!),
               ),
               const SizedBox(
                 width: 13,
@@ -52,7 +36,7 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.bookmark.post.posterName ?? "Yeabsira Driba",
+                    widget.bookmark.post.posterName ?? "User",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -61,7 +45,8 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
                   const SizedBox(
                     height: 3.0,
                   ),
-                  Text("Jan, 31"), // TODO: change the date to a proper data
+                  Text("Jan, 31"),
+                  // TODO: change the date to a proper data
                 ],
               ),
             ],

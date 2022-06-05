@@ -5,8 +5,7 @@ import 'package:frontend/models/models.dart';
 
 @immutable
 class Bookmark extends Equatable {
-  // ignore: prefer_const_constructors_in_immutables
-  Bookmark({
+  const Bookmark({
     this.id,
     required this.user_id,
     required this.post_id,
