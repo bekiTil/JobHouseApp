@@ -103,8 +103,6 @@ router.delete("/:username", verifyToken, async (req, res) => {
     return res.status(400).send("User not found");
   }
 
-  console.log(username)
-  console.log(req.params.username)
   try {
     const deleteSuccess = await User.deleteOne({ username: req.params.username})
     
