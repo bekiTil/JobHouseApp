@@ -16,14 +16,16 @@ class _PostScreenState extends State<PostScreen> {
         title: const Center(child: Text("Post A Job")),
       ),
       // ignore: prefer_const_literals_to_create_immutables
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            PostBody(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              PostBody(),
+            ],
+          ),
         ),
       ),
     );
