@@ -75,7 +75,7 @@ class _CompanyRegistrationState extends State<CompanyRegistration> {
                                 TextFormField(
                                   controller: _companyNameController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.description),
+                                    icon: Icon(Icons.add_business),
                                     hintText: 'What do people call you?',
                                     labelText: 'Company Name *',
                                   ),

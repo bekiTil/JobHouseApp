@@ -4,7 +4,7 @@ import 'package:frontend/blocs/auth/AuthState.dart';
 
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/models/models.dart';
-import 'package:frontend/screens/Company/companyHome.dart';
+// import 'package:frontend/screens/Company/companyHome.dart';
 import 'package:frontend/screens/Company/edit_company_profile.dart';
 import 'package:frontend/screens/bookmark/bookmark_list.dart';
 import 'package:frontend/screens/post/post.dart';
@@ -16,6 +16,7 @@ import 'package:frontend/screens/auth/employee_registration.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/authentication_page.dart';
+import 'package:frontend/screens/Company/company_home.dart';
 
 class AllRoutes {
   static const String loginPage = '/login';
@@ -70,7 +71,7 @@ class AllRoutes {
             path: '/companyHome',
             pageBuilder: (context, state) => MaterialPage(
                   key: state.pageKey,
-                  child: const HomePage(),
+                  child: const CompanyHomePage(),
                 ),
             routes: [
               GoRoute(

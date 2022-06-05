@@ -17,9 +17,10 @@ class _PostBodyState extends State<PostBody> {
   final List<String> _categories = [
     'TECH',
     'BUSINESS',
-    ' ART',
+    'ART',
     'CONSTRUCTION',
-    'EDUCATION'
+    'EDUCATION',
+    'OTHER'
   ];
 
   String? categorySelected;
@@ -39,8 +40,8 @@ class _PostBodyState extends State<PostBody> {
           const Text(
             "Post a new Job",
             style: TextStyle(
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
+              fontSize: 33.0,
+              fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(
@@ -83,10 +84,10 @@ class _PostBodyState extends State<PostBody> {
           ),
           TextFormField(
             controller: _descriptionController,
-            decoration: const InputDecoration(labelText: 'description'),
+            decoration: const InputDecoration(labelText: 'Description'),
             validator: (String? value) {
               return value!.isEmpty
-                  ? 'Please enter small job description'
+                  ? 'Please enter a brief job description'
                   : null;
             },
           ),
