@@ -18,6 +18,8 @@ import 'package:frontend/screens/auth/choose_role.dart';
 import 'package:frontend/utils/routes.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
 import 'package:frontend/bloc_observer.dart';
+import 'darkTheme.dart';
+import 'blocs/theme/changetheme_bloc.dart';
 
 void main() {
   BlocOverrides.runZoned(
@@ -84,11 +86,26 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(create: ((context) => PostBloc())),
             BlocProvider(create: (context) => BookmarkBloc()),
+            BlocProvider(create: ((context) => ChangethemeBloc()))
           ],
-          child: MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              routeInformationParser: router.routeInformationParser,
-              routerDelegate: router.routerDelegate),
+          child: BlocConsumer<ChangethemeBloc, ChangethemeState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              return state is DarkTheme
+                  ? MaterialApp.router(
+                      theme: darkTheme,
+                      debugShowCheckedModeBanner: false,
+                      routeInformationParser: router.routeInformationParser,
+                      routerDelegate: router.routerDelegate)
+                  : MaterialApp.router(
+                      theme: ThemeData.light(),
+                      debugShowCheckedModeBanner: false,
+                      routeInformationParser: router.routeInformationParser,
+                      routerDelegate: router.routerDelegate);
+            },
+          ),
         ));
   }
 }

@@ -8,6 +8,8 @@ const authorize = require("../middleware/authorize");
 const Role = require("../models/Role");
 const upload = require("../middleware/image");
 const verifyToken = require("../middleware/verifyToken");
+const { Post, postValidation } = require("../models/Post");
+const { Bookmark, bookmarkValidation } = require("../models/Bookmark");
 
 const router = express.Router();
 
@@ -75,8 +77,6 @@ router.put("/:id", verifyToken, async (req, res) => {
 
   let user = await User.findOne({ _id: req.params.id });
 
-  console.log(req.body.profile);
-
   user.profile = req.body.profile;
 
   console.log(user.profile);
@@ -99,12 +99,14 @@ router.put("/:id", verifyToken, async (req, res) => {
 router.delete("/:username", verifyToken, async (req, res) => {
   const { username } = req.params.username;
   const usernameExist = await User.findOne({ username: req.params.username });
+
   if (!usernameExist) {
     return res.status(400).send("User not found");
   }
 
-  console.log(username);
-  console.log(req.params.username);
+  await Post.deleteMany({ poster_id: req.user._id });
+  await Bookmark.deleteMany({ user_id: req.user._id });
+
   try {
     const deleteSuccess = await User.deleteOne({
       username: req.params.username,

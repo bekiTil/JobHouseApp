@@ -5,6 +5,7 @@ import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/blocs.dart';
 import 'package:go_router/go_router.dart';
+import '../../../blocs/theme/changetheme_bloc.dart';
 
 class CompanyDrawer extends StatelessWidget {
   const CompanyDrawer({Key});
@@ -34,17 +35,17 @@ class CompanyDrawer extends StatelessWidget {
               UserAccountsDrawerHeader(
                 accountName: Text(
                   state.fullName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 accountEmail: Text(
                   "@${state.username}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                currentAccountPicture: CircleAvatar(
+                currentAccountPicture: const CircleAvatar(
                   maxRadius: 35,
                   minRadius: 25,
                   backgroundImage: NetworkImage(
@@ -57,11 +58,31 @@ class CompanyDrawer extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                    BlocBuilder<ChangethemeBloc, ChangethemeState>(
+                        builder: (context, state) {
+                          return state is LightTheme
+                              ? ListTile(
+                                  title: const Text('Night Mode'),
+                                  leading: const Icon(Icons.nightlight),
+                                  onTap: () {
+                                    BlocProvider.of<ChangethemeBloc>(context)
+                                        .add(ChangethemeTODark());
+                                  },
+                                )
+                              : ListTile(
+                                  title: const Text('Light Mode'),
+                                  leading: const Icon(Icons.sunny),
+                                  onTap: () {
+                                    BlocProvider.of<ChangethemeBloc>(context)
+                                        .add(ChangethemeTOLight());
+                                  });
+                        },
+                      ),
                   ListTile(
                     title: const Text('Edit Profile'),
                     leading: const Icon(Icons.person),
                     onTap: () {
-                      context.go('/companyHome/editprofile');
+                      context.go('/companyHome/editprofile', extra: state);
                       Navigator.of(context).pop();
                     },
                   ),
@@ -71,16 +92,12 @@ class CompanyDrawer extends StatelessWidget {
                     onTap: () {
                       BlocProvider.of<CompanyBloc>(context)
                           .add(DeleteCompany(state.username));
-                      context.go("/login");
+
+                      BlocProvider.of<AuthBloc>(context).add(LogOut());
+                      context.go('/login');
                     },
                   ),
-                  ListTile(
-                    title: const Text('Invite Friends'),
-                    leading: const Icon(Icons.share),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+            
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: ((context, state) {
                       if (state is AuthLoggingOut) {
