@@ -138,15 +138,14 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                 TextFormField(
                                   controller: _yearsOfExperienceController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.work_history_sharp),
+                                    icon: Icon(Icons.work_sharp),
                                     hintText: 'How much have you learnt?',
                                     labelText: 'Years of experience  *',
                                   ),
                                   validator: (String? value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Years of experience cannot be empty";
-                                    }
-                                    return null;
+                                    return double.tryParse(value!) == null
+                                        ? 'Please only numbers'
+                                        : null;
                                   },
                                 ),
                                 const SizedBox(
