@@ -23,8 +23,10 @@ void main()
     await tester.pumpAndSettle();
     
     await tester.tap(find.byKey(Key('signInUsernameField')));
+    await Future.delayed(Duration(seconds: 2));
     await tester.enterText(signInusernameField, "test");
-
+      
+    await Future.delayed(Duration(seconds: 2));
     await tester.tap(signInPasswordField);
     await tester.enterText(signInPasswordField, "123456");
 
@@ -33,7 +35,9 @@ void main()
 
     
     await tester.pumpAndSettle(Duration(seconds: 1));
-    expect(1+1,equals(4));
+    await Future.delayed(Duration(seconds: 2));
+      
+    expect(find.text('Jobhouse'), findsOneWidget);
 
     });
     testWidgets("Post feature test",(tester) async{
@@ -56,7 +60,7 @@ void main()
 
     
     await tester.pumpAndSettle(Duration(seconds: 1));
-    expect(1+1,equals(4));
+    expect(find.text('Jobhouse'), findsOneWidget);
 
 
     });
@@ -70,16 +74,21 @@ void main()
     final Finder editedIN = find.byKey(Key('Edited'));
 
     await tester.pumpAndSettle();
-    
+    await tester.pumpAndSettle(Duration(seconds: 1));
+      
+      
     await tester.tap(find.byKey(Key('location')));
     await tester.enterText(number, "Addis Abeba");
 
     await tester.tap(bio);
     await tester.enterText(bio, "it is a blue color work");
+      
+    await tester.pumpAndSettle(Duration(seconds: 1));
 
     await tester.tap(editedIN);
     await tester.pumpAndSettle(Duration(seconds: 1));
-    expect(1+1,equals(4));
+    expect(find.text('Jobhouse'), findsOneWidget);
+    
 
 
     });
