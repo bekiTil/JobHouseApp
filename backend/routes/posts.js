@@ -13,6 +13,10 @@ router.post(
   async (req, res) => {
     req.body.poster_id = req.auth._id;
 
+    console.log("poster id", req.auth._id);
+
+    const user = await User.findById(req.auth._id);
+
     const { error } = postValidation(req.body);
 
     if (error) {
@@ -26,6 +30,7 @@ router.post(
       description: description,
       category: category,
       number: number,
+      posterName: user["fullName"],
     });
 
     if (req.file) {

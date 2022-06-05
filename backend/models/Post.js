@@ -6,6 +6,9 @@ const postSchema = mongoose.Schema({
     type: mongoose.ObjectId,
     required: true,
   },
+  posterName: {
+    type: String,
+  },
   description: {
     type: String,
     required: true,
