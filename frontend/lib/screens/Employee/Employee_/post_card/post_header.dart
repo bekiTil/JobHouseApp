@@ -66,7 +66,7 @@ class _PostHeaderState extends State<PostHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.post.posterName ?? "Yeabsira Driba",
+                    widget.post.posterName!,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

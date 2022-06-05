@@ -71,7 +71,7 @@ class CompanyDrawer extends StatelessWidget {
                     onTap: () {
                       BlocProvider.of<CompanyBloc>(context)
                           .add(DeleteCompany(state.username));
-                      Navigator.pop(context);
+                      context.go("/login");
                     },
                   ),
                   ListTile(

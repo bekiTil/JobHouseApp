@@ -32,11 +32,21 @@ class _HomeBodyState extends State<HomeBody> {
                   ? const Center(
                       child: Text('Loading Failed'),
                     )
-                  : ListView.builder(
-                      itemCount: state.posts.length,
-                      itemBuilder: (context, index) =>
-                          PostCard(post: state.posts[index]),
-                    ),
+                  : state.posts.length == 0
+                      ? Center(
+                          child: const Text(
+                            "No Posts.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: state.posts.length,
+                          itemBuilder: (context, index) =>
+                              PostCard(post: state.posts[index]),
+                        ),
         );
       },
     );
