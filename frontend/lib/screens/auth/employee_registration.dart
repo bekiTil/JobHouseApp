@@ -77,7 +77,7 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                     TextFormField(
                                       controller: _employeeNameController,
                                       decoration: const InputDecoration(
-                                        icon: Icon(Icons.description),
+                                        icon: Icon(Icons.person),
                                         hintText: 'What do people call you?',
                                         labelText: 'Full Name *',
                                       ),
