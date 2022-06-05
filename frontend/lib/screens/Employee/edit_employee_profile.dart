@@ -179,10 +179,9 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                     labelText: 'Bio *',
                                   ),
                                   validator: (String? value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Bio cannot be empty";
-                                    }
-                                    return null;
+                                    return double.tryParse(value!) == null
+                                        ? 'Please only numbers'
+                                        : null;
                                   },
                                 ),
                               ],
