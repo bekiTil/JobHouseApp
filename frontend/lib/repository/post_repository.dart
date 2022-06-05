@@ -8,18 +8,18 @@ class PostRepository {
 
   Future<Post> create(Map post) async {
     try {
-      return postDataProvider.create(post);
+      return await postDataProvider.create(post);
     } catch (e) {
       rethrow;
     }
   }
 
   Future<Post> update(String id, Post post) async {
-    return postDataProvider.update(id, post);
+    return await postDataProvider.update(id, post);
   }
 
   Future<List<Post>> fetchAll() async {
-    return postDataProvider.fetchAll();
+    return await postDataProvider.fetchAll();
   }
 
   Future<List<Post>> fetchAllByUserID() async {

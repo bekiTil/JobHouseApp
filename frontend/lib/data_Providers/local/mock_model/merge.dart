@@ -11,7 +11,6 @@ import '../../../models/post.dart';
 import 'book_mark.dart';
 
 Employee mergeEmpProfile(MockEmpProfile mocEmp) {
-  print('insideeeeeee');
   final newEmp = EmployeeProfile(
     mocEmp.fieldOfStudy!,
     mocEmp.educationLevel!,
@@ -19,16 +18,10 @@ Employee mergeEmpProfile(MockEmpProfile mocEmp) {
     mocEmp.location!,
     mocEmp.bio!,
   );
-  print(newEmp.fieldOfStudy);
-  print(mocEmp.fullName!);
-  print(mocEmp.id);
-  print(mocEmp.username);
-  print(mocEmp.email);
-  print(mocEmp.role);
 
   final nsew = Employee(mocEmp.id!, mocEmp.fullName!, mocEmp.username!,
       mocEmp.email!, mocEmp.role!, newEmp);
-  print(nsew.employeeProfile);
+
   return nsew;
 }
 
@@ -42,17 +35,18 @@ Company mergeComProfile(MockCompProfile moc_emp) {
       moc_emp.email!, moc_emp.role!, newComp);
 }
 
-Bookmark mergeBookmark(
-  MockBookmark mockBookmark,
-) {
-  return Bookmark(
-      user_id: mockBookmark.user_id!,
-      post_id: mockBookmark.post_id!,
-      post: Post(
-        category: mockBookmark.category,
-        description: mockBookmark.description,
-        id: mockBookmark.post_id!,
-        number: mockBookmark.number,
-        poster_id: '',
-      ));
-}
+// Bookmark mergeBookmark(
+//   MockBookmark mockBookmark,
+// ) {
+//   return Bookmark(
+//       user_id: mockBookmark.user_id!,
+//       post_id: mockBookmark.post_id!,
+//       post: Post(
+//         posterName: "Yeabsira Driba",
+//         category: mockBookmark.category,
+//         description: mockBookmark.description,
+//         id: mockBookmark.post_id!,
+//         number: mockBookmark.number,
+//         poster_id: '',
+//       ));
+// }

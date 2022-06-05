@@ -7,43 +7,47 @@ class Post {
   String description;
   String category;
   String? image;
+  String date;
+  String posterName = " ";
+  String posterProfilePicture =
+      "http://10.0.2.2:3000/images/default_profile.png";
 
-  String? posterName;
-  String? posterProfilePicture;
-
-  void setPosterData() async {
-
-    var url = "http://10.0.2.2:3000/";
-    final postDataProvider = PostDataProvider();
-
-    final userData = await postDataProvider.findOwnerInfo(poster_id);
-
-    posterName = userData['posterName'];
-    posterProfilePicture = url + userData['posterProfilePicture']!;
-
-    if (image != null && image!.isNotEmpty) {
-      image = url + image!;
-    }
-  }
-
-  Post({
-    required this.id,
-    required this.poster_id,
-    required this.number,
-    required this.description,
-    required this.category,
-    this.image,
-  }) {
-    setPosterData();
-  }
+  Post(
+      {required this.id,
+      required this.poster_id,
+      required this.number,
+      required this.description,
+      required this.category,
+      required this.posterName,
+      this.image,
+      required this.date});
 
   factory Post.fromJson(Map<String, dynamic> json) {
+    final date = DateTime.parse(json['createdAt']);
+    List months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+
     return Post(
-        id: json['_id'],
-        poster_id: json['poster_id'],
-        number: json['number'],
-        description: json['description'],
-        category: json['category'],
-        image: json['image']);
+      id: json['_id'],
+      poster_id: json['poster_id'],
+      posterName: json['posterName'],
+      number: json['number'],
+      description: json['description'],
+      category: json['category'],
+      image: json['image'],
+      date: months[date.month - 1] + ", " + date.day.toString(),
+    );
   }
 }

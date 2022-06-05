@@ -86,9 +86,10 @@ class _PostBodyState extends State<PostBody> {
             controller: _descriptionController,
             decoration: const InputDecoration(labelText: 'Description'),
             validator: (String? value) {
-              return value!.isEmpty
-                  ? 'Please enter a brief job description'
-                  : null;
+              if (value == null || value.isEmpty) {
+                return 'Please enter a brief job description';
+              }
+              return null;
             },
           ),
           const SizedBox(

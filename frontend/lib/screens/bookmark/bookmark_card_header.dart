@@ -52,7 +52,7 @@ class _BookmarkHeaderState extends State<BookmarkHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.bookmark.post.posterName ?? "Yeabsira Driba",
+                    widget.bookmark.post.posterName,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
