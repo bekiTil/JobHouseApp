@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frontend/models/Employee.dart';
 import 'package:frontend/models/employee_profile.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -25,11 +26,12 @@ void main() {
           MockEmployeeDataProvider(MockClient(_mockGetRequest));
       final user = await mockEmployeeDataProvider.getUser();
       EmployeeProfile emp = user.employeeProfile;
+
       expect(user.id, "fakeID");
       expect(user.fullName, "First Last");
       expect(user.username, "fakeUserName");
       expect(user.email, "fakeEmail@gmail.com");
-      expect(user.role, 'company');
+      expect(user.role, 'employee');
       expect(emp.fieldOfStudy, "Software");
       expect(emp.educationLevel, "3");
       expect(emp.yearsOfExperience, 2);
@@ -56,7 +58,7 @@ void main() {
         );
       }
 
-      final newcompanyProfile = {
+      final newEmpoyeeProfile = {
         'fieldOfStudy': "Software",
         'educationLevel': "3",
         'yearsOfExperience': 2,
@@ -65,7 +67,10 @@ void main() {
       };
       final mockEmployeeDataProvider =
           MockEmployeeDataProvider(MockClient(_mockEditRequest));
-      final user = await mockEmployeeDataProvider.editUser(newcompanyProfile);
+      final user = await mockEmployeeDataProvider.editUser(newEmpoyeeProfile);
+      expect(user.fieldOfStudy, 'Software');
+      expect(user.educationLevel, '3');
+      expect(user.yearsOfExperience, 2);
       expect(user.location, 'Adama');
       expect(user.bio, 'new bio');
     });
@@ -77,48 +82,48 @@ void main() {
         });
       }
 
-      final mockCompanyDataProvider =
-          MockCompanyDataProvider(MockClient(_mockDeleteRequest));
+      final mockEmployeeDataProvider =
+          MockEmployeeDataProvider(MockClient(_mockDeleteRequest));
 
       final http.Response response =
-          await mockCompanyDataProvider.deleteUser('1');
+          await mockEmployeeDataProvider.deleteUser('1');
       expect(response.statusCode, 200);
     });
   });
 
-  test("The model should be able to recieve the following data", () {
-    final user = Company(
-      "12",
-      "First Last",
-      "fakeUsername",
-      'fakeEmail@gmail.com',
-      'company',
-      CompanyProfile('Addis Ababa', 'some description'),
-    );
+//   test("The model should be able to recieve the following data", () {
+//     final user = Employee(
+//       "12",
+//       "First Last",
+//       "fakeUsername",
+//       'fakeEmail@gmail.com',
+//       'company',
+//       EmployeeProfile('Software', "3", 2, 'Addis Ababa', 'some description'),
+//     );
 
-    CompanyProfile cmp = user.companyProfile;
-    expect(user.id, "12");
-    expect(user.fullName, "First Last");
-    expect(user.username, "fakeUsername");
-    expect(user.email, "fakeEmail@gmail.com");
-    expect(user.role, 'company');
-    expect(cmp.location, "Addis Ababa");
-    expect(cmp.bio, 'some description');
-  });
+//     EmployeeProfile cmp = user.employeeProfile;
+//     expect(user.id, "12");
+//     expect(user.fullName, "First Last");
+//     expect(user.username, "fakeUsername");
+//     expect(user.email, "fakeEmail@gmail.com");
+//     expect(user.role, 'company');
+//     expect(cmp.location, "Addis Ababa");
+//     expect(cmp.bio, 'some description');
+//   });
 
-  test("", () {
-    final fakeData =
-        File('test/repository/auth/test_resources/random_login_response.json')
-            .readAsStringSync();
-    final json = jsonDecode(fakeData);
-    final user = Company.fromJson(json['user']);
-    CompanyProfile cmp = user.companyProfile;
-    expect(user.id, "fakeID");
-    expect(user.fullName, "First Last");
-    expect(user.username, "fakeUserName");
-    expect(user.email, "fakeEmail@gmail.com");
-    expect(user.role, 'company');
-    expect(cmp.location, "Addis Ababa");
-    expect(cmp.bio, 'some description');
-  });
+//   test("", () {
+//     final fakeData =
+//         File('test/repository/auth/test_resources/random_login_response.json')
+//             .readAsStringSync();
+//     final json = jsonDecode(fakeData);
+//     final user = Employee.fromJson(json['user']);
+//     EmployeeProfile cmp = user.employeeProfile;
+//     expect(user.id, "fakeID");
+//     expect(user.fullName, "First Last");
+//     expect(user.username, "fakeUserName");
+//     expect(user.email, "fakeEmail@gmail.com");
+//     expect(user.role, 'company');
+//     expect(cmp.location, "Addis Ababa");
+//     expect(cmp.bio, 'some description');
+//   });
 }

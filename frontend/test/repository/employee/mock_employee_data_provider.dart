@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:frontend/models/Company.dart';
 import 'package:frontend/models/Employee.dart';
-import 'package:frontend/models/company_profile.dart';
 import 'package:frontend/models/employee_profile.dart';
 import 'package:http/http.dart';
 
@@ -11,7 +9,7 @@ class MockEmployeeDataProvider {
 
   MockEmployeeDataProvider(this.client);
 
-  final baseUrl = 'http://10.0.2.2:3000/api/users/1';
+  final baseUrl = 'http://10.0.2.2:3000/api/users/2';
   Future<Employee> getUser() async {
     final response = await client.get(Uri.parse(baseUrl));
     return Employee.fromJson(jsonDecode(response.body));
