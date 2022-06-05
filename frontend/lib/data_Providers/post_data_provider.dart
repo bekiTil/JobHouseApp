@@ -101,34 +101,15 @@ class PostDataProvider {
     var url = Uri.parse('http://10.0.2.2:3000/api/users/$id');
     var defaultProfilePicture = "images/default_profile.png";
 
-    print('the url is');
-    print(url);
-
     final http.Response response = await http.get(url);
 
     if (response.statusCode == 200) {
-      print('body');
-      print(response.body);
       final user = jsonDecode(response.body);
       return {
         'posterName': user['fullName'],
         'posterProfilePicture': user['image'] ?? defaultProfilePicture
       };
     }
-
-    // print('acced is denied');
     throw Exception('Error');
   }
-
-  // Future<Post> addPosterInfo(Post post) async {
-  //   print('inside add info');
-  //   var posterData = await findOwnerInfo(post.poster_id);
-
-  //   print(posterData['posterName']);
-
-  //   post.posterName = posterData['posterName'];
-  //   post.posterProfilePicture = posterData['posterProfilePicture'];
-
-  //   return post;
-  // }
 }

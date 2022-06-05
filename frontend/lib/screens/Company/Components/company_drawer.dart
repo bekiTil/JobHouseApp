@@ -39,7 +39,7 @@ class CompanyDrawer extends StatelessWidget {
                   ),
                 ),
                 accountEmail: Text(
-                  state.username,
+                  "@${state.username}",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

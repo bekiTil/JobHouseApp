@@ -5,7 +5,7 @@ import 'package:frontend/models/bookmark.dart';
 class BookmarkRepository {
   final BookmarkDataProvider dataProvider = BookmarkDataProvider();
 
-  Future<Bookmark> createBookmark(Bookmark bookmark) async {
+  Future<Bookmark>? createBookmark(Bookmark bookmark) async {
     return await dataProvider.createBookmark(bookmark);
   }
 

@@ -19,10 +19,9 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
       try {
         EmployeeRepository employeeRepository = EmployeeRepository();
         Employee user = await employeeRepository.fetchSingle();
-        
+
         PostRepository postRepository = PostRepository(PostDataProvider());
         List<Post> posts = await postRepository.fetchAll();
-        
 
         emit(EmployeeHomeLoaded(
             id: user.id,
@@ -31,6 +30,9 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
             fullName: user.fullName,
             location: user.employeeProfile.location,
             bio: user.employeeProfile.bio,
+            fieldOfStudy: user.employeeProfile.fieldOfStudy,
+            educationLevel: user.employeeProfile.educationLevel,
+            yearsOfExperience: user.employeeProfile.yearsOfExperience.toString(),
             posts: posts));
       } catch (e) {
         emit(EmployeeHomeLoadingFailed(exception: e.toString()));
@@ -40,14 +42,12 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
     on<DeleteEmployee>((event, emit) async {
       emit(EmployeeDeleting());
 
-      try{
+      try {
         EmployeeRepository employeeRepository = EmployeeRepository();
 
         await employeeRepository.deleteSingle(event.userName);
         emit(EmployeeDeletionSuccess());
-        
-      }catch(e){
-      
+      } catch (e) {
         emit(EmployeeDeletionFailed(e.toString()));
       }
     });

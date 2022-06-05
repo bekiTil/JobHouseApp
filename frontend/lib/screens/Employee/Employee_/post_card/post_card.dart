@@ -5,11 +5,12 @@ import 'post_header.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
-  const PostCard({Key? key, required this.post}) : super(key: key);
+  final bool isEmployee;
+  const PostCard({Key? key, required this.post, this.isEmployee = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
@@ -21,7 +22,7 @@ class PostCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PostHeader(post: post),
+          PostHeader(post: post, isEmployee: isEmployee),
           const SizedBox(
             height: 15,
           ),

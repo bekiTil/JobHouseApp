@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/blocs.dart';
 import 'Components/bottomNavigationBar.dart';
+import 'package:frontend/screens/Employee/Employee_/post_card/post_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,7 +38,9 @@ class _HomePageState extends State<HomePage> {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(title: Text(state.fullName)),
+          appBar: AppBar(
+            title: Text("JobHouse"),
+          ),
           drawer: const CompanyDrawer(),
           body: Center(
               child: state is CompanyHomeLoading
@@ -51,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   : state is CompanyHomeLoadingFailed
                       ? const Center(
-                          child: Text('Err... Loading Failed'),
+                          child: Text('Error... Loading Failed'),
                         )
                       : ListView.builder(
                           itemCount: state.posts.length,
@@ -200,7 +203,6 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Icon(Icons.add),
           ),
-  
         );
       },
     );
