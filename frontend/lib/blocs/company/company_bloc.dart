@@ -14,7 +14,7 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
       emit(CompanyHomeLoading());
       try {
         CompanyRepository companyRepository = CompanyRepository();
-        Company user = await companyRepository.fetchSingle();
+        Employee user = await companyRepository.fetchSingle();
         PostRepository postRepository = PostRepository(PostDataProvider());
         List<Post> posts = await postRepository.fetchAllByUserID();
         emit(CompanyHomeLoaded(
