@@ -1,0 +1,14 @@
+{
+    "id": "fakeID",
+    "username": "fakeUserName",
+    "email": "fakeEmail@gmail.com",
+    "fullName": "First Last",
+    "role": "employee",
+    "profile": {
+        "fieldOfStudy": "Software",
+        "educationLevel": "3",
+        "yearsOfExperience": 2,
+        "location": "Addis Ababa",
+        "bio": "some description"
+    }
+}

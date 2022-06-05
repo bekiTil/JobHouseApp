@@ -33,20 +33,13 @@ Employee mergeEmpProfile(MockEmpProfile mocEmp) {
 }
 
 Company mergeComProfile(MockCompProfile moc_emp) {
-  final newComp =CompanyProfile(
+  final newComp = CompanyProfile(
     moc_emp.location!,
     moc_emp.bio!,
   );
 
-  return Company(
-      moc_emp.id!,
-      moc_emp.fullName!,
-      moc_emp.username!,
-      moc_emp.email!,
-      moc_emp.role!,
-    newComp
-
-      );
+  return Company(moc_emp.id!, moc_emp.fullName!, moc_emp.username!,
+      moc_emp.email!, moc_emp.role!, newComp);
 }
 
 Bookmark mergeBookmark(

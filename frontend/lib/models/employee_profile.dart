@@ -7,4 +7,14 @@ class EmployeeProfile {
 
   EmployeeProfile(this.fieldOfStudy, this.educationLevel,
       this.yearsOfExperience, this.location, this.bio);
+
+  factory EmployeeProfile.fromJson(Map<String, dynamic> json) {
+    return EmployeeProfile(
+      json['fieldOfStudy'],
+      json['educationLevel'],
+      json['yearsOfExperience'],
+      json['location'],
+      json['bio'],
+    );
+  }
 }
