@@ -6,14 +6,14 @@ import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/screens/Employee/Components/bottomNavigationBar.dart';
 import 'package:frontend/screens/Employee/Components/drawer.dart';
 import 'package:frontend/screens/Employee/Components/homeBody.dart';
-import 'package:frontend/screens/Employee/Employee_/employee_drawer.dart';
+import 'package:frontend/screens/Employee/Components/employee_drawer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import '../../blocs/blocs.dart';
 import '../../screens/bookmark/bookmark_list.dart';
 
-import 'Employee_/employee_drawer.dart';
+import 'Components/employee_drawer.dart';
 
 class EmployeeHomePage extends StatefulWidget {
   const EmployeeHomePage({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class _HomePageState extends State<EmployeeHomePage> {
         return Scaffold(
           drawer: const EmployeeDrawer(),
           appBar: AppBar(
-            title: Text("JobHouse"),
+            title: const Text("JobHouse"),
           ),
           body: screens[_selectedindex],
           bottomNavigationBar: BottomNavigationBar(

@@ -22,164 +22,172 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   late ScaffoldMessengerState scaffoldMessenger;
+
+  bool _passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('JobHouse'),
+      ),
       key: _scaffoldKey,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 130.0),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Card(
-              elevation: 20,
-              child: SizedBox(
-                width: 350,
-                height: 550,
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 30),
-                      child: Column(
-                        children: [
-                          const Text(
-                            "Sign up",
-                            style: TextStyle(
-                              fontSize: 40.0,
-                            ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(top: 30),
+        child: Center(
+          child: Card(
+            elevation: 20,
+            child: SizedBox(
+              width: 350,
+              height: 630,
+              child: ListView(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                        top: 0.0, left: 30 , right: 30),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Sign up",
+                          style: TextStyle(
+                            fontSize: 40.0,
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          BlocListener<SignUpBloc, SignUpState>(
-                            listener: ((context, state) {
-                              if (state is SignUpFailure) {
-                                signupResult = "invalid credentials";
-                              } else if (state is SignUpSuccess) {
-                                context.go('/login');
-                              }
-                            }),
-                            child: Form(
-                              key: _formKey,
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    TextFormField(
-                                      controller: _employeeNameController,
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.description),
-                                        hintText: 'What do people call you?',
-                                        labelText: 'Full Name *',
-                                      ),
-                                      validator: (String? value) {
-                                        return value!.isEmpty
-                                            ? 'Please enter your name!'
-                                            : null;
-                                      },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        BlocListener<SignUpBloc, SignUpState>(
+                          listener: ((context, state) {
+                            if (state is SignUpFailure) {
+                              signupResult = "invalid credentials";
+                            } else if (state is SignUpSuccess) {
+                              context.go('/login');
+                            }
+                          }),
+                          child: Form(
+                            key: _formKey,
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    controller: _employeeNameController,
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.description),
+                                      hintText: 'What do people call you?',
+                                      labelText: 'Full Name *',
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    validator: (String? value) {
+                                      return value!.isEmpty
+                                          ? 'Please enter your name!'
+                                          : null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    controller: _usernameController,
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.abc_outlined),
+                                      hintText: 'Any alternative names?',
+                                      labelText: 'Username *',
                                     ),
-                                    TextFormField(
-                                      controller: _usernameController,
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.abc_outlined),
-                                        hintText: 'Any alternative names?',
-                                        labelText: 'Username *',
-                                      ),
-                                      validator: (String? value) {
-                                        return value!.length < 3
-                                            ? 'Username must be at least 3 characters long!'
-                                            : null;
-                                      },
+                                    validator: (String? value) {
+                                      return value!.length < 3
+                                          ? 'Username must be at least 3 characters long!'
+                                          : null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    controller: _emailController,
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.email),
+                                      hintText: 'Your personal email?',
+                                      labelText: 'Email *',
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    validator: (String? value) {
+                                      bool validEmail = RegExp(
+                                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                          .hasMatch(value!);
+                                      return !validEmail
+                                          ? 'Please enter valid Email!'
+                                          : null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    controller: _passwordController,
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.password),
+                                      hintText: 'The one you only you know?',
+                                      labelText: 'Password *',
                                     ),
-                                    TextFormField(
-                                      controller: _emailController,
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.email),
-                                        hintText: 'Your personal email?',
-                                        labelText: 'Email *',
-                                      ),
-                                      validator: (String? value) {
-                                        bool validEmail = RegExp(
-                                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                            .hasMatch(value!);
-                                        return !validEmail
-                                            ? 'Please enter valid Email!'
-                                            : null;
-                                      },
+                                    validator: (String? value) {
+                                      return value!.isEmpty
+                                          ? 'Please enter password'
+                                          : null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.password),
+                                      hintText: 'The one you only you know?',
+                                      labelText: 'Confirm Password *',
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextFormField(
-                                      controller: _passwordController,
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.password),
-                                        hintText: 'The one you only you know?',
-                                        labelText: 'Password *',
-                                      ),
-                                      validator: (String? value) {
-                                        return value!.isEmpty
-                                            ? 'Please enter password'
-                                            : null;
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.password),
-                                        hintText: 'The one you only you know?',
-                                        labelText: 'Confirm Password *',
-                                      ),
-                                      validator: (String? value) {
-                                        return value != _passwordController.text
-                                            ? 'Passwords Should match'
-                                            : null;
-                                      },
-                                    ),
-                                    BlocBuilder<SignUpBloc, SignUpState>(
-                                        builder: ((context, state) {
-                                      return state is SignUpFailure
-                                          ? Container(
-                                              margin:
-                                                  const EdgeInsets.only(top: 20),
-                                              child: Text(
-                                                signupResult,
-                                                style: const TextStyle(
-                                                    color: Colors.red),
-                                              ),
-                                            )
-                                          : Text(signupResult);
-                                    }))
-                                  ],
-                                ),
+                                    validator: (String? value) {
+                                      return value != _passwordController.text
+                                          ? 'Passwords Should match'
+                                          : null;
+                                    },
+                                  ),
+                                  BlocBuilder<SignUpBloc, SignUpState>(
+                                      builder: ((context, state) {
+                                    return state is SignUpFailure
+                                        ? Container(
+                                            margin:
+                                                const EdgeInsets.only(top: 20),
+                                            child: Text(
+                                              signupResult,
+                                              style: const TextStyle(
+                                                  color: Colors.red),
+                                            ),
+                                          )
+                                        : Text(signupResult);
+                                  }))
+                                ],
                               ),
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
-                    const SizedBox(height: 10),
-                    BlocBuilder<SignUpBloc, SignUpState>(
-                      builder: ((context, state) {
-                        return state is SignUpLoading
-                            ? const CircularProgressIndicator(
-                                color: Colors.brown,
-                              )
-                            : ElevatedButton(
+                  ),
+                  const SizedBox(height: 10),
+                  BlocBuilder<SignUpBloc, SignUpState>(
+                    builder: ((context, state) {
+                      return state is SignUpLoading
+                          ? const CircularProgressIndicator(
+                              color: Colors.brown,
+                            )
+                          : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal:80.0),
+                            child: ElevatedButton(
                                 style: ButtonStyle(
                                   elevation: MaterialStateProperty.all(16),
                                 ),
                                 child: Container(
                                   width: 200,
-                                  padding: const EdgeInsets.all(15.0),
+                                  height: 50,
                                   child: const Center(
                                     child: Text(
                                       "Sign up",
@@ -200,34 +208,34 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                             role: Roles.Employee));
                                   }
                                 },
-                              );
-                      }),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 40),
-                        const Text(
-                          "Already have an account?   ",
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              context.go('/login');
-                            },
-                            child: const Text(
-                              'Sign in',
-                              style: TextStyle(
-                                fontSize: 17,
                               ),
-                            ))
-                      ],
-                    ),
-                  ],
-                ),
+                          );
+                    }),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 40),
+                      const Text(
+                        "Already have an account?   ",
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            context.go('/login');
+                          },
+                          child: const Text(
+                            'Sign in',
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ))
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

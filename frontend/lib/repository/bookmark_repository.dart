@@ -5,11 +5,11 @@ import 'package:frontend/models/bookmark.dart';
 class BookmarkRepository {
   final BookmarkDataProvider dataProvider = BookmarkDataProvider();
 
-  Future<Bookmark> createBookmark(Bookmark bookmark) async {
+  Future<Bookmark>? createBookmark(Bookmark bookmark) async {
     return await dataProvider.createBookmark(bookmark);
   }
 
-  Future<List<Bookmark>> getBookmarks() async {
+  Future<List<Bookmark>>? getBookmarks() async {
     try {
       return await dataProvider.getBookmarks();
     } catch (e) {
@@ -17,11 +17,11 @@ class BookmarkRepository {
     }
   }
 
-  Future<Bookmark> updateBookmark(Bookmark bookmark) async {
+  Future<Bookmark>? updateBookmark(Bookmark bookmark) async {
     return await dataProvider.updateBookmarks(bookmark);
   }
 
-  Future<void> deleteBookmark(String? id) async {
+  Future<void>? deleteBookmark(String? id) async {
     return await dataProvider.deleteBookmark(id!);
   }
 }
