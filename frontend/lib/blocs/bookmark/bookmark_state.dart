@@ -3,20 +3,16 @@ part of 'bookmark_bloc.dart';
 @immutable
 abstract class BookmarkState {
   const BookmarkState();
-
-  // @override
-  // List<Object> get props => [];
 }
 
 class BookmarkLoading extends BookmarkState {}
 
 class BookmarkLoadSuccess extends BookmarkState {
   final List<Bookmark> bookmarks;
+  final String type;
 
-  const BookmarkLoadSuccess({this.bookmarks = const <Bookmark>[]});
-
-  // @override
-  // List<Object> get props => [bookmarks];
+  const BookmarkLoadSuccess(
+      {required this.type, this.bookmarks = const <Bookmark>[]});
 }
 
 class BookmarkOperationFailure extends BookmarkState {

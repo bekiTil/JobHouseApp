@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
-import 'package:frontend/models/models.dart';
-import 'package:frontend/screens/Employee/post_card/post_card.dart';
 import 'package:frontend/screens/bookmark/bookmark_card.dart';
-import 'package:go_router/go_router.dart';
 
 class BookmarkList extends StatefulWidget {
   const BookmarkList({Key? key}) : super(key: key);
@@ -17,13 +14,19 @@ class _BookmarkListState extends State<BookmarkList> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<BookmarkBloc>(context).add(const BookmarkLoad());
+    BlocProvider.of<BookmarkBloc>(context).add(BookmarkLoad());
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return  BlocBuilder<BookmarkBloc, BookmarkState>(builder: (context, state) {
+    return BlocConsumer<BookmarkBloc, BookmarkState>(
+        listener: ((context, state) {
+      if (state is BookmarkLoadSuccess && state.type == "delete") {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Bookmark Deleted')),
+        );
+      }
+    }), builder: (context, state) {
       if (state is BookmarkOperationFailure) {
         return const Text('Failed operation');
       }
@@ -38,7 +41,6 @@ class _BookmarkListState extends State<BookmarkList> {
         );
       } else {
         return const CircularProgressIndicator();
-        
       }
     });
   }
