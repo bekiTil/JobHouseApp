@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 class EditCompanyProfile extends StatefulWidget {
-  final CompanyState user;
+  final user;
   const EditCompanyProfile({Key? key, required this.user}) : super(key: key);
 
   @override

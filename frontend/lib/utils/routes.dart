@@ -80,7 +80,9 @@ class AllRoutes {
                 path: 'editProfile',
                 pageBuilder: (context, state) => MaterialPage(
                   key: state.pageKey,
-                  child: EditCompanyProfile(user: state.extra as CompanyState),
+                  child: EditCompanyProfile(
+                    user: state.extra,
+                  ),
                 ),
               ),
               GoRoute(
