@@ -22,20 +22,28 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   late ScaffoldMessengerState scaffoldMessenger;
+
+  bool _passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('JobHouse'),
+      ),
       key: _scaffoldKey,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 130.0),
+      body: Center(
         child: SingleChildScrollView(
           child: Center(
             child: Card(
-              elevation: 20,
+              elevation: 50,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
               child: SizedBox(
                 width: 350,
-                height: 550,
                 child: Column(
                   children: [
                     Container(
@@ -46,11 +54,12 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                           const Text(
                             "Sign up",
                             style: TextStyle(
-                              fontSize: 40.0,
+                              fontSize: 33.0,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           BlocListener<SignUpBloc, SignUpState>(
                             listener: ((context, state) {
@@ -79,7 +88,7 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                       },
                                     ),
                                     const SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
                                     TextFormField(
                                       controller: _usernameController,
@@ -95,7 +104,7 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                       },
                                     ),
                                     const SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
                                     TextFormField(
                                       controller: _emailController,
@@ -106,7 +115,7 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                       ),
                                       validator: (String? value) {
                                         bool validEmail = RegExp(
-                                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                             .hasMatch(value!);
                                         return !validEmail
                                             ? 'Please enter valid Email!'
@@ -114,14 +123,28 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                       },
                                     ),
                                     const SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
                                     TextFormField(
                                       controller: _passwordController,
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.password),
-                                        hintText: 'The one you only you know?',
+                                      obscureText: !_passwordVisible,
+                                      decoration: InputDecoration(
+                                        icon: const Icon(Icons.security),
+                                        hintText: 'The one you only know?',
                                         labelText: 'Password *',
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            _passwordVisible
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              _passwordVisible =
+                                              !_passwordVisible;
+                                            });
+                                          },
+                                        ),
                                       ),
                                       validator: (String? value) {
                                         return value!.isEmpty
@@ -130,12 +153,13 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                       },
                                     ),
                                     const SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
                                     TextFormField(
+                                      obscureText: !_passwordVisible,
                                       decoration: const InputDecoration(
                                         icon: Icon(Icons.password),
-                                        hintText: 'The one you only you know?',
+                                        hintText: 'The one you only know?',
                                         labelText: 'Confirm Password *',
                                       ),
                                       validator: (String? value) {
@@ -146,18 +170,18 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                                     ),
                                     BlocBuilder<SignUpBloc, SignUpState>(
                                         builder: ((context, state) {
-                                      return state is SignUpFailure
-                                          ? Container(
-                                              margin:
-                                                  const EdgeInsets.only(top: 20),
-                                              child: Text(
-                                                signupResult,
-                                                style: const TextStyle(
-                                                    color: Colors.red),
-                                              ),
-                                            )
-                                          : Text(signupResult);
-                                    }))
+                                          return state is SignUpFailure
+                                              ? Container(
+                                            margin: const EdgeInsets.only(
+                                                top: 20),
+                                            child: Text(
+                                              signupResult,
+                                              style: const TextStyle(
+                                                  color: Colors.red),
+                                            ),
+                                          )
+                                              : Text(signupResult);
+                                        }))
                                   ],
                                 ),
                               ),
@@ -166,48 +190,45 @@ class _EmployeeRegistrationState extends State<EmployeeRegistration> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
                     BlocBuilder<SignUpBloc, SignUpState>(
                       builder: ((context, state) {
                         return state is SignUpLoading
                             ? const CircularProgressIndicator(
-                                color: Colors.brown,
-                              )
+                          color: Colors.brown,
+                        )
                             : ElevatedButton(
-                                style: ButtonStyle(
-                                  elevation: MaterialStateProperty.all(16),
+                          style: ButtonStyle(
+                            elevation: MaterialStateProperty.all(16),
+                          ),
+                          child: Container(
+                            width: 200,
+                            padding: const EdgeInsets.all(15.0),
+                            child: const Center(
+                              child: Text(
+                                "Sign up",
+                                style: TextStyle(
+                                  fontSize: 18,
                                 ),
-                                child: Container(
-                                  width: 200,
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: const Center(
-                                    child: Text(
-                                      "Sign up",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    BlocProvider.of<SignUpBloc>(context).add(
-                                        SignUpSubmitted(
-                                            username: _usernameController.text,
-                                            email: _emailController.text,
-                                            name: _employeeNameController.text,
-                                            password: _passwordController.text,
-                                            role: Roles.Employee));
-                                  }
-                                },
-                              );
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              BlocProvider.of<SignUpBloc>(context).add(
+                                  SignUpSubmitted(
+                                      username: _usernameController.text,
+                                      email: _emailController.text,
+                                      name: _employeeNameController.text,
+                                      password: _passwordController.text,
+                                      role: Roles.Employee));
+                            }
+                          },
+                        );
                       }),
                     ),
-                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(height: 40),
                         const Text(
                           "Already have an account?   ",
                           style: TextStyle(
