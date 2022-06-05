@@ -143,11 +143,9 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                     labelText: 'Years of experience  *',
                                   ),
                                   validator: (String? value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Years of experience cannot be empty";
-                                    }
-
-                                    return null;
+                                    return double.tryParse(value!) == null
+                                        ? 'Please only numbers'
+                                        : null;
                                   },
                                 ),
                                 const SizedBox(
@@ -179,9 +177,10 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                     labelText: 'Bio *',
                                   ),
                                   validator: (String? value) {
-                                    return double.tryParse(value!) == null
-                                        ? 'Please only numbers'
-                                        : null;
+                                    if (value == null || value.isEmpty) {
+                                      return "Location cannot be empty";
+                                    }
+                                    return null;
                                   },
                                 ),
                               ],
