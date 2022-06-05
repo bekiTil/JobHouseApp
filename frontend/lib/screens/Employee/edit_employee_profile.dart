@@ -178,7 +178,7 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                                   ),
                                   validator: (String? value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Bio cannot be empty";
+                                      return "Location cannot be empty";
                                     }
                                     return null;
                                   },
@@ -204,49 +204,54 @@ class _EditEmployeeProfileState extends State<EditEmployeeProfile> {
                             ? const CircularProgressIndicator()
                             : BlocBuilder<EmployeeBloc, EmployeeState>(
                                 builder: (context, state) {
-                                  return ElevatedButton(
-                                    style: ButtonStyle(
-                                      elevation: MaterialStateProperty.all(16),
-                                    ),
-                                    child: Container(
-                                      width: 120,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 15),
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        elevation:
+                                            MaterialStateProperty.all(16),
+                                      ),
+                                      child: Container(
+                                        width: 120,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 15,
+                                        ),
 
-                                      // margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                      child: const Center(
-                                        child: Text(
-                                          "Save",
-                                          style: TextStyle(
-                                            fontSize: 18,
+                                        // margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                        child: const Center(
+                                          child: Text(
+                                            "Save",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    onPressed: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        int yearsOfExperience =
-                                            (_yearsOfExperienceController
-                                                    .text.isNotEmpty)
-                                                ? int.parse(
-                                                    _yearsOfExperienceController
-                                                        .text)
-                                                : 0;
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          int yearsOfExperience =
+                                              (_yearsOfExperienceController
+                                                      .text.isNotEmpty)
+                                                  ? int.parse(
+                                                      _yearsOfExperienceController
+                                                          .text)
+                                                  : 0;
 
-                                        (BlocProvider.of<EditEmployeeBloc>(
-                                                context)
-                                            .add(
-                                          EditEmployee(
-                                              _locationController.text,
-                                              _bioController.text,
-                                              token,
-                                              id,
-                                              _fieldOfStudyController.text,
-                                              _educationLevelController.text,
-                                              yearsOfExperience),
-                                        ));
-                                      }
-                                    },
+                                          (BlocProvider.of<EditEmployeeBloc>(
+                                                  context)
+                                              .add(
+                                            EditEmployee(
+                                                _locationController.text,
+                                                _bioController.text,
+                                                token,
+                                                id,
+                                                _fieldOfStudyController.text,
+                                                _educationLevelController.text,
+                                                yearsOfExperience),
+                                          ));
+                                        }
+                                      },
+                                    ),
                                   );
                                 },
                               );
