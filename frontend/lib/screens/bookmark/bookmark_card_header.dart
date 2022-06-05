@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/models.dart';
-import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/repository/secure_storage.dart';
 
 class BookmarkHeader extends StatefulWidget {
   final Bookmark bookmark;

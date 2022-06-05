@@ -31,7 +31,7 @@ class Bookmark extends Equatable {
       post_id: json["post_id"],
       memo: json["memo"],
       post: Post.fromJson(
-        json["post"],
+        json["post"]!,
       ),
     );
   }

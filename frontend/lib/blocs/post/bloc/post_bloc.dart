@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:frontend/data_Providers/data_providers.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/repository/post_repository.dart';

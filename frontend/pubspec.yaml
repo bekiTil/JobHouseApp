@@ -20,6 +20,7 @@ dependencies:
   sqflite: ^2.0.2+1
   path_provider: ^2.0.10
   bloc_test: ^9.0.3
+  analyzer: ^2.8.0
   
 dev_dependencies:
   flutter_test:

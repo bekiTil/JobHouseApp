@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/models/post.dart';
-import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/repository/secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'bookmark_popup.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
@@ -62,8 +62,7 @@ class _PostHeaderState extends State<PostHeader> {
                 backgroundColor: Color.fromARGB(255, 150, 159, 163),
                 minRadius: 30,
                 maxRadius: 31,
-                backgroundImage:
-                    NetworkImage(widget.post.posterProfilePicture),
+                backgroundImage: NetworkImage(widget.post.posterProfilePicture),
               ),
               const SizedBox(
                 width: 13,
@@ -72,7 +71,7 @@ class _PostHeaderState extends State<PostHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.post.posterName ,
+                    widget.post.posterName,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -81,7 +80,8 @@ class _PostHeaderState extends State<PostHeader> {
                   const SizedBox(
                     height: 3.0,
                   ),
-                  Text(widget.post.date), // TODO: change the date to a proper data
+                  Text(widget
+                      .post.date), // TODO: change the date to a proper data
                 ],
               ),
             ],

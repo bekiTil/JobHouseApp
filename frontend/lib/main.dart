@@ -7,7 +7,7 @@ import 'package:frontend/blocs/company/EditCompany/editcompany_bloc.dart';
 import 'package:frontend/blocs/employee/editEmployee/editEmployee_bloc.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
 import 'package:frontend/data_Providers/bookmark_data_providers.dart';
-import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/repository/secure_storage.dart';
 import 'package:frontend/repository/user_repository.dart';
 import 'package:frontend/repository/bookmark_repository.dart';
 import 'package:frontend/blocs/auth/AuthBloc.dart';
