@@ -61,7 +61,7 @@ class CompanyDrawer extends StatelessWidget {
                     title: const Text('Edit Profile'),
                     leading: const Icon(Icons.person),
                     onTap: () {
-                      context.go('/companyHome/editprofile');
+                      context.go('/companyHome/editprofile', extra: state);
                       Navigator.of(context).pop();
                     },
                   ),

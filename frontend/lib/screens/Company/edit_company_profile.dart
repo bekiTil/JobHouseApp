@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 class EditCompanyProfile extends StatefulWidget {
-  const EditCompanyProfile({Key? key}) : super(key: key);
+  final CompanyState user;
+  const EditCompanyProfile({Key? key, required this.user}) : super(key: key);
 
   @override
   State<EditCompanyProfile> createState() => _EditCompanyProfileState();
@@ -49,10 +50,13 @@ class _EditCompanyProfileState extends State<EditCompanyProfile> {
   @override
   Widget build(BuildContext context) {
     scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    _bioController.text = widget.user.bio;
+    _locationController.text = widget.user.location;
+
     return BlocListener<EditCompanyBloc, EditCompanyState>(
       listener: (context, state) {
         if (state is EditProfileSuccess) {
-          print(id);
           BlocProvider.of<CompanyBloc>(context).add(CompanyHomeVisited());
           context.go('/companyHome');
         } else if (state is EditProfileFailed) {
