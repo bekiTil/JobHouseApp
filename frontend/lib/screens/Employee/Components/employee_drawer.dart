@@ -5,8 +5,10 @@ import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/employee/employee_bloc.dart';
+import 'package:frontend/darkTheme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:frontend/utils/constants.dart';
+import '../../../blocs/theme/changetheme_bloc.dart';
 
 class EmployeeDrawer extends StatelessWidget {
   const EmployeeDrawer({Key});
@@ -68,6 +70,24 @@ class EmployeeDrawer extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      BlocConsumer<ChangethemeBloc, ChangethemeState>(
+                        listener: (context, state) {
+                          // TODO: implement listener
+                        },
+                        builder: (context, state) {
+                          return ListTile(
+                            title: const Text('change to dark'),
+                            leading: const Icon(Icons.person),
+                            onTap: () {
+                              state is DarkTheme
+                                  ? BlocProvider.of<ChangethemeBloc>(context)
+                                      .add(ChangethemeTOLight())
+                                  : BlocProvider.of<ChangethemeBloc>(context)
+                                      .add(ChangethemeTODark());
+                            },
+                          );
+                        },
+                      ),
                       ListTile(
                         title: const Text('Edit Profile'),
                         leading: const Icon(Icons.person),

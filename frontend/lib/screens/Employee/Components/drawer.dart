@@ -5,7 +5,7 @@ import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:go_router/go_router.dart';
 import '../../../blocs/employee/employee_bloc.dart';
-
+import '../../../darkTheme.dart';
 class DrawerCustom extends StatefulWidget {
   const DrawerCustom({Key? key}) : super(key: key);
 
@@ -34,7 +34,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                     ),
-                    child: Row(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const CircleAvatar(
@@ -51,22 +51,25 @@ class _DrawerCustomState extends State<DrawerCustom> {
                             const SizedBox(
                               height: 9,
                             ),
-                            Row(
-                              children: [
-                                const Text(
-                                  "@",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  state.username,
-                                  style: const TextStyle(fontSize: 19),
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left:50.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    "@",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                    state.username,
+                                    style: const TextStyle(fontSize: 19),
+                                  ),
+                                ],
+                              ),
                             ),
                             const SizedBox(
                               height: 9,
