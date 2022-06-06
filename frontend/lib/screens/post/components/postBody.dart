@@ -70,6 +70,7 @@ class _PostBodyState extends State<PostBody> {
             height: 20.0,
           ),
           TextFormField(
+            key:Key("number"),
             controller: _numberController,
             decoration:
                 const InputDecoration(labelText: 'Number of available places'),
@@ -83,6 +84,7 @@ class _PostBodyState extends State<PostBody> {
             height: 20.0,
           ),
           TextFormField(
+            key:Key("description"),
             controller: _descriptionController,
             decoration: const InputDecoration(labelText: 'Description'),
             validator: (String? value) {
@@ -123,6 +125,7 @@ class _PostBodyState extends State<PostBody> {
               return state is PostOperationLoading
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
+                    key:Key("posted"),
                       style: ButtonStyle(
                         elevation: MaterialStateProperty.all(16),
                       ),

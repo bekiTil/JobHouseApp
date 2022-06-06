@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/bookmark/bookmark_bloc.dart';
 import 'package:frontend/models/models.dart';
 import 'package:frontend/models/post.dart';
-import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/repository/secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
 void popBookmark(BuildContext context, Post post, id) async {

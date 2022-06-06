@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/employee/editEmployee/editEmployee_bloc.dart';
 import 'package:frontend/models/post.dart';
-import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/repository/secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'bookmark_popup.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';

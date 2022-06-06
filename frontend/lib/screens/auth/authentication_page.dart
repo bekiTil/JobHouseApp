@@ -100,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Column(
                                     children: [
                                       TextFormField(
+                                         key: Key("signInUsernameField"),
                                         controller: _usernameController,
                                         decoration: const InputDecoration(
                                           icon: Icon(Icons.email),
@@ -119,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                                         height: 5,
                                       ),
                                       TextFormField(
+                                        key: Key("signInPasswordField"),
                                         controller: _passwordController,
                                         obscureText: !_passwordVisible,
                                         decoration: InputDecoration(
@@ -175,6 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Colors.brown,
                                 )
                               : ElevatedButton(
+                                key: Key("Sign in"),
                                   style: ButtonStyle(
                                     elevation: MaterialStateProperty.all(16),
                                   ),

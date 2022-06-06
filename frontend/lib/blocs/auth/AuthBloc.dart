@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/repository/secureStorage.dart';
+import 'package:frontend/repository/secure_storage.dart';
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 
@@ -13,7 +13,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final String? id = await storage.getId();
         final String? role = await storage.getRole();
         emit(Authenticated(role!, id!));
-        
       }
     });
     on<LoggedIn>(
