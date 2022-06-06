@@ -27,7 +27,7 @@ class DBProvider {
   Future<Database?> get database async {
     if (kIsWeb){
 
-      print("web is it");
+     
       return null;
     }
     if (_database != null) return _database;
