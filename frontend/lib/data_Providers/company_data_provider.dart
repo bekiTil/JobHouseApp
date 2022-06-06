@@ -7,6 +7,7 @@ import 'package:frontend/models/company_profile.dart';
 import 'package:frontend/repository/repository.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'local/mock_model/merge.dart';
 
@@ -15,8 +16,8 @@ class CompanyDataProvider {
     StorageService storage = StorageService();
     String? id = await storage.getId();
     final database = await DBProvider.db;
-    if (database == null) {
-      print('becasuse it is web we dont perisit files using sqfile');
+    if (kIsWeb) {
+      print("");
     } else {
       final company = await DBProvider.db.findCompanyById(id!);
       print(company);
