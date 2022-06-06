@@ -22,7 +22,7 @@ class CompanyRepository {
 
   Future deleteSingle(String userName) async {
     try {
-      return await CompanyDataProvider.deleteSingle(userName);
+      return await companyDataProvider.deleteSingle(userName);
     } catch (e) {
       rethrow;
     }

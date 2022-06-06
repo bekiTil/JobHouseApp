@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:convert' as convert;
 
+import 'package:frontend/utils/constants.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
@@ -9,8 +10,9 @@ import '../models/user.dart';
 class AuthProvider {
   AuthProvider();
 
+  final _baseUrl = "$baseUrl/api/users";
   Future signup(User user) async {
-    var url = Uri.parse('http://10.0.2.2:3000/api/users');
+    var url = Uri.parse(_baseUrl);
 
     final response = await http.post(url, body: {
       "username": user.username,
@@ -33,7 +35,7 @@ class AuthProvider {
 
   Future<dynamic> login(String username, String password) async {
     Map data = {"username": username, 'password': password};
-    var url = Uri.parse("http://10.0.2.2:3000/login");
+    var url = Uri.parse("$baseUrl/login");
     final response = await http.post(url, body: data);
 
     if (response.statusCode == 201) {

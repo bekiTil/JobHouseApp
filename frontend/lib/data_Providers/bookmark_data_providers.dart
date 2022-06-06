@@ -5,6 +5,7 @@ import 'package:frontend/data_Providers/local/mock_model/book_mark.dart';
 import 'package:frontend/data_Providers/local/mock_model/merge.dart';
 import 'package:frontend/data_Providers/local/mock_model/post_.dart';
 import 'package:frontend/models/bookmark.dart';
+import 'package:frontend/utils/constants.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,7 +13,8 @@ import '../models/post.dart';
 import '../repository/repository.dart';
 
 class BookmarkDataProvider {
-  final String _baseUrl = 'http://10.0.2.2:3000/api/bookmarks';
+
+  final String _baseUrl = '$baseUrl/api/bookmarks';
 
   Future<Bookmark> createBookmark(Bookmark bookmark) async {
     StorageService storage = StorageService();

@@ -5,6 +5,7 @@ import 'package:frontend/data_Providers/local/mock_model/com_profile.dart';
 import 'package:frontend/models/Company.dart';
 import 'package:frontend/models/company_profile.dart';
 import 'package:frontend/repository/repository.dart';
+import 'package:frontend/utils/constants.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -12,6 +13,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'local/mock_model/merge.dart';
 
 class CompanyDataProvider {
+  final _baseUrl = "$baseUrl/api/users/";
   Future<dynamic> fetchSingle() async {
     StorageService storage = StorageService();
     String? id = await storage.getId();
@@ -25,7 +27,7 @@ class CompanyDataProvider {
         return mergeComProfile(company);
       }
     }
-    var url = Uri.parse("http://10.0.2.2:3000/api/users/$id");
+    var url = Uri.parse("$_baseUrl$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String, dynamic> responded = jsonDecode(response.body);
@@ -52,7 +54,7 @@ class CompanyDataProvider {
     Map<String, dynamic> data = {'profile': profile};
     print(token);
     final response =
-        await http.put(Uri.parse("http://10.0.2.2:3000/api/users/$id"),
+        await http.put(Uri.parse("$_baseUrl$id"),
             headers: {
               "x-auth-token": token.toString(),
               "Accept": "application/json",
@@ -91,11 +93,11 @@ class CompanyDataProvider {
     }
   }
 
-  static Future deleteSingle(String userName) async {
+  Future deleteSingle(String userName) async {
     StorageService storage = StorageService();
     final String? token = await storage.getToken();
 
-    var url = Uri.parse("http://10.0.2.2:3000/api/users/$userName");
+    var url = Uri.parse("$_baseUrl$userName");
 
     final response = await http.delete(
       url,

@@ -1,4 +1,5 @@
 import 'package:frontend/data_Providers/post_data_provider.dart';
+import 'package:frontend/utils/constants.dart';
 
 class Post {
   String id;
@@ -10,7 +11,7 @@ class Post {
   String date;
   String posterName = " ";
   String posterProfilePicture =
-      "http://10.0.2.2:3000/images/default_profile.png";
+      "$baseUrl/images/default_profile.png";
 
   Post(
       {required this.id,

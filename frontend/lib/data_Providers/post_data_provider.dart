@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:frontend/repository/repository.dart';
+import 'package:frontend/utils/constants.dart';
 import 'package:frontend/utils/exception.dart';
 import 'package:http/http.dart' as http;
 import '../models/post.dart';
 
 class PostDataProvider {
-  static const String _baseUrl = "http://10.0.2.2:3000/api/posts";
-  static const String _token = "TODO:";
+  static final String _baseUrl = "$baseUrl/api/posts";
+  // static const String _token = "TODO:";
 
   String jsonify(Post post) {
     return jsonEncode({
@@ -79,11 +80,14 @@ class PostDataProvider {
   }
 
   Future<Post> update(String id, Post post) async {
+    final StorageService storage = StorageService();
+   final String? _token = await storage.getToken();
+
     final response = await http.put(
       Uri.parse("$_baseUrl/$id"),
       headers: <String, String>{
         "Content-Type": "application/json",
-        "x-auth-token": _token,
+        "x-auth-token": _token!,
       },
       body: jsonify(post),
     );
@@ -106,7 +110,7 @@ class PostDataProvider {
   }
 
   Future<Map<String, String>> findOwnerInfo(String id) async {
-    var url = Uri.parse('http://10.0.2.2:3000/api/users/$id');
+    var url = Uri.parse('$baseUrl/api/users/$id');
     var defaultProfilePicture = "images/default_profile.png";
 
     final http.Response response = await http.get(url);

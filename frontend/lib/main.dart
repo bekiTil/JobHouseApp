@@ -90,7 +90,9 @@ class _MyAppState extends State<MyApp> {
           ],
           child: BlocConsumer<ChangethemeBloc, ChangethemeState>(
             listener: (context, state) {
-              // TODO: implement listener
+              if (state is ChangethemeInitial){
+                BlocProvider.of<ChangethemeBloc>(context).add(ChangethemeTODark());
+              }
             },
             builder: (context, state) {
               return state is DarkTheme
