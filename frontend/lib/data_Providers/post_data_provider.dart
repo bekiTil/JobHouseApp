@@ -6,6 +6,7 @@ import '../models/post.dart';
 
 class PostDataProvider {
   static const String _baseUrl = "http://10.0.2.2:3000/api/posts";
+  static const String _token = "TODO:";
 
   String jsonify(Post post) {
     return jsonEncode({
@@ -78,17 +79,15 @@ class PostDataProvider {
   }
 
   Future<Post> update(String id, Post post) async {
-    final StorageService storage = StorageService();
-    final String? _token = await storage.getToken();
     final response = await http.put(
       Uri.parse("$_baseUrl/$id"),
       headers: <String, String>{
         "Content-Type": "application/json",
-        "x-auth-token": _token!,
+        "x-auth-token": _token,
       },
       body: jsonify(post),
     );
-    print(response.statusCode);
+
     if (response.statusCode == 200) {
       return Post.fromJson(jsonDecode(response.body));
     } else {

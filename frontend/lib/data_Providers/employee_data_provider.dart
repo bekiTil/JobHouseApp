@@ -26,7 +26,7 @@ class EmployeeDataProvider {
         return mergeEmpProfile(employee);
       }
     }
-    var url = Uri.parse("http://10.0.2.2:3000/api/users/$id");
+    var url = Uri.parse("z$id");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String, dynamic> responded = jsonDecode(response.body);
