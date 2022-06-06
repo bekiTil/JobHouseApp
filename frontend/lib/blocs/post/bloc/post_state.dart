@@ -26,3 +26,5 @@ class PostEditingOperationStarted extends PostState {
 
   PostEditingOperationStarted(this.post);
 }
+
+class PostEditingOperationSuccess extends PostState{}

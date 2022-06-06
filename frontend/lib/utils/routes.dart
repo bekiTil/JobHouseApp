@@ -1,8 +1,11 @@
 // import 'dart:js';
+import 'dart:js';
+
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/blocs.dart';
-
+import 'package:frontend/blocs/post/bloc/post_bloc.dart';
+import '../screens/post/editPost .dart';
 import 'package:frontend/blocs/signup/SignUpBloc.dart';
 import 'package:frontend/models/models.dart';
 // import 'package:frontend/screens/Company/companyHome.dart';
@@ -90,6 +93,13 @@ class AllRoutes {
                 builder: (BuildContext context, GoRouterState state) =>
                     const PostScreen(),
               ),
+              GoRoute(
+                name: 'editPost',
+                path: '/editPost',
+                pageBuilder: (context, state) => MaterialPage(
+                  key: state.pageKey,
+                  child: const EditPostScreen())
+              )
             ]),
         GoRoute(
             name: 'employeeHome',

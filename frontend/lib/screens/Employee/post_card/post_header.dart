@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/blocs/employee/editEmployee/editEmployee_bloc.dart';
 import 'package:frontend/models/post.dart';
 import 'package:frontend/repository/secureStorage.dart';
 import 'package:go_router/go_router.dart';
@@ -59,11 +60,10 @@ class _PostHeaderState extends State<PostHeader> {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 150, 159, 163),
+                backgroundColor: const Color.fromARGB(255, 150, 159, 163),
                 minRadius: 30,
                 maxRadius: 31,
-                backgroundImage:
-                    NetworkImage(widget.post.posterProfilePicture),
+                backgroundImage: NetworkImage(widget.post.posterProfilePicture),
               ),
               const SizedBox(
                 width: 13,
@@ -72,7 +72,7 @@ class _PostHeaderState extends State<PostHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.post.posterName ,
+                    widget.post.posterName,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -81,7 +81,8 @@ class _PostHeaderState extends State<PostHeader> {
                   const SizedBox(
                     height: 3.0,
                   ),
-                  Text(widget.post.date), // TODO: change the date to a proper data
+                  Text(widget
+                      .post.date), // TODO: change the date to a proper data
                 ],
               ),
             ],
@@ -106,7 +107,7 @@ class _PostHeaderState extends State<PostHeader> {
                     cursor: SystemMouseCursors.text,
                     child: IconButton(
                       onPressed: () {
-                        // popBookmark(context, widget.post, id);
+                        context.go('/companyHome/editPost');
                       },
                       icon: const Icon(
                         Icons.edit,

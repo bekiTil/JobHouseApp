@@ -15,7 +15,11 @@ class PostRepository {
   }
 
   Future<Post> update(String id, Post post) async {
-    return await postDataProvider.update(id, post);
+    try {
+      return await postDataProvider.update(id, post);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<List<Post>> fetchAll() async {
