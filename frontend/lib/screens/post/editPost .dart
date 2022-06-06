@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/models.dart';
 import 'components/post_edit_body.dart';
 class EditPostScreen extends StatefulWidget {
-  const EditPostScreen({Key? key}) : super(key: key);
+  final post;
+  const EditPostScreen({Key? key,required this.post}) : super(key: key);
 
   @override
   State<EditPostScreen> createState() => _EditPostScreenState();
@@ -22,8 +24,8 @@ class _EditPostScreenState extends State<EditPostScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  EditPostBody(),
+                children:  [
+                  EditPostBody(post: widget.post),
                 ],
               ),
             ),

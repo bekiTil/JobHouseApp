@@ -46,7 +46,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       try {
         PostDataProvider postDataProvider = PostDataProvider();
         PostRepository postRepository = PostRepository(postDataProvider);
-        // await Future.delayed(const Duration(seconds: 3));
         await postRepository.update(event.post.id, event.post);
         emit(PostOperationSuccess());
       } catch (e) {

@@ -2,17 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/blocs/blocs.dart';
 import 'package:frontend/blocs/post/bloc/post_bloc.dart';
+import 'package:frontend/models/models.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../models/roles.dart';
 
 class EditPostBody extends StatefulWidget {
-  const EditPostBody({Key? key}) : super(key: key);
+  final Post post;
+  const EditPostBody({Key? key, required this.post}) : super(key: key);
 
   @override
   State<EditPostBody> createState() => _EditPostBodyState();
 }
 
 class _EditPostBodyState extends State<EditPostBody> {
+  @override
+  void initState() {
+    super.initState();
+    categorySelected = widget.post.category;
+    _descriptionController.text = widget.post.description;
+    _numberController.text = widget.post.number.toString();
+  }
+
   final _formKey = GlobalKey<FormState>();
   final List<String> _categories = [
     'TECH',
@@ -22,13 +32,9 @@ class _EditPostBodyState extends State<EditPostBody> {
     'EDUCATION',
     'OTHER'
   ];
-
   String? categorySelected;
   String selectedRole = Roles.Company;
-  final TextEditingController
-
-      /// A controller for the description text field.
-      _descriptionController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
 
   @override
@@ -38,7 +44,7 @@ class _EditPostBodyState extends State<EditPostBody> {
       child: Column(
         children: [
           const Text(
-            "Post a new Job",
+            "Edit Your Post",
             style: TextStyle(
               fontSize: 33.0,
               fontWeight: FontWeight.w500,
@@ -131,7 +137,7 @@ class _EditPostBodyState extends State<EditPostBody> {
                         padding: const EdgeInsets.all(15.0),
                         child: const Center(
                           child: Text(
-                            "Post",
+                            "Confirm",
                             style: TextStyle(
                               fontSize: 18,
                             ),
@@ -141,10 +147,15 @@ class _EditPostBodyState extends State<EditPostBody> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           BlocProvider.of<PostBloc>(context).add(
-                            PostCreate(
-                              _descriptionController.text,
-                              int.parse(_numberController.text),
-                              categorySelected!,
+                            EditPost(
+                              Post(
+                                  id: widget.post.id,
+                                  poster_id: widget.post.poster_id,
+                                  number: int.parse(_numberController.text),
+                                  description: _descriptionController.text,
+                                  category: categorySelected!,
+                                  posterName: widget.post.posterName,
+                                  date: widget.post.date),
                             ),
                           );
                         }

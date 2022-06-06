@@ -61,7 +61,7 @@ class PostCard extends StatelessWidget {
                   width: 20,
                 ),
                 FilterChip(
-                  label: Text("Candidates Needed: ${post.number}"),
+                  label: Text("Candidates: ${post.number}"),
                   onSelected: (bool value) {},
                 ),
               ],

@@ -107,7 +107,7 @@ class _PostHeaderState extends State<PostHeader> {
                     cursor: SystemMouseCursors.text,
                     child: IconButton(
                       onPressed: () {
-                        context.go('/companyHome/editPost');
+                        context.go('/companyHome/editPost', extra: widget.post);
                       },
                       icon: const Icon(
                         Icons.edit,

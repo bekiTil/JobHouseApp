@@ -1,6 +1,3 @@
-// import 'dart:js';
-import 'dart:js';
-
 import 'package:frontend/blocs/auth/AuthEvent.dart';
 import 'package:frontend/blocs/auth/AuthState.dart';
 import 'package:frontend/blocs/blocs.dart';
@@ -94,12 +91,14 @@ class AllRoutes {
                     const PostScreen(),
               ),
               GoRoute(
-                name: 'editPost',
-                path: '/editPost',
-                pageBuilder: (context, state) => MaterialPage(
-                  key: state.pageKey,
-                  child: const EditPostScreen())
-              )
+                  name: 'editPost',
+                  path: 'editPost',
+                  pageBuilder: (context, state) => MaterialPage(
+                        key: state.pageKey,
+                        child: EditPostScreen(
+                          post: state.extra,
+                        ),
+                      ))
             ]),
         GoRoute(
             name: 'employeeHome',

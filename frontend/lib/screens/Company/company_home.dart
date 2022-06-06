@@ -61,7 +61,7 @@ class _CompanyHomePageState extends State<CompanyHomePage> {
                           child: Text('Error... Loading Failed'),
                         )
                       : posts.length == 0
-                          ? Center(
+                          ?const Center(
                               child: Text(
                                 "No post found",
                                 style: TextStyle(
